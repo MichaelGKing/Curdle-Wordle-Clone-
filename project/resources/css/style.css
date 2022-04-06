@@ -1,0 +1,26 @@
+body {
+  background-color: beige;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+h1 {
+  font-family: 'Rubik Microbe', cursive;
+  font-size: 4em;
+  color: rgb(255, 206, 72);
+}
+
+
+a {
+  margin: auto;
+  font-size: 2em;
+  color: black;
+}
+
+a:hover {
+  color: rgb(255, 206, 72);
+}
