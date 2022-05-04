@@ -10,6 +10,16 @@ Design and Development
 
 How to Install and Run Curdle (from local host)
 
+How to set up required environment
+
+- Navigate to repository root folder
+	% cd curdle
+- Create new virtual python environment within the current directory
+	% python3 -m venv ./venv
+	% source venv/bin/activate
+- Install Flask to new virtual environment
+	(venv) % pip install Flask
+
 How to Play
 
 How to 
