@@ -19,11 +19,11 @@ How to Install and Run Curdle (from local host)
 
 ### How to set up required environment (In bash terminal)
 
-1. Navigate to repository root folder
+1. Ensure that python3 and pip are both installed and set up on your host machine
 
-   ```% cd curdle```
+2. After cloning the repositor to your host machine, in a new bash terminal session, navigate to the repository root folder
 
-2. Create new virtual python environment within the current directory and activate environment
+3. Create new virtual python environment within the current directory and activate the environment
 
    ```% python3 -m venv ./venv```
 
@@ -33,15 +33,15 @@ How to Install and Run Curdle (from local host)
 
    ```% deactivate```
 
-3. Install Flask to new virtual environment
+4. Install Flask to new virtual environment
 
    ```(venv) % pip install Flask```
 
-4. Install python-dotenv so you can set required environment variables for the Flask application in a .flaskenv file
+5. Install all required python packages 
 
-   ```% pip install python-dotenv```
+   ```% pip install -r requirements.txt```
 
-5. Create a file named '.flaskenv' and add any required tenvironment variables. 
+6. Create a file named '.flaskenv' and add any required tenvironment variables. 
    To tell Flask which file needs to be run to start the application. This is necessary, and having it set in a .flaskenv file avoids the need to set it manually for every new session:
 
    ```FLASK_APP=setup.py```
@@ -63,5 +63,6 @@ How to Add New Puzzles to the Game
 Credits
 -------
 
-Licence Information
+References
 -------------------
+
