@@ -1,26 +1,55 @@
+html, body {
+  overflow: hidden;
+}
+
 body {
   background-color: beige;
+  margin: 0px;
 }
 
 header {
   display: flex;
   width: 100%;
   justify-content: space-around;
+  border-bottom: 1px solid black;
 }
 
 h1 {
   font-family: 'Rubik Microbe', cursive;
-  font-size: 4em;
-  color: rgb(255, 206, 72);
+  font-size: 37px;
+  color: rgb(221, 178, 61);
+  margin: 0px;
 }
 
 
 a {
   margin: auto;
-  font-size: 2em;
+  font-size: 24px;
   color: black;
 }
 
 a:hover {
   color: rgb(255, 206, 72);
+}
+
+/* Body */
+#game {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(245, 245, 179);
+}
+
+#board-container {
+  height: 600px;
+  width: 500px;
+  background-color: red;
+}
+
+#keyboard {
+  min-width: 500px;
+  height: 300px;
+  background-color: grey;
 }
