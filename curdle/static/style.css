@@ -129,12 +129,13 @@ a:hover {
 #button, #cheese-choice {
   padding: 0px;
   height: 32.5px;
+  border-radius: 5px;
 }
 
 #cheese-choice {
   width: 491px;
   margin: 0px 5px 0 5px;
-  border-radius: 5px;
+  
   font-size: 16px;
   padding-left: 5px;
   text-align: center;
@@ -143,8 +144,20 @@ a:hover {
 #button {
   margin: 5px 5px 0 5px;
   width: 500px;
-  border-radius: 5px;
+  background-color: white;
+  border: 1px solid black;
 }
+
+#button:hover {
+  cursor: pointer;
+  background-color: rgb(241, 241, 241);
+}
+
+#button:active {
+  background-color: rgb(223, 223, 223);
+}
+
+
 
 
 
