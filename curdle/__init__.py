@@ -4,9 +4,15 @@
 
 from flask import Flask
 
+from config import Config
+
 # Create a new instance of the Flask application, called app
 
 app = Flask(__name__)
+
+# Set Flask configuration variables from Config Class variables
+
+app.config.from_object(Config)
 
 # Import our python module 'routes' which contains instructions what to render on what URL for the web site/application
 # The name of the folder this file is in is 'curdle' 
