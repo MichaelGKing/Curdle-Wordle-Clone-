@@ -1,7 +1,6 @@
-# From the package curdle (that routes is part of), import app 
-# app is the new flask instance created by __init__
 
 from curdle import app
+from flask import render_template
 
 # routes or views are written as shown below
 # the decorators at the beginning (starting with @app) define what URL's the code below them is run on
@@ -9,4 +8,4 @@ from curdle import app
 @app.route('/')
 @app.route('/index')
 def index():
-    return 'Hello, World!'
+    return render_template('index.html')
