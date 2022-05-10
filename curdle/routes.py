@@ -1,6 +1,8 @@
 
-from curdle import app, AdminLoginForm
-from flask import render_template, redirect
+from cProfile import label
+from curdle import app
+from curdle.admin_login import AdminLoginForm
+from flask import render_template, flash, redirect
 
 # Toutes are written as shown below
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
@@ -21,7 +23,7 @@ def add_new_puzzle():
 def puzzle_uploader():
     return 
 
-# This route below can recieve GET and POST HTTP methods, required for receiving form data
+# This route below can receive GET and POST requests, required for receiving form data - Default without this set is just to receive GET requests
 @app.route('/authorize', methods=['GET', 'POST'])
 def authorize():
 
@@ -31,24 +33,11 @@ def authorize():
     # Use WTForms' FlaskForms functions to validate user input
     # The validations set in admin_login.py are checked, and if data is valid, browser is redirected to /index
     if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect('/index')
+        if (form.password.data == app.config['SECRET_KEY']):
+            flash('Administration Portal Authentication Successful')
+            return redirect('/add-new-puzzle')
 
     # Else, browser stays at /authorise view
-    return '''
-    
-    <h1>Sign In</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    
-    '''
+    return render_template('authorize.html', form=form)
     
 
