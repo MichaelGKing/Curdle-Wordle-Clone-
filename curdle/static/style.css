@@ -33,55 +33,108 @@ a:hover {
 }
 
 /* Body */
-#game-container {
+.game-container {
+  display: block;
+}
+
+.image {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
-#game {
+#image-block {
+  width: 494px;
+  background-image: url(https://cdn.britannica.com/60/217660-050-DBCC409A/cheddar-cheese-wedge.jpg);
+  height: 194px;
+  background-position: center;
+  background-size: cover;
+  border: 3px solid black;
+  margin: 5px;
+}
+
+.results {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
-#image {
+#grid-container {
   width: 500px;
-  height: 200px;
-  background-color: black;
+  height: 300px;
+  margin: 5px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
 }
 
-#results {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#user-input {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#results > div {
-  width: 500px;
-  height: 50px;
+#result-1 {
+  grid-column: 1 / span 7;
+  grid-row: 1;
   background-color: grey;
-  margin: 5px;
-  border-radius: 5px;
 }
 
-.guess > * {
-  width: 500px;
+#result-2 {
+  grid-column: 1 / span 7;
+  grid-row: 2;
+  background-color: grey;
+}
+
+#result-3 {
+  grid-column: 1 / span 7;
+  grid-row: 3;
+  background-color: grey;
+}
+
+#result-4 {
+  grid-column: 1 / span 7;
+  grid-row: 4;
+  background-color: grey;
+}
+
+#result-5 {
+  grid-column: 1 / span 7;
+  grid-row: 5;
+  background-color: grey;
+}
+
+#result-6 {
+  grid-column: 1 / span 7;
+  grid-row: 6;
+  background-color: grey;
+}
+
+.guess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: 50px;
-  margin: 5px;
 }
 
-#guess-input {
-  width: 492px;
-  height: 44px;
+#guess-textbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#guess-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button {
+  width: 500px;
+  margin: 5px;
+  padding: 0px;
+}
+
+#textbox {
+  width: 496px;
+  margin: 5px;
+  padding: 0px;
+}
+
+

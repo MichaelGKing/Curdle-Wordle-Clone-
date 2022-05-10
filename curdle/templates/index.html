@@ -24,25 +24,32 @@
       <ion-icon name="stats-chart-outline"></ion-icon>
     </a>
   </header>
-  <div id="game-container">
-    <div id="game">
-      <div id="image">
-        <img>
-      </div>
+  <section class="game-container">
 
-      <div id="results">
-        <div class="result" id="result-1"></div>
-        <div class="result" id="result-2"></div>
-        <div class="result" id="result-3"></div>
-        <div class="result" id="result-4"></div>
-        <div class="result" id="result-5"></div>
-        <div class="result" id="result-6"></div>
+    <section class="image">
+      <div id="image-block"></div>
+    </section>
+
+    <section class="results">
+      <div id="grid-container">
+        <div id="result-1"></div>
+        <div id="result-2"></div>
+        <div id="result-3"></div>
+        <div id="result-4"></div>
+        <div id="result-5"></div>
+        <div id="result-6"></div>
       </div>
-      <div class="guess" id="user-input">
-        <input id="guess-input" type="text" placeholder="Enter a cheese...">
-        <button>Guess</button>
+    </section>
+
+    <section class="guess-container">
+      <div id="guess-textbox">
+        <input id="textbox" type="text">
       </div>
-    </div>
+      <div id="guess-button">
+        <button id="button">GUESS</button>
+      </div>
+    </section>
+  </section>
 </body>
 
 </html>
