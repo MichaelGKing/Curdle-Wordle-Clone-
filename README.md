@@ -25,21 +25,31 @@ How to Install and Run Curdle (from local host)
 
 3. Create new virtual python environment within the current directory and activate the environment
 
-   ```% python3 -m venv ./venv```
+   ```bash
+   % python3 -m venv ./venv
+   ```
 
-   ```% source venv/bin/activate```
+   ```bash
+   % source venv/bin/activate
+   ```
 
    You can exit the virtual environment at any time with the following command:
 
-   ```% deactivate```
+   ```bash
+   % deactivate
+   ```
 
 4. Install Flask to new virtual environment
 
-   ```(venv) % pip install Flask```
+   ```bash
+   (venv) % pip install Flask
+   ```
 
 5. Install all required python packages 
 
-   ```% pip install -r requirements.txt```
+   ```bash
+   % pip install -r requirements.txt
+   ```
 
 6. Create a file named '.flaskenv' and add any required tenvironment variables. 
    To tell Flask which file needs to be run to start the application. This is necessary, and having it set in a .flaskenv file avoids the need to set it manually for every new session:
