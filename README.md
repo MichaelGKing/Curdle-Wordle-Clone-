@@ -21,7 +21,7 @@ How to Install and Run Curdle (from local host)
 
 1. Ensure that python3 and pip are both installed and set up on your host machine
 
-2. After cloning the repositor to your host machine, in a new bash terminal session, navigate to the repository root folder
+2. After cloning the repository to your host machine, in a new bash terminal session, navigate to the repository root folder
 
 3. Create new virtual python environment within the current directory and activate the environment
 
@@ -51,7 +51,8 @@ How to Install and Run Curdle (from local host)
    % pip install -r requirements.txt
    ```
 
-6. Create a file named '.flaskenv' and add any required tenvironment variables. 
+6. Create a file named '.flaskenv' and add any required environment variables. 
+   
    To tell Flask which file needs to be run to start the application. This is necessary, and having it set in a .flaskenv file avoids the need to set it manually for every new session:
 
    ```FLASK_APP=setup.py```
