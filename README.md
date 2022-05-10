@@ -50,7 +50,7 @@ How to Install and Run Curdle (from local host)
    
    (Do not set this variable for production environments)
 
-   FLASK_ENV=development
+   ```FLASK_ENV=development```
 
 ### How to Start the Flask Application
 
