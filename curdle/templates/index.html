@@ -43,7 +43,14 @@
 
     <section class="guess-container">
       <div id="guess-textbox">
-        <input id="textbox" type="text">
+        <input list="cheese-names" id="cheese-choice" name="cheese-choice" />
+        <datalist id="cheese-names">
+          <option value="Cheddar">
+          <option value="Camembert">
+          <option value="Parmesan">
+          <option value="Red Leicester">
+          <option value="Blue Cheese">
+      </datalist>
       </div>
       <div id="guess-button">
         <button id="button">GUESS</button>

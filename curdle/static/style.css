@@ -29,7 +29,7 @@ a {
 }
 
 a:hover {
-  color: rgb(255, 206, 72);
+  color: rgb(221, 178, 61);
 }
 
 /* Body */
@@ -61,7 +61,7 @@ a:hover {
 
 #grid-container {
   width: 500px;
-  height: 300px;
+  height: 220px;
   margin: 5px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -69,40 +69,41 @@ a:hover {
   gap: 5px;
 }
 
+#result-1, #result-2, #result-3, #result-4, #result-5, #result-6 {
+  border-radius: 5px;
+  background-color: rgb(221, 178, 61);
+  opacity: 50%;
+} 
+
 #result-1 {
   grid-column: 1 / span 7;
   grid-row: 1;
-  background-color: grey;
+  
 }
 
 #result-2 {
   grid-column: 1 / span 7;
   grid-row: 2;
-  background-color: grey;
 }
 
 #result-3 {
   grid-column: 1 / span 7;
   grid-row: 3;
-  background-color: grey;
 }
 
 #result-4 {
   grid-column: 1 / span 7;
   grid-row: 4;
-  background-color: grey;
 }
 
 #result-5 {
   grid-column: 1 / span 7;
   grid-row: 5;
-  background-color: grey;
 }
 
 #result-6 {
   grid-column: 1 / span 7;
   grid-row: 6;
-  background-color: grey;
 }
 
 .guess {
@@ -125,16 +126,25 @@ a:hover {
   align-items: center;
 }
 
-#button {
-  width: 500px;
-  margin: 5px;
+#button, #cheese-choice {
   padding: 0px;
+  height: 32.5px;
 }
 
-#textbox {
-  width: 496px;
-  margin: 5px;
-  padding: 0px;
+#cheese-choice {
+  width: 491px;
+  margin: 0px 5px 0 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  padding-left: 5px;
+  text-align: center;
 }
+
+#button {
+  margin: 5px 5px 0 5px;
+  width: 500px;
+  border-radius: 5px;
+}
+
 
 
