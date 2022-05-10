@@ -1,4 +1,7 @@
-Curdle - A daily cheese identification puzzle
+<!-- This document needs to be formatted using Markdown as stated in the last slide
+	 of the Agile Development lecture slides. -->
+
+<h1>Curdle - A daily cheese identification puzzle<h1>
 
 Curdle is an image identification game that presents players with an image of a unidentified type of cheese and asks them to guess the type of cheese. Players recieve a new image to attempt to identify daily and have a fixed number of attempts available. After each guess players are provided a series of clues confirming characteristics that link their incorrect guess to the solution.
 
