@@ -1,7 +1,7 @@
 
-from curdle import app
-from flask import render_template
-from admin_login import AdminLoginForm
+from curdle import app, AdminLoginForm
+from flask import render_template, redirect
+
 # Toutes are written as shown below
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
 # The view function contains this code
