@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SubmitField
+from wtforms import PasswordField, SubmitField, ValidationError
 from wtforms.validators import DataRequired
+from curdle import app
 
 # The game does not require users to login to save/track their play statistics.
 # Regardless, there is a need for a login form for the administration interface
@@ -10,8 +11,18 @@ from wtforms.validators import DataRequired
 # This includes validators for inputs, so validation can be done server side
 
 class AdminLoginForm(FlaskForm):
+
+    # This is a custom validator created following the WTForms official documentation
+    # It returns an error if the password in entered incorrectly
+    def validate_successful_auth(form, field):
+        if (field.data != app.config['SECRET_KEY']):
+            raise ValidationError('The password you entered in incorrect')
     
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), validate_successful_auth])
 
     submit = SubmitField('Sign In')
+
+    
+
+
 
