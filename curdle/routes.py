@@ -1,7 +1,7 @@
 
 from cProfile import label
 from curdle import app
-from curdle.admin_login import AdminLoginForm
+from curdle.forms import AdminLoginForm
 from flask import render_template, flash, redirect
 
 # Toutes are written as shown below
@@ -34,8 +34,8 @@ def puzzle_uploader():
     return 
 
 # This route below can receive GET and POST requests, required for receiving form data - Default without this set is just to receive GET requests
-@app.route('/authorize', methods=['GET', 'POST'])
-def authorize():
+@app.route('/auth', methods=['GET', 'POST'])
+def auth():
 
     # initialize new object of AdminLoginForm() class
     form = AdminLoginForm()
@@ -48,6 +48,6 @@ def authorize():
             return redirect('/add-new-puzzle')
 
     # Else, browser stays at /authorise view
-    return render_template('authorize.html', form=form)
+    return render_template('auth.html', form=form)
     
 
