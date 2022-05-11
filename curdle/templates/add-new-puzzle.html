@@ -1,0 +1,35 @@
+<h1>Welcome Curdle Admin!</h1>
+<p>Please upload your new puzzle using the form below</p>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.name.label }}<br>
+        {% for error in form.name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.type.label }}<br>
+        {% for error in form.type.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.country.label }}<br>
+        {% for error in form.country.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.animal.label }}<br>
+        {% for error in form.animal.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.remember_me() }} {{ form.mold.label }}<br>
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+
