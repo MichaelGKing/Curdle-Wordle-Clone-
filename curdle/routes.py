@@ -10,16 +10,20 @@ from flask import render_template, flash, redirect
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 # A view function for the homepage
 def index():
-    return render_template('index.html')
+    # Placeholder puzzle - a class will be made for this that will pull a random daily cheese from the database
+    puzzle = ['Cheddar', 'Hard', 'England', False, 'cheese1.jpg']
+
+    # The page renderer also passes the puzzle object through to the front end?
+    return render_template('index.html', puzzle=puzzle)
 
 @app.route('/add-new-puzzle')
 def add_new_puzzle():
     return "New puzzle uploading form here"
 
-@app.route('/puzzle-uploader') 
+@app.route('/puzzle-uploader', methods=['GET', 'POST']) 
 def puzzle_uploader():
     return 
 
