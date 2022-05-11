@@ -14,7 +14,13 @@ from flask import render_template, flash, redirect
 # A view function for the homepage
 def index():
     # Placeholder puzzle - a class will be made for this that will pull a random daily cheese from the database
-    puzzle = ['Cheddar', 'Hard', 'England', False, 'cheese1.jpg']
+    puzzle = {
+        'name': 'Cheddar', 
+        'type': 'Hard', 
+        'origin': 'England', 
+        'is_mouldy': False, 
+        'img_path': '/images/cheese1.jpg'
+        }
 
     # The page renderer also passes the puzzle object through to the front end?
     return render_template('index.html', puzzle=puzzle)
