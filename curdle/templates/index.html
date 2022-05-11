@@ -15,6 +15,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script type="text/javascript" src="../static/game.js"></script>
   <script type="text/javascript" src="../static/inputFunctions.js"></script>
+  <script defer src="../static/popup.js"></script>
 </head>
 
 <body>
@@ -55,12 +56,26 @@
           <option value="Blue Cheese">
         </datalist>
       </div>
-      <form>
-        <div id="guess-button">
-          <button id="button" type="submit" onclick="entryTest()">GUESS</button>
-        </div>
-    </form>
+
+      <div id="guess-button">
+        <button data-modal-target="#modal" id="button" type="submit" onclick="entryTest()">GUESS</button>
+
+      </div>
+
     </section>
+  </section>
+
+  <section>
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="title">Enter a valid cheese!</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        The drop down box will list valid cheeses. (Don't worry about capitalization)
+      </div>
+    </div>
+    <div id="overlay"></div>
   </section>
 </body>
 

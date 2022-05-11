@@ -1,5 +1,6 @@
 let cheese = ["Cheddar", "Cow", "Type-5", "false"];
-let guessNum = 1;
+let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
+let resultNum = 1;
 
 let correctName = false;
 let correctAnimal = false;
@@ -12,15 +13,17 @@ function resultArray() {
   return guessedCheese;
 }
 
-//Removes
-$(document).ready(function () {
-  $("#button").click(function () {
-    $("#result-"+guessNum).fadeOut("slow");
-  });
-});
+/**
+ * Function generates results box.
+ */
+function resultGen() {
 
-let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
+}
 
+
+/**
+ * Function removes text from the text input box.
+ */
 function removeText() {
   document.getElementById("cheese-choice").value = "";
 }
@@ -29,19 +32,26 @@ function removeText() {
  * Functions tests if entry is valid entry and performs followup functions.
  */
 function entryTest() {
+  //Removes the textbox and button when user has had 6 valid guesses.
+  if (resultNum == 6) {
+    $("#guess-textbox").fadeOut("slow");
+    $("#guess-button").fadeOut("slow");
+  }
   let entry = document.getElementById("cheese-choice").value;
   let validEntry = false;
   for (let i = 0; i < cheeseList.length; i++) {
-    if (entry == cheeseList[i]) {
+    if (entry.toLowerCase() == cheeseList[i].toLowerCase()) {
       validEntry = true;
     }
   }
 
   if (validEntry == false) {
-
+    popup();
   }
 
   if (validEntry == true) {
     removeText();
+    $("#result-"+resultNum).fadeOut("slow");
+    resultNum++;
   }
 }
