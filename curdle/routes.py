@@ -1,5 +1,3 @@
-
-from cProfile import label
 from curdle import app
 from curdle.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect
