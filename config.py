@@ -13,3 +13,11 @@ class Config(object):
     # ie. app.config['SECRET_KEY']
 
     ADMIN_PASSWORD = 'password'
+
+    # This config variable is used to define where new images should be uploaded from the puzzle upload form
+
+    UPLOAD_FOLDER = '/images'
+
+    # This one is used to specify the maximum file size in bytes that can be uploaded - 524288 bytes is 512 kilobytes (web friendly)
+
+    MAX_CONTENT_PATH = 524288
