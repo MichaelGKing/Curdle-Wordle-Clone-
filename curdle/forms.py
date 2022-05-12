@@ -30,7 +30,7 @@ class PuzzleUploadForm(FlaskForm):
     type = SelectField('Cheese Type', choices=['Soft', 'Hard', 'Brined', 'Processed', 'Fresh/Whey', 'Stretched Curd', 'Washed-rind', 'Blue'], validators=[DataRequired()])
     country = SelectField('Country of Origin', choices=['England', 'USA', 'France', 'Switzerland'], validators=[DataRequired()])
     animal = SelectField('Animal of Origin', choices=['Cow', 'Sheep', 'Goat', 'Moose'], validators=[DataRequired()])
-    mold = BooleanField('Is mouldy?')
+    mould = BooleanField('Is mouldy?')
  
     submit = SubmitField('Upload Puzzle to Curdle Database')
 
