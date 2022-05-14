@@ -47,6 +47,8 @@ def close_db(e=None):
      with current_app.open_resource('schema.sql') as f:
          db.executescript(f.read().decode('utf8'))
 
+# The decorators below define a CLI command which will run the function underneath
+# The db can be initialised from the CLI using init-db
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
