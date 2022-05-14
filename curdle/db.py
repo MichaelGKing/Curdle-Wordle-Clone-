@@ -1,5 +1,6 @@
 import sqlite3
 
+# Click is a python package for creating CLI interfaces. It is used in this module to create a CLI command for database initialisation
 import click
 
 # current_app points to the Flask application handling a request
@@ -36,3 +37,18 @@ def close_db(e=None):
     if db is not None:
         db.close()
  
+ # Initialise the database using the SQL instructions from schema.sql
+ def init_db():
+
+     # Set current connection to a new local variable - as seen above, get_db() will open a new connection if one not open already
+     db = get_db()
+
+    # Open schema.sql, decode it to UTF8 format, and execute the SQL script
+     with current_app.open_resource('schema.sql') as f:
+         db.executescript(f.read().decode('utf8'))
+
+@click.command('init-db')
+@with_appcontext
+def init_db_command():
+    init_db()
+    click.echo('The database has been initialised.')
