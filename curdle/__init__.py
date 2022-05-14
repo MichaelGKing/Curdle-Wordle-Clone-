@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 
-from . import db
+from curdle import db
 
 db.init_app(app)
 
