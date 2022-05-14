@@ -54,3 +54,10 @@ def init_db():
 def init_db_command():
     init_db()
     click.echo('The database has been initialised.')
+
+# Register above functions with the application instance
+def init_app(app):
+    # Tell Flask to close the database after returning a response to a request
+    app.teardown_appcontext(close_db)
+    # Add a new CLI command that can be called with flask command ie. > flask init-db
+    app.cli.add_command(init_db_command)
