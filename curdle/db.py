@@ -38,7 +38,7 @@ def close_db(e=None):
         db.close()
  
  # Initialise the database using the SQL instructions from schema.sql
- def init_db():
+def init_db():
 
      # Set current connection to a new local variable - as seen above, get_db() will open a new connection if one not open already
      db = get_db()
