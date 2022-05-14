@@ -55,7 +55,7 @@ How to Install and Run Curdle (from local host)
    
    To tell Flask which file needs to be run to start the application. This is necessary, and having it set in a .flaskenv file avoids the need to set it manually for every new session:
 
-   ```FLASK_APP=setup.py```
+   ```FLASK_APP=curdle```
 
    To run Flask in development mode. This enables some debugging tools and automatically reloads browser when changes are made to code
    
