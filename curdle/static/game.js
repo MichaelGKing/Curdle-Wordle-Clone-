@@ -17,7 +17,12 @@ function resultArray() {
  * Function generates results box.
  */
 function resultGen() {
-
+  //resultnum starts at 1
+  document.getElementById("word-" + resultNum).classList.toggle("active");
+  document.getElementById("world-" + resultNum).classList.toggle("active");
+  document.getElementById("mold-" + resultNum).classList.toggle("active");
+  document.getElementById("animal-" + resultNum).classList.toggle("active");
+  document.getElementById("type-" + resultNum).classList.toggle("active");
 }
 
 
@@ -52,7 +57,9 @@ function entryTest() {
   if (validEntry == true) {
     removeText();
     $("#result-"+resultNum).fadeOut("slow");
+    resultGen();
     resultNum++;
+    
   }
 }
 
