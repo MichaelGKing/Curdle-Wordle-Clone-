@@ -23,13 +23,21 @@ function resultGen() {
   let newEle = document.createElement("p");
   let para = document.createTextNode(cheeseList[cheeseIndex]);
   newEle.appendChild(para);
-
   document.getElementById("word-" + resultNum).appendChild(newEle);
+  $("#word-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
   document.getElementById("world-" + resultNum).classList.toggle("active");
+  $("#world-" + resultNum).css("display", "flex").hide().fadeIn("slow");
+
   document.getElementById("mold-" + resultNum).classList.toggle("active");
+  $("#mold-" + resultNum).css("display", "flex").hide().fadeIn("slow");
+
   document.getElementById("animal-" + resultNum).classList.toggle("active");
+  $("#animal-" + resultNum).css("display", "flex").hide().fadeIn("slow");
+
   document.getElementById("type-" + resultNum).classList.toggle("active");
+  $("#type-" + resultNum).css("display", "flex").hide().fadeIn("slow");
+
   resultNum++;
 }
 
