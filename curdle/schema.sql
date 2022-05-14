@@ -11,7 +11,7 @@ CREATE TABLE cheese (
     animal_id INTEGER NOT NULL,
     country_id INTEGER NOT NULL,
     mouldy INTEGER NOT NULL,
-    image_file_name TEXT NOT NULL
+    image_file_name TEXT NOT NULL,
     FOREIGN KEY (type_id)
         REFERENCES type (type_id)
     FOREIGN KEY (animal_id)
@@ -33,7 +33,7 @@ CREATE TABLE animal (
 CREATE TABLE country (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     country_name TEXT UNIQUE NOT NULL,
-    continent_id INTEGER NOT NULL
+    continent_id INTEGER NOT NULL,
     FOREIGN KEY (continent_id)
         REFERENCES continent (id)
 );
