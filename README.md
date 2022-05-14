@@ -74,6 +74,24 @@ How to Add New Puzzles to the Game
 Credits
 -------
 
+### 3rd party extentions and libraries
+
+To avoid the need for 
+
 References
 -------------------
+
+### DBDiagram
+
+The SQLite database for the project was designed using DBDiagram, a relational database diagram tool found at https://dbdiagram.io/
+
+The database diagram can be viewed below:
+
+<iframe width="560" height="315" src='https://dbdiagram.io/embed/627fc6307f945876b61ae11e'> </iframe>
+
+### Flask development references
+
+A large proportion of the basic Flask application set up was designed following the offical documentation found at https://flask.palletsprojects.com/
+
+Miguel Grinberg's The Flask Mega-Tutorial also provided a valuable guide for many aspects of the development process not covered in the official flask docuemtation. Miguel's tutorial can be found here: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
