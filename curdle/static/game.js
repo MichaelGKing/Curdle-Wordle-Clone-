@@ -1,6 +1,7 @@
 let cheese = ["Cheddar", "Cow", "Type-5", "false"];
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
 let resultNum = 1;
+let cheeseIndex = 0;
 
 let correctName = false;
 let correctAnimal = false;
@@ -19,10 +20,17 @@ function resultArray() {
 function resultGen() {
   //resultnum starts at 1
   document.getElementById("word-" + resultNum).classList.toggle("active");
+  let newEle = document.createElement("p");
+  let para = document.createTextNode(cheeseList[cheeseIndex]);
+  newEle.appendChild(para);
+
+  document.getElementById("word-" + resultNum).appendChild(newEle);
+
   document.getElementById("world-" + resultNum).classList.toggle("active");
   document.getElementById("mold-" + resultNum).classList.toggle("active");
   document.getElementById("animal-" + resultNum).classList.toggle("active");
   document.getElementById("type-" + resultNum).classList.toggle("active");
+  resultNum++;
 }
 
 
@@ -47,6 +55,7 @@ function entryTest() {
   for (let i = 0; i < cheeseList.length; i++) {
     if (entry.toLowerCase() == cheeseList[i].toLowerCase()) {
       validEntry = true;
+      cheeseIndex = i;
     }
   }
 
@@ -56,9 +65,8 @@ function entryTest() {
 
   if (validEntry == true) {
     removeText();
-    $("#result-"+resultNum).fadeOut("slow");
-    resultGen();
-    resultNum++;
+    $("#result-"+resultNum).fadeOut(500);
+    setTimeout(resultGen, 500);
     
   }
 }
