@@ -21,3 +21,8 @@ class Config(object):
     # This one is used to specify the maximum file size in bytes that can be uploaded - 524288 bytes is 512 kilobytes (web friendly)
 
     MAX_CONTENT_PATH = 524288
+
+    # When flask init-db is run, a new database will be created named curdle.sqlite
+    # This can now be pointed to using the DATABASE config variable below
+
+    DATABASE = 'curdle.sqlite'

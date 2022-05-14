@@ -55,7 +55,7 @@ How to Install and Run Curdle (from local host)
    
    To tell Flask which file needs to be run to start the application. This is necessary, and having it set in a .flaskenv file avoids the need to set it manually for every new session:
 
-   ```FLASK_APP=setup.py```
+   ```FLASK_APP=curdle```
 
    To run Flask in development mode. This enables some debugging tools and automatically reloads browser when changes are made to code
    
@@ -74,6 +74,24 @@ How to Add New Puzzles to the Game
 Credits
 -------
 
+### 3rd party extentions and libraries
+
+To avoid the need for 
+
 References
 -------------------
+
+### DBDiagram
+
+The SQLite database for the project was designed using DBDiagram, a relational database diagram tool found at https://dbdiagram.io/
+
+The database diagram can be viewed below:
+
+<iframe width="560" height="315" src='https://dbdiagram.io/embed/627fc6307f945876b61ae11e'> </iframe>
+
+### Flask development references
+
+A large proportion of the basic Flask application set up was designed following the offical documentation found at https://flask.palletsprojects.com/
+
+Miguel Grinberg's The Flask Mega-Tutorial also provided a valuable guide for many aspects of the development process not covered in the official flask docuemtation. Miguel's tutorial can be found here: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
