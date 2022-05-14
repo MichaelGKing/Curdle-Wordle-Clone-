@@ -31,8 +31,9 @@ def get_db():
 # The connection to the db should be closed before responding to a request
 
 def close_db(e=None):
-    # set current connection to a new local variable
-    db = g.pop('db, None')
+    # pop() removes an item at the given index from a list and returns the removed example? not sure what the None variable does...
+    # This is just how Flask recommend to do it 
+    db = g.pop('db', None)
     # if there is a current database connection, close it
     if db is not None:
         db.close()
