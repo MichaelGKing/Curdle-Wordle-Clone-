@@ -27,7 +27,7 @@ CREATE TABLE animal (
 CREATE TABLE country (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     country_name TEXT UNIQUE NOT NULL,
-    continent_id INTEGER NOT NULL,
+    continent_id INTEGER NOT NULL
 );
 
 CREATE TABLE continent (
