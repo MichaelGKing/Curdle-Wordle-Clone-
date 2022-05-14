@@ -46,7 +46,7 @@ function entryTest() {
   }
 
   if (validEntry == false) {
-    popup();
+    togglePopup();
   }
 
   if (validEntry == true) {
@@ -54,4 +54,12 @@ function entryTest() {
     $("#result-"+resultNum).fadeOut("slow");
     resultNum++;
   }
+}
+
+
+/**
+ * Generates a popup box when the user does not enter a valid cheese.
+ */
+function togglePopup() {
+  document.getElementById("popup-1").classList.toggle("active");
 }
