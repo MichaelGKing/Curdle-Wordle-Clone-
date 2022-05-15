@@ -1,12 +1,10 @@
 let cheese = ["Cheddar", "Cow", "Type-5", "false"];
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
+
+//Entries are name, continent, mold, animal, cheese type.
+let correctChoice = [false, false, false, false, false];
 let resultNum = 1;
 let cheeseIndex = 0;
-
-let correctName = false;
-let correctAnimal = false;
-let correctType = false;
-let correctMold = false;
 
 function resultArray() {
   let guess = document.getElementById("cheese-choice").value;
@@ -27,15 +25,19 @@ function resultGen() {
   $("#word-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
   document.getElementById("world-" + resultNum).classList.toggle("active");
+  $("#world-" + resultNum).append("<i class='fa fa-globe'></i>");
   $("#world-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
   document.getElementById("mold-" + resultNum).classList.toggle("active");
+  $("#mold-" + resultNum).append("<i class='fa-solid fa-bacteria'></i>");
   $("#mold-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
   document.getElementById("animal-" + resultNum).classList.toggle("active");
+  $("#animal-" + resultNum).append("<i class='fa-solid fa-paw'></i>");
   $("#animal-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
   document.getElementById("type-" + resultNum).classList.toggle("active");
+  $("#type-" + resultNum).append("<i class='fas fa-cheese'></i>");
   $("#type-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
   resultNum++;
