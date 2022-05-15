@@ -174,6 +174,11 @@ VALUES
     ("Chile", 7),
     ("Colombia", 7),
     ("Venezuela", 7);
-
-
+    
+/*
+Inserting a cheese to make sure SQLite syntax is correct (tested, and it works!)
+*/
+INSERT INTO cheese (cheese_name, cheese_type_id, animal_id, country_id, mouldy, image_file_name)
+VALUES
+    ('Cheddar', 4, 1, 55, 0, 'cheese1.jpg');
 
