@@ -146,14 +146,24 @@ header p:hover {
   border: 3px solid rgba(221, 178, 61, 0.5);
   box-sizing: border-box;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#share:hover {
+  background-color: rgb(0, 161, 0);
+  cursor: pointer;
+}
+
+#share:active {
+  background-color: green;
 }
 
 #button, #cheese-choice, #share {
   padding: 0px;
   height: 32.5px;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Poppins";
 }
 

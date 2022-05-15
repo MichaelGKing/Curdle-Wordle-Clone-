@@ -6,10 +6,26 @@ let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Che
 
 //Entries are name, continent, mold, animal, cheese type.
 let correctChoice = [false, false, false, false, false];
+
+//Tracks how many valid guesses have been made.
 let resultNum = 1;
+
+//Tracks the index of the cheeselist used in making the guess for generating
+//word in the results box from the cheeselist not the user input, as user input
+//may have incorrect capitalization.
 let cheeseIndex = 0;
+
 //For sharing your puzzle results.
 let puzzleNum = 1;
+
+//Matrix array storing results.
+// Create one dimensional array
+var resultArray = new Array(5);
+// Loop to create 2D array using 1D array
+for (var i = 0; i < resultArray.length; i++) {
+  resultArray[i] = [-1,-1,-1,-1,-1,-1];
+}
+
 
 /**
  * Generates boolean array indicating if attribute of guessed cheese is same
@@ -25,6 +41,15 @@ function attributeChecker() {
   for (let i = 0; i < guessAttributes.length; i++) {
     if (guessAttributes[i] == correctAttributes[i]) {
       correctChoice[i] = true;
+    }
+  }
+
+  for (let i = 0; i < correctChoice.length; i++) {
+    if (correctChoice[i] == true) {
+      resultArray[resultNum - 1][i] = 1;
+    }
+    if (correctChoice[i] == false) {
+      resultArray[resultNum - 1][i] = 0;
     }
   }
 }
@@ -149,4 +174,33 @@ function toggleStats() {
  */
 function toggleCongrats() {
   document.getElementById("popup-4").classList.toggle("active");
+}
+
+/**
+ * Copies result to clipboard when share button is pressed.
+ */
+function clipboard() {
+  let text = "";
+  for (let i = 0; i < resultArray.length; i++) {
+    for (let j = 0; j < resultArray[i].length; j++) {
+      if (resultArray[i][j] == -1) {
+        continue;
+      }
+      if (resultArray[i][j] == 0) {
+        let x = "🟥";
+        text = text.concat(x);
+        continue;
+      }
+      if (resultArray[i][j] == 1) {
+        let x = "🟩";
+        text = text.concat(x);
+        continue;
+      }
+    }
+    text = text.concat("\n");
+  }
+
+  text = `Curdle #${puzzleNum} ${resultNum-1}/6\n${text}`
+  navigator.clipboard.writeText(text);
+  alert("Copied the text: " + text);
 }
