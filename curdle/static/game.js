@@ -29,7 +29,8 @@ for (var i = 0; i < resultArray.length; i++) {
 
 /**
  * Generates boolean array indicating if attribute of guessed cheese is same
- * as attribute of the correct cheese.
+ * as attribute of the correct cheese. Also inputs results to 2-D array resultArray
+ * for use in sharing results with others.
  */
 function attributeChecker() {
   let guess = document.getElementById("cheese-choice").value.toLowerCase();
@@ -200,7 +201,7 @@ function clipboard() {
     text = text.concat("\n");
   }
 
-  text = `Curdle #${puzzleNum} ${resultNum-1}/6\n${text}`
+  text = `Curdle #${puzzleNum} ${resultNum-1}/6\n${text}`;
   navigator.clipboard.writeText(text);
   alert("Copied the text: " + text);
 }
