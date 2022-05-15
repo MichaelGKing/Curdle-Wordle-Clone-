@@ -116,7 +116,6 @@ VALUES
     ("Malaysia", 2),
     ("Mongolia", 2),
     ("Nepal", 2),
-    ("Malaysia", 2),
     ("Philippines", 2),
     ("Albania", 3),
     ("Austria", 3),
