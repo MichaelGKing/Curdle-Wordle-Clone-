@@ -95,6 +95,7 @@ function entryTest() {
   if (resultNum == 6) {
     $("#guess-textbox").fadeOut("slow");
     $("#guess-button").fadeOut("slow");
+    $("#share-button").css("display", "flex").hide().fadeIn("slow");
   }
   let entry = document.getElementById("cheese-choice").value;
   let validEntry = false;
@@ -116,6 +117,7 @@ function entryTest() {
       $("#guess-textbox").fadeOut("slow");
       $("#guess-button").fadeOut("slow");
       toggleCongrats();
+      $("#share-button").css("display", "flex").hide().fadeIn("slow");
     }
     $("#result-"+resultNum).fadeOut(500);
     setTimeout(resultGen, 500);

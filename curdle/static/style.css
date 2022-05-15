@@ -1,5 +1,6 @@
 html, body {
   overflow: hidden;
+  font-family: "Poppins";
 }
 
 body {
@@ -132,19 +133,36 @@ header p:hover {
   align-items: center;
 }
 
-#button, #cheese-choice {
+#share-button {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#share {
+  margin: 5px 5px 0 5px;
+  width: 500px;
+  background-color: green;
+  border: 3px solid rgba(221, 178, 61, 0.5);
+  box-sizing: border-box;
+  color: white;
+  font-size: 18px;
+}
+
+#button, #cheese-choice, #share {
   padding: 0px;
   height: 32.5px;
   border-radius: 5px;
+  font-size: 18px;
+  font-family: "Poppins";
 }
 
 #cheese-choice {
   width: 491px;
   margin: 0px 5px 0 5px;
-  
   font-size: 16px;
   padding-left: 5px;
-  text-align: center;
+  text-align: left;
 }
 
 #button {
