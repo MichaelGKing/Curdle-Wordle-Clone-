@@ -8,6 +8,8 @@ let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Che
 let correctChoice = [false, false, false, false, false];
 let resultNum = 1;
 let cheeseIndex = 0;
+//For sharing your puzzle results.
+let puzzleNum = 1;
 
 /**
  * Generates boolean array indicating if attribute of guessed cheese is same
@@ -113,6 +115,7 @@ function entryTest() {
     if (correctChoice[0] == true) {
       $("#guess-textbox").fadeOut("slow");
       $("#guess-button").fadeOut("slow");
+      toggleCongrats();
     }
     $("#result-"+resultNum).fadeOut(500);
     setTimeout(resultGen, 500);
@@ -137,4 +140,11 @@ function toggleHelp() {
 
 function toggleStats() {
   document.getElementById("popup-3").classList.toggle("active");
+}
+
+/**
+ * Generates popup box for when the user completes the puzzle.
+ */
+function toggleCongrats() {
+  document.getElementById("popup-4").classList.toggle("active");
 }
