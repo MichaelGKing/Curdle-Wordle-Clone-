@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&family=Rubik+Microbe&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&display=swap" rel="stylesheet">
   
   <script type="text/javascript" src="../static/game.js"></script>
   <script type="text/javascript" src="../static/inputFunctions.js"></script>
@@ -92,8 +93,11 @@
       </div>
 
       <div id="guess-button">
-        <button data-modal-target="#modal" id="button" type="submit" onclick="entryTest()">GUESS</button>
+        <button id="button" type="submit" onclick="entryTest()">GUESS</button>
+      </div>
 
+      <div id="share-button">
+        <button id="share" onclick="clipboard()">SHARE</button>
       </div>
 
     </section>
@@ -123,6 +127,15 @@
       <div class="close-btn" onclick="toggleStats()">&times;</div>
       <h2>Statistics</h2>
       <p>You have scored...</p>
+      </div>
+    </div>
+  </div>
+  <div class="popup" id="popup-4">
+    <div class="overlay"></div>
+    <div class ="content">
+      <div class="close-btn" onclick="toggleCongrats()">&times;</div>
+      <h2>Congratulations!</h2>
+      <p>You have completed the puzzle.</p>
       </div>
     </div>
   </div>

@@ -6,12 +6,31 @@ let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Che
 
 //Entries are name, continent, mold, animal, cheese type.
 let correctChoice = [false, false, false, false, false];
+
+//Tracks how many valid guesses have been made.
 let resultNum = 1;
+
+//Tracks the index of the cheeselist used in making the guess for generating
+//word in the results box from the cheeselist not the user input, as user input
+//may have incorrect capitalization.
 let cheeseIndex = 0;
+
+//For sharing your puzzle results.
+let puzzleNum = 1;
+
+//Matrix array storing results.
+// Create one dimensional array
+var resultArray = new Array(5);
+// Loop to create 2D array using 1D array
+for (var i = 0; i < resultArray.length; i++) {
+  resultArray[i] = [-1,-1,-1,-1,-1,-1];
+}
+
 
 /**
  * Generates boolean array indicating if attribute of guessed cheese is same
- * as attribute of the correct cheese.
+ * as attribute of the correct cheese. Also inputs results to 2-D array resultArray
+ * for use in sharing results with others.
  */
 function attributeChecker() {
   let guess = document.getElementById("cheese-choice").value.toLowerCase();
@@ -23,6 +42,15 @@ function attributeChecker() {
   for (let i = 0; i < guessAttributes.length; i++) {
     if (guessAttributes[i] == correctAttributes[i]) {
       correctChoice[i] = true;
+    }
+  }
+
+  for (let i = 0; i < correctChoice.length; i++) {
+    if (correctChoice[i] == true) {
+      resultArray[resultNum - 1][i] = 1;
+    }
+    if (correctChoice[i] == false) {
+      resultArray[resultNum - 1][i] = 0;
     }
   }
 }
@@ -93,6 +121,7 @@ function entryTest() {
   if (resultNum == 6) {
     $("#guess-textbox").fadeOut("slow");
     $("#guess-button").fadeOut("slow");
+    $("#share-button").css("display", "flex").hide().fadeIn("slow");
   }
   let entry = document.getElementById("cheese-choice").value;
   let validEntry = false;
@@ -113,6 +142,8 @@ function entryTest() {
     if (correctChoice[0] == true) {
       $("#guess-textbox").fadeOut("slow");
       $("#guess-button").fadeOut("slow");
+      toggleCongrats();
+      $("#share-button").css("display", "flex").hide().fadeIn("slow");
     }
     $("#result-"+resultNum).fadeOut(500);
     setTimeout(resultGen, 500);
@@ -137,4 +168,40 @@ function toggleHelp() {
 
 function toggleStats() {
   document.getElementById("popup-3").classList.toggle("active");
+}
+
+/**
+ * Generates popup box for when the user completes the puzzle.
+ */
+function toggleCongrats() {
+  document.getElementById("popup-4").classList.toggle("active");
+}
+
+/**
+ * Copies result to clipboard when share button is pressed.
+ */
+function clipboard() {
+  let text = "";
+  for (let i = 0; i < resultArray.length; i++) {
+    for (let j = 0; j < resultArray[i].length; j++) {
+      if (resultArray[i][j] == -1) {
+        continue;
+      }
+      if (resultArray[i][j] == 0) {
+        let x = "🟥";
+        text = text.concat(x);
+        continue;
+      }
+      if (resultArray[i][j] == 1) {
+        let x = "🟩";
+        text = text.concat(x);
+        continue;
+      }
+    }
+    text = text.concat("\n");
+  }
+
+  text = `Curdle #${puzzleNum} ${resultNum-1}/6\n${text}`;
+  navigator.clipboard.writeText(text);
+  alert("Copied the text: " + text);
 }
