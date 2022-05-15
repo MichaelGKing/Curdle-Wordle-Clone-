@@ -67,3 +67,8 @@ def puzzle_uploader():
     
     flash('You have not been authorised to view this page, please enter the admin password below to continue.')
     return redirect('/auth')
+
+@app.route('/get-puzzle', methods=['GET', 'POST'])
+def get_daily_puzzle():
+
+    
