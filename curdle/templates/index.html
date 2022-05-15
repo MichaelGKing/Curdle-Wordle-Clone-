@@ -8,25 +8,29 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/popup.css">
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&family=Rubik+Microbe&display=swap"
-    rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&family=Rubik+Microbe&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+  
   <script type="text/javascript" src="../static/game.js"></script>
   <script type="text/javascript" src="../static/inputFunctions.js"></script>
   <script defer src="../static/popup.js"></script>
+  <script src="https://kit.fontawesome.com/143356e028.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <header>
-    <a href="">
+    <p onclick="toggleHelp()">
       <ion-icon name="help-circle-outline"></ion-icon>
-    </a>
+    </p>
     <h1>Curdle</h1>
-    <a href="">
+    <p onclick="toggleStats()">
       <ion-icon name="stats-chart-outline"></ion-icon>
-    </a>
+    </p>
   </header>
   <section class="game-container">
 
@@ -37,11 +41,41 @@
     <section class="results">
       <div id="grid-container">
         <div id="result-1"></div>
+        <div class="word one" id="word-1"></div>
+        <div class="world one" id="world-1"></div>
+        <div class="mold one" id="mold-1"></div>
+        <div class="animal one" id="animal-1"></div>
+        <div class="type one" id="type-1"></div>
         <div id="result-2"></div>
+        <div class="word two" id="word-2"></div>
+        <div class="world two" id="world-2"></div>
+        <div class="mold two" id="mold-2"></div>
+        <div class="animal two" id="animal-2"></div>
+        <div class="type two" id="type-2"></div>
         <div id="result-3"></div>
+        <div class="word three" id="word-3"></div>
+        <div class="world three" id="world-3"></div>
+        <div class="mold three" id="mold-3"></div>
+        <div class="animal three" id="animal-3"></div>
+        <div class="type three" id="type-3"></div>
         <div id="result-4"></div>
+        <div class="word four" id="word-4"></div>
+        <div class="world four" id="world-4"></div>
+        <div class="mold four" id="mold-4"></div>
+        <div class="animal four" id="animal-4"></div>
+        <div class="type four" id="type-4"></div>
         <div id="result-5"></div>
+        <div class="word five" id="word-5"></div>
+        <div class="world five" id="world-5"></div>
+        <div class="mold five" id="mold-5"></div>
+        <div class="animal five" id="animal-5"></div>
+        <div class="type five" id="type-5"></div>
         <div id="result-6"></div>
+        <div class="word six" id="word-6"></div>
+        <div class="world six" id="world-6"></div>
+        <div class="mold six" id="mold-6"></div>
+        <div class="animal six" id="animal-6"></div>
+        <div class="type six" id="type-6"></div>
       </div>
     </section>
 
@@ -65,18 +99,33 @@
     </section>
   </section>
 
-  <section>
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <div class="title">Enter a valid cheese!</div>
-        <button data-close-button class="close-button">&times;</button>
-      </div>
-      <div class="modal-body">
-        The drop down box will list valid cheeses. (Don't worry about capitalization)
+  <div class="popup" id="popup-1">
+    <div class="overlay"></div>
+    <div class ="content">
+      <div class="close-btn" onclick="togglePopup()">&times;</div>
+      <h2>Please enter a valid cheese!</h2>
+      <p>See the drop down menu for a list.</p>
       </div>
     </div>
-    <div id="overlay"></div>
-  </section>
+  </div>
+  <div class="popup" id="popup-2">
+    <div class="overlay"></div>
+    <div class ="content">
+      <div class="close-btn" onclick="toggleHelp()">&times;</div>
+      <h2>Help</h2>
+      <p>Enter a guess...</p>
+      </div>
+    </div>
+  </div>
+  <div class="popup" id="popup-3">
+    <div class="overlay"></div>
+    <div class ="content">
+      <div class="close-btn" onclick="toggleStats()">&times;</div>
+      <h2>Statistics</h2>
+      <p>You have scored...</p>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

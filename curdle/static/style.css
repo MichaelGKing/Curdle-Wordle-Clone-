@@ -22,14 +22,15 @@ h1 {
 }
 
 
-a {
+header p {
   margin: auto;
   font-size: 24px;
   color: black;
 }
 
-a:hover {
+header p:hover {
   color: rgb(221, 178, 61);
+  cursor: pointer;
 }
 
 /* Body */
@@ -69,10 +70,15 @@ a:hover {
   gap: 5px;
 }
 
+#grid-container p {
+  margin: 0px;
+}
+
 #result-1, #result-2, #result-3, #result-4, #result-5, #result-6 {
   border-radius: 5px;
   background-color: rgb(221, 178, 61);
   opacity: 50%;
+  
 } 
 
 #result-1 {
@@ -157,64 +163,182 @@ a:hover {
   background-color: rgb(223, 223, 223);
 }
 
-/* Pop up box */
-.modal {
-  position: fixed;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: 200ms ease-in-out;
-  border: 1px solid black;
-  border-radius: 10px;
-  z-index: 10;
-  background-color: white;
-  width: 300px;
-  max-width: 80%;
-}
 
-.modal.active {
-  transform: translate(-50%, -50%) scale(1);
-}
 
-.modal-header {
-  padding: 10px 15px;
+/* Styling for hidden results bars */
+
+.word.active, .world.active, .mold.active, .animal.active, .type.active {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-bottom: 1px solid black;
 }
 
-.modal-header .title {
-  font-size: 1.25rem;
-  font-weight: bold;
+.word {
+  border: 3px solid red;
 }
 
-.modal-header .close-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.25rem;
-  font-weight: bold;
+.word, .mold, .animal, .type, .world {
+  color: black;
+  display: none;
+  border-radius: 5px;
+  background: rgba(221, 178, 61, 0.5);
 }
 
-.modal-body {
-  padding: 10px 15px;
+#grid-container i {
+  color: red;
 }
 
-#overlay {
-  position: fixed;
-  opacity: 0;
-  transition: 200ms ease-in-out;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, .5);
-  pointer-events: none;
+.word.one {
+  grid-column: 1 / span 3;
+  grid-row: 1;
 }
 
-#overlay.active {
-  opacity: 1;
-  pointer-events: all;
+.world.one {
+  grid-column: 4 / span 1;
+  grid-row: 1;
+}
+
+.mold.one {
+  grid-column: 5 / span 1;
+  grid-row: 1;
+}
+
+.animal.one {
+  grid-column: 6 / span 1;
+  grid-row: 1;
+}
+
+.type.one {
+  grid-column: 7 / span 1;
+  grid-row: 1;
+}
+
+/* Result 2 */
+.word.two {
+  grid-column: 1 / span 3;
+  grid-row: 2;
+}
+
+.world.two {
+  grid-column: 4 / span 1;
+  grid-row: 2;
+}
+
+.mold.two {
+  grid-column: 5 / span 1;
+  grid-row: 2;
+}
+
+.animal.two {
+  grid-column: 6 / span 1;
+  grid-row: 2;
+}
+
+.type.two {
+  grid-column: 7 / span 1;
+  grid-row: 2;
+}
+
+/* Result 3 */
+.word.three {
+  grid-column: 1 / span 3;
+  grid-row: 3;
+}
+
+.world.three {
+  grid-column: 4 / span 1;
+  grid-row: 3;
+}
+
+.mold.three {
+  grid-column: 5 / span 1;
+  grid-row: 3;
+}
+
+.animal.three {
+  grid-column: 6 / span 1;
+  grid-row: 3;
+}
+
+.type.three {
+  grid-column: 7 / span 1;
+  grid-row: 3;
+}
+
+/* Result 4 */
+.word.four {
+  grid-column: 1 / span 3;
+  grid-row: 4;
+}
+
+.world.four {
+  grid-column: 4 / span 1;
+  grid-row: 4;
+}
+
+.mold.four {
+  grid-column: 5 / span 1;
+  grid-row: 4;
+}
+
+.animal.four {
+  grid-column: 6 / span 1;
+  grid-row: 4;
+}
+
+.type.four {
+  grid-column: 7 / span 1;
+  grid-row: 4;
+}
+
+/* Result 5 */
+.word.five {
+  grid-column: 1 / span 3;
+  grid-row: 5;
+}
+
+.world.five {
+  grid-column: 4 / span 1;
+  grid-row: 5;
+}
+
+.mold.five {
+  grid-column: 5 / span 1;
+  grid-row: 5;
+}
+
+.animal.five {
+  grid-column: 6 / span 1;
+  grid-row: 5;
+}
+
+.type.five {
+  grid-column: 7 / span 1;
+  grid-row: 5;
+}
+
+/* Result 4 */
+.word.six {
+  grid-column: 1 / span 3;
+  grid-row: 6;
+}
+
+.world.six {
+  grid-column: 4 / span 1;
+  grid-row: 6;
+}
+
+.mold.six {
+  grid-column: 5 / span 1;
+  grid-row: 6;
+}
+
+.animal.six {
+  grid-column: 6 / span 1;
+  grid-row: 6;
+}
+
+.type.six {
+  grid-column: 7 / span 1;
+  grid-row: 6;
 }
