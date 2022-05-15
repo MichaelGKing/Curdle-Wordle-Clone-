@@ -37,6 +37,9 @@ function resultGen() {
   let para = document.createTextNode(cheeseList[cheeseIndex]);
   newEle.appendChild(para);
   document.getElementById("word-" + resultNum).appendChild(newEle);
+  if (correctChoice[0] == true) {
+    $("#word-" + resultNum).css("border", "3px solid green");
+  }
   $("#word-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
   //Generates section indicating if continent is correct.
@@ -107,6 +110,10 @@ function entryTest() {
   if (validEntry == true) {
     removeText();
     attributeChecker();
+    if (correctChoice[0] == true) {
+      $("#guess-textbox").fadeOut("slow");
+      $("#guess-button").fadeOut("slow");
+    }
     $("#result-"+resultNum).fadeOut(500);
     setTimeout(resultGen, 500);
     

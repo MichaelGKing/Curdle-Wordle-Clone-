@@ -173,6 +173,10 @@ header p:hover {
   align-items: center;
 }
 
+.word {
+  border: 3px solid red;
+}
+
 .word, .mold, .animal, .type, .world {
   color: black;
   display: none;
