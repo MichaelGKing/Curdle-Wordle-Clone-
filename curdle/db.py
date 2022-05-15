@@ -56,8 +56,8 @@ def init_db():
     # Create hash of the admin password configuration variable
     hash = generate_password_hash(app.config['ADMIN_PASSWORD'])
     # Store hashed password in the database
-    db = get_db()
     db.execute('INSERT INTO admin (password_hash) VALUES(?)', (hash,))
+    db.commit()
 
 # The decorators below define a CLI command which will run the function underneath
 # The db can be initialised from the CLI using init-db
@@ -92,14 +92,25 @@ def get_puzzle(cheese_name):
     else:
         return cheese
 
-
+# This is a overly complicated one, due to the decision to normalise the SQLite db...
+# 
 def set_puzzle(cheese):
-    return None
+    db = get_db()
+    db.execute('INSERT INTO cheese (password_hash) VALUES(?)', (hash,))
 
 def set_todays_puzzle():
     return None
 
-    
-
+# Get hashed admin password from database for authentication
+def get_hashed_password():
+    db = get_db()
+    hash = db.execute(
+        'SELECT password_hash FROM admin').fetchone()
+        # There should only ever be one admin password, set at DB initialisation
+    # Do a check just incase a password is not there..
+    if hash == None:
+        print('There was no admin password found in the database! Please assign a strong password to ADMIN_PASSWORD in config.py, and reinitialise the database.')
+    else:
+        return hash['password_hash']
 
 
