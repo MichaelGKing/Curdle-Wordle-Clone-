@@ -18,6 +18,10 @@ class Config(object):
 
     UPLOAD_FOLDER = '/images'
 
+    # This is used to set allowed cheese image upload file types
+
+    ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
     # This one is used to specify the maximum file size in bytes that can be uploaded - 524288 bytes is 512 kilobytes (web friendly)
 
     MAX_CONTENT_PATH = 524288

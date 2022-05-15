@@ -12,7 +12,7 @@
 {% endwith %}
 {% block body %}{% endblock %}
 
-<form action="" method="post" novalidate>
+<form action="" method="post" novalidate enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>
         {{ form.name.label }}<br>
@@ -45,6 +45,13 @@
     <p>
         {{ form.mould() }} {{ form.mould.label }}<br>
     </p>
+    <p>
+      {{ form.image.label }}<br>
+      {{ form.image() }}<br>
+      {% for error in form.image.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+  </p>
     <p>{{ form.submit() }}</p>
 </form>
 

@@ -63,6 +63,10 @@ How to Install and Run Curdle (from local host)
 
    ```FLASK_ENV=development```
 
+   To allow the Flask application to print debugging messages to console, disable stdout buffering
+
+   ```PYTHONUNBUFFERED='any_non_empty_string'```
+
 ### How to Start the Flask Application
 
 How to Play
