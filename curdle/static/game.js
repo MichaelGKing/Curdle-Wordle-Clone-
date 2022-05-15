@@ -1,4 +1,4 @@
-let cheese = ["Cheddar", "Cow", "Type-5", "false"];
+let cheese = ["Cheddar", "Europe", "Cow", "Type-5", "false"];
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
 
 //Entries are name, continent, mold, animal, cheese type.
@@ -7,8 +7,10 @@ let resultNum = 1;
 let cheeseIndex = 0;
 
 function resultArray() {
+  //Store
   let guess = document.getElementById("cheese-choice").value;
-  guessedCheese = ["Cheddar", "Cow", "Type-5", "false"];
+  //
+  guessedCheese = ["Cheddar", "Europe", "Cow", "Type-5", "false"];
   return guessedCheese;
 }
 
@@ -87,4 +89,15 @@ function entryTest() {
  */
 function togglePopup() {
   document.getElementById("popup-1").classList.toggle("active");
+}
+
+/**
+ * Generates popupbox for help and stats button.
+ */
+ function toggleHelp() {
+  document.getElementById("popup-2").classList.toggle("active");
+}
+
+function toggleStats() {
+  document.getElementById("popup-3").classList.toggle("active");
 }
