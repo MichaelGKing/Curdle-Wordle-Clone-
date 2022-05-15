@@ -1,6 +1,8 @@
-from curdle import app
+from curdle import app, db
 from curdle.forms import AdminLoginForm, PuzzleUploadForm
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request
+from wtforms import ValidationError
+from werkzeug.security import check_password_hash
 
 authorised = False
 
@@ -36,14 +38,15 @@ def auth():
     # Use WTForms' FlaskForms functions to validate user input
     # The validations set in admin_login.py are checked, and if data is valid, browser is redirected to /index
     if form.validate_on_submit():
-        if (form.password.data == app.config['SECRET_KEY']):
-            
-            global authorised 
-            authorised = True
 
-            flash('Administration Portal Authentication Successful')
+        password = request.form['password']
+        # Need to start a session for user login - old method did not work
+        if not check_password_hash(db.get_hashed_password(), password):
+            raise ValidationError('The password you entered in incorrect')
 
-            return redirect('/puzzle-uploader')
+        flash('Administration Portal Authentication Successful')
+
+        return redirect('/puzzle-uploader')
 
     # Else, browser stays at /authorise view
     return render_template('auth.html', form=form)
@@ -59,8 +62,15 @@ def puzzle_uploader():
     if form.validate_on_submit():
 
         # Here goes the code that recieves the data and handles adding it to the database
-        
-        flash('Puzzle Upload Successful')
+        if request.method == "POST":
+
+            req = request.form
+            
+            print(req)
+
+            flash('Puzzle Upload Successful')
+
+            # return redirect(request.url)
     
     if authorised:
         return render_template('puzzle-uploader.html', form=form)
@@ -68,7 +78,6 @@ def puzzle_uploader():
     flash('You have not been authorised to view this page, please enter the admin password below to continue.')
     return redirect('/auth')
 
-@app.route('/get-puzzle', methods=['GET', 'POST'])
-def get_daily_puzzle():
-
-    
+@app.route('/get-todays-puzzle', methods=['GET', 'POST'])
+def get_todays_puzzle():
+    return
