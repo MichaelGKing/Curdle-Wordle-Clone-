@@ -90,7 +90,8 @@ def get_guess():
     # Get cheese name from client side
     if request.method == "POST":
 
-        guess = {}
+        guess = request.get_json()
+        print(guess)
 
     # Get list of cheese attributes from the database for the cheese
 
