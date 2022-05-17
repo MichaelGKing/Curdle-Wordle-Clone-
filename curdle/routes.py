@@ -1,5 +1,5 @@
 import os
-from curdle import app, db
+from curdle import app
 from curdle.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect, request
 from wtforms import ValidationError
@@ -60,7 +60,12 @@ def puzzle_uploader():
     
     global authorised
 
+    # create new instance of PuzzleUploadForm()
     form = PuzzleUploadForm()
+    # retreive lists of cheese attributes from the database and use them to set the choices for the form's SelectFields
+    form.set_types(db.get_attribute_list('cheese_type', 'cheese_type'))
+    form.set_countries(db.get_attribute_list('animal_name', 'animal'))
+    form.set_animals(db.get_attribute_list('country_name', 'country'))
 
     if form.validate_on_submit():
 
@@ -68,12 +73,6 @@ def puzzle_uploader():
         if request.method == "POST":
 
             req = request.form
-
-            cheese = {}
-
-
-
-
 
             f = form.image.data
             filename = secure_filename(f.filename)

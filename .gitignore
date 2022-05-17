@@ -17,4 +17,4 @@ build/
 
 .DS_Store
 
-curdle.sqlite
+app.db

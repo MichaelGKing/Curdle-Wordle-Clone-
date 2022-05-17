@@ -20,21 +20,27 @@ class AdminLoginForm(FlaskForm):
     
 class PuzzleUploadForm(FlaskForm):
 
-    type_list = ['Soft', 'Hard', 'Brined', 'Processed', 'Fresh/Whey', 'Stretched Curd', 'Washed-rind', 'Blue']
-    country_list = ['England', 'USA', 'France', 'Switzerland']
-    animal_list = db.execute(
-        'SELECT * FROM animal'
-    ).fetchall()
-    print(animal_list)
-
     name = StringField('Cheese Name', validators=[DataRequired()])
-    type = SelectField('Cheese Type', choices=type_list, validators=[DataRequired()])
-    country = SelectField('Country of Origin', choices=country_list, validators=[DataRequired()])
-    animal = SelectField('Animal of Origin', choices=animal_list, validators=[DataRequired()])
+    type = SelectField('Cheese Type', choices=[], validators=[DataRequired()])
+    country = SelectField('Country of Origin', choices=[], validators=[DataRequired()])
+    animal = SelectField('Animal of Origin', choices=[], validators=[DataRequired()])
     mould = BooleanField('Is mouldy?')
     image = FileField(validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Only images of .png, .jpg, .jpeg or .gif allowed.')])
- 
     submit = SubmitField('Upload Puzzle to Curdle Database')
+
+    # Setter functions are required so that the type, country and animal form fields can have their options set
+    # with data from the corresponding database tables. 
+    def set_types(list):
+        global type
+        type = SelectField('Cheese Type', choices=list, validators=[DataRequired()])
+
+    def set_countries(list):
+        global country
+        country = SelectField('Country of Origin', choices=list, validators=[DataRequired()])
+    
+    def set_animals(list):
+        global animal
+        animal = SelectField('Animal of Origin', choices=list, validators=[DataRequired()])
 
 
 

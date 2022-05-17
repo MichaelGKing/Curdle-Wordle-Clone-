@@ -2,6 +2,8 @@
 
 import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 class Config(object):
 
     # Flask and some of it's extensions need a secret key set to use as a cryptographic key
@@ -26,7 +28,8 @@ class Config(object):
 
     MAX_CONTENT_PATH = 524288
 
-    # When flask init-db is run, a new database will be created named curdle.sqlite
-    # This can now be pointed to using the DATABASE config variable below
-
-    DATABASE = 'curdle.sqlite'
+    # Tells SQLAlchemy where the database should be found
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+        
+    # When true, SQLAlchemy sends a signal to the application everytime a change is about to be made to the database
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

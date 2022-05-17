@@ -1,2 +1,0 @@
-
-from curdle import app
