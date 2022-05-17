@@ -1,6 +1,6 @@
 import os
-from curdle import app
-from curdle.forms import AdminLoginForm, PuzzleUploadForm
+from app import app
+from app.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect, request
 from wtforms import ValidationError
 from werkzeug.security import check_password_hash
