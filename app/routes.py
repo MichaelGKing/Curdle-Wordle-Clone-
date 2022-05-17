@@ -1,7 +1,9 @@
-import os
+from mimetypes import guess_type
+import os, json
+from urllib import response
 from app import app
 from app.forms import AdminLoginForm, PuzzleUploadForm
-from flask import render_template, flash, redirect, request, jsonify
+from flask import render_template, flash, redirect, request, jsonify, Response
 from wtforms import ValidationError
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
@@ -101,11 +103,7 @@ def get_guess():
 
     # Return string in json format to the client side
 
-        response = jsonify({ 'result' : (False, False, False, False, False) })
-
-        print(response)
-
-        return response
+        return {'message': "Hello Client!"}
 
 
 
