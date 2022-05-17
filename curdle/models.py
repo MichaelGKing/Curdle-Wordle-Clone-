@@ -1,4 +1,4 @@
-from app import db
+from curdle import db
 
 class Type(db.Model):
     id = db.Column(db.Integer, primary_key=True)

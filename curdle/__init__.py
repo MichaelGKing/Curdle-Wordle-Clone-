@@ -12,7 +12,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from app import routes, models
+from curdle import routes, models
 
 # Import our python module 'routes' which contains instructions what to render on what URL for the web site/application
 # The name of the folder this file is in is 'app'. This means app is a python package, and we can import individual modules from it as needed

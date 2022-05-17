@@ -10,7 +10,7 @@ import click
 # current_app points to the Flask application handling a request
 from flask import g
 from flask.cli import with_appcontext
-from app import app
+from curdle import app
 
 # The main structure of the below code is taken from the official Flask documentation 
 # This explains how to connect to a SQLite database using Flask/Python's native support
