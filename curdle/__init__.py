@@ -6,20 +6,19 @@
 # From the python package flask, import the class Flask
 
 from flask import Flask
-
 from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
-
 app.config.from_object(Config)
-
-from curdle import db
-
-db.init_app(app)
+db = SQLAlchemy(app)
+migrate = Migrate(db, app)
 
 # Import our python module 'routes' which contains instructions what to render on what URL for the web site/application
-# The name of the folder this file is in is 'curdle' 
-# This means curdle is a python package, and we can import individual modules from it as needed
-from curdle import routes   
+# The name of the folder this file is in is 'curdle'. This means curdle is a python package, and we can import individual modules from it as needed
+# Models is a python module containing object models relating to each table in the SQLite database - required for SQLAlchemy flask extension
+from curdle import routes, models
+
 
 
