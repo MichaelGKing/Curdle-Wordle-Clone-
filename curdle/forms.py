@@ -20,17 +20,19 @@ class AdminLoginForm(FlaskForm):
     
 class PuzzleUploadForm(FlaskForm):
 
-    type_list = ['Soft', 'Hard', 'Brined', 'Processed', 'Fresh/Whey', 'Stretched Curd', 'Washed-rind', 'Blue']
-    country_list = ['England', 'USA', 'France', 'Switzerland']
-    animal_list = db.execute(
-        'SELECT * FROM animal'
-    ).fetchall()
-    print(animal_list)
+    # initialises an object of this class, takes variables for holding lists of cheese attributes
+    def __init__(self, type_list, country_list, animal_list):
+        self.type_list = type_list
+        self.country_list = country_list
+        self.animal_list = animal_list
+
+    def self(self):
+        print(self.value)
 
     name = StringField('Cheese Name', validators=[DataRequired()])
-    type = SelectField('Cheese Type', choices=type_list, validators=[DataRequired()])
-    country = SelectField('Country of Origin', choices=country_list, validators=[DataRequired()])
-    animal = SelectField('Animal of Origin', choices=animal_list, validators=[DataRequired()])
+    type = SelectField('Cheese Type', choices=self.type_list, validators=[DataRequired()])
+    country = SelectField('Country of Origin', choices=self.country_list, validators=[DataRequired()])
+    animal = SelectField('Animal of Origin', choices=self.animal_list, validators=[DataRequired()])
     mould = BooleanField('Is mouldy?')
     image = FileField(validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Only images of .png, .jpg, .jpeg or .gif allowed.')])
  
