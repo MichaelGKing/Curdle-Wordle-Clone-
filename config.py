@@ -28,11 +28,6 @@ class Config(object):
 
     MAX_CONTENT_PATH = 524288
 
-    # When flask init-db is run, a new database will be created named curdle.sqlite
-    # This can now be pointed to using the DATABASE config variable below
-    # DATABASE HANDLING IS NOW DONE USING SQLALCHEMY FLASK EXTENSION - THIS IS DEPRECIATED
-    DATABASE = 'curdle.sqlite'
-
     # Tells SQLAlchemy where the database should be found
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
         
