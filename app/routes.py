@@ -88,6 +88,9 @@ def puzzle_uploader():
 def get_guess():
     
     # Get cheese name from client side
+    if request.method == "POST":
+
+        guess = {}
 
     # Get list of cheese attributes from the database for the cheese
 
@@ -97,7 +100,11 @@ def get_guess():
 
     # Return string in json format to the client side
 
-    return jsonify({False, False, False, False, False})
+        response = jsonify({ 'result' : (False, False, False, False, False) })
+
+        print(response)
+
+        return response
 
 
 

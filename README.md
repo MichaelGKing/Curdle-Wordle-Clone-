@@ -48,7 +48,7 @@ How to Install and Run Curdle (from local host)
 5. Install all required python packages 
 
    ```bash
-   % pip install -r requirements.txt
+   (venv) % pip install -r requirements.txt
    ```
 
 6. Create a file named '.flaskenv' and add any required environment variables. 
@@ -66,6 +66,12 @@ How to Install and Run Curdle (from local host)
    To allow the Flask application to print debugging messages to console, disable stdout buffering
 
    ```PYTHONUNBUFFERED='any_non_empty_string'```
+
+6. Build the application database. Return to your terminal within the curdle folder with your virtual env active
+
+   ```bash
+   (venv) % flask db upgrade
+   ```
 
 ### How to Start the Flask Application
 
