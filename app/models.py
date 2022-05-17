@@ -29,7 +29,7 @@ class Cheese(db.Model):
     cheese_name = db.Column(db.String(64), unique=True, index=True, nullable=False)
     type_id = db.Column(db.String(64), db.ForeignKey('type.id'), nullable=False)
     animal_id = db.Column(db.String(64), db.ForeignKey('animal.id'), nullable=False)
-    country_id = db.Column(db.String(64, db.ForeignKey('country.id')), nullable=False)
+    country_id = db.Column(db.String(64), db.ForeignKey('country.id'), nullable=False)
     mouldy = db.Column(db.Boolean)
 
     def __repr__(self):
