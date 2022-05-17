@@ -217,7 +217,7 @@ function sendCheese() {
     dataType: "json",
     data: JSON.stringify({
         cheese_name: $("#cheese-choice").val(),
-    success: console.log(result)
+    success: console.log("Success")
     }),
   });
 }
