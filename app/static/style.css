@@ -45,12 +45,9 @@ header p:hover {
   align-items: center;
 }
 
-#image-block {
+img {
   width: 494px;
-  background-image: url(https://cdn.britannica.com/60/217660-050-DBCC409A/cheddar-cheese-wedge.jpg);
   height: 194px;
-  background-position: center;
-  background-size: cover;
   border: 3px solid black;
   margin: 5px;
 }

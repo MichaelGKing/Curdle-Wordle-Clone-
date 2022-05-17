@@ -35,9 +35,13 @@
   </header>
   <section class="game-container">
 
+
     <section class="image">
-      <div id="image-block"></div>
+      {% block content %}
+      <img src="{{ url_for('static', filename=image ) }}">
+      {% endblock %}
     </section>
+ 
 
     <section class="results">
       <div id="grid-container">
@@ -84,11 +88,9 @@
       <div id="guess-textbox">
         <input list="cheese-names" id="cheese-choice" name="cheese-choice" />
         <datalist id="cheese-names">
-          <option value="Cheddar">
-          <option value="Camembert">
-          <option value="Parmesan">
-          <option value="Red Leicester">
-          <option value="Blue Cheese">
+          {% for cheese in cheeses %}
+          <option value="{{ cheese }}">
+          {% endfor %}
         </datalist>
       </div>
 

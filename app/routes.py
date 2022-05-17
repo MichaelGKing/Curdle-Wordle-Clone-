@@ -1,7 +1,7 @@
 import os
 from app import app
 from app.forms import AdminLoginForm, PuzzleUploadForm
-from flask import render_template, flash, redirect, request
+from flask import render_template, flash, redirect, request, jsonify
 from wtforms import ValidationError
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
@@ -17,18 +17,12 @@ authorised = False
 # A view function for the homepage
 def index():
     # Placeholder puzzle - a class will be made for this that will pull a random daily cheese from the database
-    puzzle = {
-        'name': 'Cheddar', 
-        'type': 'Hard', 
-        'country': 'England', 
-        'mould': False,
-        'animal': 'Cow',
-        'img_path': '/images/cheese1.jpg'
-        }
+    cheeses = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese", "A NEW CHEESE"]
+    image = 'cheese1.jpg'
 
     # Render a html template in the browser
     # The page renderer also passes the puzzle object through to the front end?
-    return render_template('index.html', puzzle=puzzle)
+    return render_template('index.html', cheeses=cheeses, image=image)
 
 # This route below can receive GET and POST requests, required for receiving form data - Default without this set is just to receive GET requests
 @app.route('/auth', methods=['GET', 'POST'])
@@ -89,7 +83,23 @@ def puzzle_uploader():
     
     flash('You have not been authorised to view this page, please enter the admin password below to continue.')
     return redirect('/auth')
+    
+@app.route('/check-guess', methods=['GET', 'POST'])
+def get_guess():
+    
+    # Get cheese name from client side
 
-@app.route('/get-todays-puzzle', methods=['GET', 'POST'])
-def get_todays_puzzle():
-    return
+    # Get list of cheese attributes from the database for the cheese
+
+    # Check the guess against the correct cheese
+
+    # Produce list of boolean values relatining to attribute matches 
+
+    # Return string in json format to the client side
+
+    return jsonify({False, False, False, False, False})
+
+
+
+
+
