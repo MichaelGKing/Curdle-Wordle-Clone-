@@ -7,4 +7,4 @@ from app.models import Cheese, Type, Country, Animal, Continent, Admin
 # Very usefull for testing things in the shell while developing an app
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'Cheese': Cheese, 'Type': Type, "Country": Country, "Animal": Animal, "Continent"ß
+    return {'db': db, 'Cheese': Cheese, 'Type': Type, "Country": Country, "Animal": Animal, "Continent": Continent, "Admin": Admin}
