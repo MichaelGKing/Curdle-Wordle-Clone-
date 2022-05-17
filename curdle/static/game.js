@@ -1,7 +1,7 @@
-//Stores information on the correct cheese.
+//Stores information on the correct cheese. DATABASE
 let correctAttributes = ["Cheddar", "Europe", "Cow", "Type-5", "false"];
 
-//Stores a list of all the valid cheeses.
+//Stores a list of all the valid cheeses. DATABASE
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
 
 //Entries are name, continent, mold, animal, cheese type.
@@ -13,9 +13,9 @@ let resultNum = 1;
 //Tracks the index of the cheeselist used in making the guess for generating
 //word in the results box from the cheeselist not the user input, as user input
 //may have incorrect capitalization.
-let cheeseIndex = 0;
+let cheeseIndex = 0; 
 
-//For sharing your puzzle results.
+//For sharing your puzzle results. DATABASE
 let puzzleNum = 1;
 
 //Matrix array storing results.
