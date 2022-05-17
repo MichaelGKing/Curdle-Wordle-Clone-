@@ -137,6 +137,7 @@ function entryTest() {
   }
 
   if (validEntry == true) {
+    sendCheese();
     removeText();
     attributeChecker();
     if (correctChoice[0] == true) {
@@ -204,4 +205,18 @@ function clipboard() {
   text = `Curdle #${puzzleNum} ${resultNum-1}/6\n${text}`;
   navigator.clipboard.writeText(text);
   alert("Copied the text: " + text);
+}
+
+
+// AJAX form.
+function sendCheese() {
+  $.ajax({
+    type: "POST",
+    url: '/check-guess',
+    contentType: "application/json",
+    dataType: "json",
+    data: JSON.stringify({
+        cheese_name: $("#cheese-choice").val(),
+    }),
+  });
 }
