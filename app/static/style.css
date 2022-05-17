@@ -1,0 +1,220 @@
+html, body {
+  overflow: hidden;
+}
+
+body {
+  background-color: beige;
+  margin: 0px;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  border-bottom: 1px solid black;
+}
+
+h1 {
+  font-family: 'Rubik Microbe', cursive;
+  font-size: 37px;
+  color: rgb(221, 178, 61);
+  margin: 0px;
+}
+
+
+a {
+  margin: auto;
+  font-size: 24px;
+  color: black;
+}
+
+a:hover {
+  color: rgb(221, 178, 61);
+}
+
+/* Body */
+.game-container {
+  display: block;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#image-block {
+  width: 494px;
+  background-image: url(https://cdn.britannica.com/60/217660-050-DBCC409A/cheddar-cheese-wedge.jpg);
+  height: 194px;
+  background-position: center;
+  background-size: cover;
+  border: 3px solid black;
+  margin: 5px;
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#grid-container {
+  width: 500px;
+  height: 220px;
+  margin: 5px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
+}
+
+#result-1, #result-2, #result-3, #result-4, #result-5, #result-6 {
+  border-radius: 5px;
+  background-color: rgb(221, 178, 61);
+  opacity: 50%;
+} 
+
+#result-1 {
+  grid-column: 1 / span 7;
+  grid-row: 1;
+  
+}
+
+#result-2 {
+  grid-column: 1 / span 7;
+  grid-row: 2;
+}
+
+#result-3 {
+  grid-column: 1 / span 7;
+  grid-row: 3;
+}
+
+#result-4 {
+  grid-column: 1 / span 7;
+  grid-row: 4;
+}
+
+#result-5 {
+  grid-column: 1 / span 7;
+  grid-row: 5;
+}
+
+#result-6 {
+  grid-column: 1 / span 7;
+  grid-row: 6;
+}
+
+.guess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50px;
+}
+
+#guess-textbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#guess-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button, #cheese-choice {
+  padding: 0px;
+  height: 32.5px;
+  border-radius: 5px;
+}
+
+#cheese-choice {
+  width: 491px;
+  margin: 0px 5px 0 5px;
+  
+  font-size: 16px;
+  padding-left: 5px;
+  text-align: center;
+}
+
+#button {
+  margin: 5px 5px 0 5px;
+  width: 500px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#button:hover {
+  cursor: pointer;
+  background-color: rgb(241, 241, 241);
+}
+
+#button:active {
+  background-color: rgb(223, 223, 223);
+}
+
+/* Pop up box */
+.modal {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 300px;
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 10px 15px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
