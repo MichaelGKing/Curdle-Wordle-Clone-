@@ -92,6 +92,17 @@ def get_puzzle(cheese_name):
     else:
         return cheese
 
+# returns a list of all values from column in table of database
+def get_attribute_list(column, table):
+    db = get_db()
+    attribute_list = db.execute(
+        'SELECT ? FROM ?', 
+        (column, table)
+        ).fetchall() 
+    
+    print(attribute_list) # for debugging
+    return attribute_list
+
 # This is a overly complicated one, due to the decision to normalise the SQLite db...
 # 
 def set_puzzle(cheese):
@@ -105,7 +116,7 @@ def set_todays_puzzle():
 def get_hashed_password():
     db = get_db()
     hash = db.execute(
-        'SELECT password_hash FROM admin').fetchone()
+        'SELECT password_hash FROM admin').fetchone() # fetchone() is a sqlite function that returns the first value as a string
         # There should only ever be one admin password, set at DB initialisation
     # Do a check just incase a password is not there..
     if hash == None:
