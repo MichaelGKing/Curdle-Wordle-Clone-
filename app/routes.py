@@ -4,7 +4,7 @@ from app import app, db, models
 from app.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect, request
 from wtforms import ValidationError
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from app.models import Cheese, Type, Country, Animal, Continent, Admin
 
@@ -109,7 +109,6 @@ csvreader = csv.reader(file)
 cheeses = []
 for row in csvreader:
     cheeses.append(row)
-print(cheeses)
 
 # Add required cheese attributes to the database
 
@@ -168,16 +167,40 @@ for value in cheeses:
     db.session.add(c)
     db.session.commit()
 
-todays_cheese = 1
+# Set the admin password from environment variable
+
+# Get admin password from environment variable, if doesnt exist, fallback on hardcoded value from config.py
+p = app.config['ADMIN_PASSWORD']
+hash = generate_password_hash(p)
+
+models.Admin.query.delete()
+p = Admin(password_hash=hash)
+db.session.add(c)
+db.session.commit()
+
+# Used to index a puzzle for the day, should increment by +1 every day
+cheese_id_counter = 3
+# Somehow increment this every day - APScheduler can help?
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 # A view function for the homepage
 def index():
-    # Placeholder puzzle - a class will be made for this that will pull a random daily cheese from the database
-    cheeses = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese", "A NEW CHEESE"]
-    image = 'cheese1.jpg'
+    # get cheese puzzle by ID
+    # This could be randomised?
 
+    global cheese_id_counter
+
+    image = db.session.query(Cheese.image_filename).filter(Cheese.id == cheese_id_counter).scalar()
+    # If the database query fails because the id does not exist it should return none...
+    if image == None:
+        # If this is the case, reset the cheese id counter to 1, starting the puzzles from the beginning again
+        cheese_id_counter = 1
+        image = db.session.query(Cheese.image_filename).filter(Cheese.id == cheese_id_counter).scalar()
+
+    # Get list of cheeses from the database to be used in the game's guess selector field
+    cheeses = db.session.query(Cheese.cheese_name).all()
+    print(cheeses)
     # Render a html template in the browser
     # The page renderer also passes the puzzle object through to the front end?
     return render_template('index.html', cheeses=cheeses, image=image)
@@ -194,8 +217,11 @@ def auth():
     if form.validate_on_submit():
 
         password = request.form['password']
+        hash = db.session.query(Admin.password_hash).first()
+        print(hash)
+
         # Need to start a session for user login - old method did not work
-        if check_password_hash(db.get_hashed_password(), password):
+        if check_password_hash(hash, password):
             global authorised 
             authorised = True
             flash('Administration Portal Authentication Successful')
