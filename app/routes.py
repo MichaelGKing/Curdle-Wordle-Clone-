@@ -1,5 +1,5 @@
 
-import os
+import os, csv
 from app import app, db, models
 from app.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect, request
@@ -94,12 +94,22 @@ countries = [
     ["Venezuela", 7]
 ]
 
-# These must be set in following format
-# [ <Name>, <type>, <animal>, <Country>, <Mouldy? - True or False>, <imagefilename.jpg>]
+# The current functionality reads puzzle list from a .csv file. 
+# This file is used to store initial puzzle list and any puzzles added using the administrators Puzzle Upload form.
+# If the server requires restarting and/or the database is lost or overwritten, puzzles will be reloaded from the last write to the csv
+# Puzzles must be set in following format to be loaded into the database:
+# 
+# eg. ['Cheddar', 'hard', 'cow', 'United Kingdom', False, 'cheese1.jpg']
+#
+# This formatting will be controlled by the puzzle upload form inputs only allowing valid submissions
 
-cheeses = [
-    ['Cheddar', 'hard', 'cow', 'United Kingdom', False, 'cheese1.jpg']
-]
+# Open saved puzzles csv file, and add each line as a array within the cheeses array
+file = open('saved_puzzles.csv')
+csvreader = csv.reader(file)
+cheeses = []
+for row in csvreader:
+    cheeses.append(row)
+print(cheeses)
 
 # Add required cheese attributes to the database
 
@@ -140,16 +150,25 @@ models.Cheese.query.delete()
 # Iterates through the array of countries defined above and adds them to the database
 for value in cheeses:
 
+    # The csv reader returns all values as strings
+    # This checks the mouldy attribute to see if it is true or false and assigns the correct boolean value to a new variable
+    if value[4] == 'True' or value[4] == '1':
+        is_mouldy = True
+    else:
+        is_mouldy = False
+
     c = Cheese(
         cheese_name=value[0], 
         type_id = db.session.query(Type.id).filter(Type.type == value[1]).scalar(), 
         animal_id = db.session.query(Animal.id).filter(Animal.animal_name == value[2]).scalar(), 
         country_id = db.session.query(Country.id).filter(Country.country_name == value[3]).scalar(), 
-        mouldy=value[4], 
+        mouldy=is_mouldy, 
         image_filename=value[5]
         )
     db.session.add(c)
     db.session.commit()
+
+todays_cheese = 1
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
