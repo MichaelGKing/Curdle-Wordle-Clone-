@@ -1,17 +1,155 @@
 
 import os
-from app import app
+from app import app, db, models
 from app.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect, request
 from wtforms import ValidationError
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
+from app.models import Cheese, Type, Country, Animal, Continent, Admin
 
 authorised = False
-
 # Routes are written as shown below
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
 # The view function contains this code
+
+# Required cheese attributes
+types = ("fresh","soft","semi-hard","hard","blue","processed")
+animals = ("cow","sheep","goat","moose")
+continents = ("Africa","Asia","Europe","Middle East","North and Central America","Oceania","South America")
+countries = [
+    ["Benin" , 1],
+	["Ethiopia",  1],
+	["Mauritania", 1],
+    ["Armenia", 2],
+    ["Azerbaijan", 2],
+    ["Bangladesh", 2],
+    ["China", 2],
+    ["Cyprus", 2],
+    ["Georgia", 2],
+    ["India", 2],
+    ["Indonesia", 2],
+    ["Japan", 2],
+    ["Korea", 2],
+    ["Malaysia", 2],
+    ["Mongolia", 2],
+    ["Nepal", 2],
+    ["Philippines", 2],
+    ["Albania", 3],
+    ["Austria", 3],
+    ["Belgium", 3],
+    ["Bosnia and Herzegovina", 3],
+    ["Bulgaria", 3],
+    ["Croatia", 3],
+    ["Czech Republic", 3],
+    ["Denmark", 3],
+    ["Estonia", 3],
+    ["Finland", 3],
+    ["France", 3],
+    ["Germany", 3],
+    ["Greece", 3],
+    ["Hungary", 3],
+    ["Iceland", 3],
+    ["Ireland", 3],
+    ["Italy", 3],
+    ["Kosovo", 3],
+    ["Latvia", 3],
+    ["Lithuania", 3],
+    ["Malta", 3],
+    ["Moldova", 3],
+    ["Montenegro", 3],
+    ["Netherlands", 3],
+    ["North Macedonia", 3],
+    ["Norway", 3],
+    ["Poland", 3],
+    ["Portugal", 3],
+    ["Romania", 3],
+    ["Russia", 3],
+    ["Serbia", 3],
+    ["Slovakia", 3],
+    ["Slovenia", 3],
+    ["Spain", 3],
+    ["Sweden", 3],
+    ["Switzerland", 3],
+    ["Ukraine", 3],
+    ["United Kingdom", 3],
+    ["Egypt", 4],
+    ["Iran", 4],
+    ["Israel", 4],
+    ["Levant", 4],
+    ["Turkey", 4],
+    ["Canada", 5],
+    ["Costa Rica", 5],
+    ["El Salvador", 5],
+    ["Honduras", 5],
+    ["Mexico", 5],
+    ["Nicaragua", 5],
+    ["United States", 5],
+    ["Australia", 6],
+    ["Argentina", 7],
+    ["Bolivia", 7],
+    ["Brazil", 7],
+    ["Chile", 7],
+    ["Colombia", 7],
+    ["Venezuela", 7]
+]
+
+# These must be set in following format
+# [ <Name>, <type>, <animal>, <Country>, <Mouldy? - True or False>, <imagefilename.jpg>]
+
+cheeses = [
+    ['Cheddar', 'hard', 'cow', 'United Kingdom', False, 'cheese1.jpg']
+]
+
+# Add required cheese attributes to the database
+
+# Deletes any existing values in the database for type
+models.Type.query.delete()
+# Iterates through the list of types defined above and adds them to the database
+for value in types:
+    t = Type(type=value)
+    db.session.add(t)
+    db.session.commit()
+
+# Deletes any existing values in the database for animal
+models.Animal.query.delete()
+# Iterates through the list of animals defined above and adds them to the database
+for value in animals:
+    a = Animal(animal_name=value)
+    db.session.add(a)
+    db.session.commit()
+
+# Deletes any existing values in the database for continent
+models.Continent.query.delete()
+# Iterates through the list of continents defined above and adds them to the database
+for value in continents:
+    c = Continent(continent_name=value)
+    db.session.add(c)
+    db.session.commit()
+
+# Deletes any existing values in the database for country
+models.Country.query.delete()
+# Iterates through the array of countries defined above and adds them to the database
+for value in countries:
+    c = Country(country_name=value[0], continent_id=value[1])
+    db.session.add(c)
+    db.session.commit()
+
+# Deletes any existing values in the database for country
+models.Cheese.query.delete()
+# Iterates through the array of countries defined above and adds them to the database
+for value in cheeses:
+
+    c = Cheese(
+        cheese_name=value[0], 
+        type_id = db.session.query(Type.id).filter(Type.type == value[1]).scalar(), 
+        animal_id = db.session.query(Animal.id).filter(Animal.animal_name == value[2]).scalar(), 
+        country_id = db.session.query(Country.id).filter(Country.country_name == value[3]).scalar(), 
+        mouldy=value[4], 
+        image_filename=value[5]
+        )
+    db.session.add(c)
+    db.session.commit()
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
