@@ -31,6 +31,7 @@ class Cheese(db.Model):
     animal_id = db.Column(db.String(64), db.ForeignKey('animal.id'), nullable=False)
     country_id = db.Column(db.String(64), db.ForeignKey('country.id'), nullable=False)
     mouldy = db.Column(db.Boolean)
+    image_filename = db.Column(db.String(128), nullable=False)
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
