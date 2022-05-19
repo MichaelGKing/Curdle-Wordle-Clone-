@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../static/style.css">
   <link rel="stylesheet" href="../static/popup.css">
   <link rel="stylesheet" href="../static/help.css">
+  <link rel="stylesheet" href="../static/stats.css">
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -157,12 +158,56 @@
   </div>
 
 
-  <div class="popup" id="popup-3">
+  <div class="stats" id="popup-3">
     <div class="overlay"></div>
     <div class="content">
       <div class="close-btn" onclick="toggleStats()">&times;</div>
       <h2>Statistics</h2>
-      <p>You have scored...</p>
+      <div id="statistics">
+        <div id="played">
+          <p>7</p>
+          <p>Played</p>
+        </div>
+        <div id="winrate">
+          <p>7</p>
+          <p>Win %</p>
+        </div>
+        <div id="streak">
+          <p>7</p>
+          <p>Current Streak</p>
+        </div>
+        <div id="best-streak">
+          <p>7</p>
+          <p>Max Streak</p>
+        </div>
+      </div>
+      <h3>Guess Distribution</h3>
+      <div id="distribution-container">
+        <div class="dist one">
+          <p>1</p>
+          <div id="bar"><p>4</p></div>
+        </div>
+        <div class="dist two">
+          <p>2</p>
+          <div id="bar"><p>0</p></div>
+        </div>
+        <div class="dist three">
+          <p>3</p>
+          <div id="bar"></div>
+        </div>
+        <div class="dist four">
+          <p>4</p>
+          <div id="bar"></div>
+        </div>
+        <div class="dist five">
+          <p>5</p>
+          <div id="bar"></div>
+        </div>
+        <div class="dist six">
+          <p>6</p>
+          <div id="bar"></div>
+        </div>
+      </div>
     </div>
   </div>
 
