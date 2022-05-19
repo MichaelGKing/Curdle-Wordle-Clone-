@@ -234,14 +234,11 @@ function sendCheese() {
   return booleanisedResult;
 }
 
-console.log("Hello World");
-
-// function helpResults() {
-//   $("grid-container-e").css("display", "grid").fadeIn("slow");
-// }
-
+/**
+ * Function toggles the help page to appear.
+ */
 function toggleHelp() {
-  document.getElementById("popup-2").classList.toggle("active");
+  document.getElementById("help-page").classList.toggle("active");
   $("#grid-container-e1").css("display", "grid").hide().fadeIn("slow");
   $("#grid-container-e2").css("display", "grid").hide().fadeIn("slow");
   $("#grid-container-e3").css("display", "grid").hide().fadeIn("slow");
