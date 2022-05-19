@@ -124,18 +124,35 @@
       <h2>HOW TO PLAY</h2>
       <p>Guess the CURDLE in 6 guesses.</p>
       <p>Each guess must be a valid cheese. See the dropdown menu.</p>
-      <p>After each guess you will be told if your guess is of the same continent,
-        country, mold content, animal of oirign and type of cheese as the answer.
+      <p>After each guess you will be told if your guess is consistent with the continent,
+        country, and animal of oirign of the answer. As well as it's mold content, and type.
       </p>
       <h3>EXAMPLES</h3>
-      <div id="grid-container-e">
-        <!-- <div id="result-e"></div> -->
+      <div id="grid-container-e1">
         <div class="word e" id="word-e"><p>Cheddar</p></div>
-        <div class="world e" id="world-e"><i class="fa fa-globe"></i></div>
-        <div class="mold e" id="mold-e"><i class="fa-solid fa-bacteria"></i></div>
-        <div class="animal e" id="animal-e"><i class="fa-solid fa-paw"></i></div>
-        <div class="type e" id="type-e"><i class="fas fa-cheese"></i></div>
+        <div class="world e" id="world-e"><i style="color: orange" class="fa fa-globe"></i></div>
+        <div class="mold e" id="mold-e"><i style="color: green" class="fa-solid fa-bacteria"></i></div>
+        <div class="animal e" id="animal-e"><i style="color: red" class="fa-solid fa-paw"></i></div>
+        <div class="type e" id="type-e"><i style="color: red" class="fas fa-cheese"></i></div>
       </div>
+      <p>The cheese is incorrect, continent of origin is consistent (country different), mold content is consistent, animal is different, and the cheese type is different.</p>
+      <div id="grid-container-e2">
+        <div class="word e" id="word-e"><p>Cheddar</p></div>
+        <div class="world e" id="world-e"><i style="color: green" class="fa fa-globe"></i></div>
+        <div class="mold e" id="mold-e"><i style="color: red" class="fa-solid fa-bacteria"></i></div>
+        <div class="animal e" id="animal-e"><i style="color: red" class="fa-solid fa-paw"></i></div>
+        <div class="type e" id="type-e"><i style="color: red" class="fas fa-cheese"></i></div>
+      </div>
+      <p>Only the continent and country of origin of the your guess is consistent with the correct answer.</p>
+      <div id="grid-container-e3">
+        <div class="word e" id="word-e" style="border: 3px solid green"><p>Cheddar</p></div>
+        <div class="world e" id="world-e"><i style="color: green" class="fa fa-globe"></i></div>
+        <div class="mold e" id="mold-e"><i style="color: green" class="fa-solid fa-bacteria"></i></div>
+        <div class="animal e" id="animal-e"><i style="color: green" class="fa-solid fa-paw"></i></div>
+        <div class="type e" id="type-e"><i style="color: green" class="fas fa-cheese"></i></div>
+      </div>
+      <p>You have guessed the correct cheese.</p>
+      <p style="font-weight:600; text-align: center; margin: 16px;">A new CURDLE will be available each day!</p>
     </div>
   </div>
 

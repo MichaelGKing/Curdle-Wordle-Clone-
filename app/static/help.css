@@ -31,6 +31,11 @@
 .help p {
   font-size: 14px;
   text-align: left;
+
+}
+
+.e p, i {
+  margin: 0;
 }
 
 .help.active .overlay {
@@ -40,9 +45,10 @@
 .help.active .content {
   /* transition: all 300ms ease-in-out; */
   transform: translate(-50%,-50%) scale(1);
+  overflow: auto;
 }
 
-#grid-container-e {
+#grid-container-e1, #grid-container-e2, #grid-container-e3 {
   width: 100%;
   height: 32.5px;
   display: none;
