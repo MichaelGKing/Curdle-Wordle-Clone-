@@ -138,7 +138,7 @@ function entryTest() {
 
   if (validEntry == true) {
     let x = sendCheese();
-    console.log(x);
+    console.log(x[0]);
     removeText();
     attributeChecker();
     if (correctChoice[0] == true) {
@@ -212,7 +212,7 @@ function clipboard() {
 // AJAX form.
 
 function sendCheese() {
-  let response = ""
+  let response
   $.ajax({
     type: "POST",
     async: false,
@@ -222,9 +222,10 @@ function sendCheese() {
     data: JSON.stringify({
       cheese_name: $("#cheese-choice").val(),
     }),
-    success: function (data, status, xhr) { response=JSON.stringify(data); }
+    success: function (data, status, xhr) { response=data; }
   });
-  return response;
+  let result = Object.values(response);
+  return result;
 }
 
 console.log("Hello World");
