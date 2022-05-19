@@ -236,3 +236,13 @@ function sendCheese() {
 
 console.log("Hello World");
 
+// function helpResults() {
+//   $("grid-container-e").css("display", "grid").fadeIn("slow");
+// }
+
+function toggleHelp() {
+  document.getElementById("popup-2").classList.toggle("active");
+  $("#grid-container-e1").css("display", "grid").hide().fadeIn("slow");
+  $("#grid-container-e2").css("display", "grid").hide().fadeIn("slow");
+  $("#grid-container-e3").css("display", "grid").hide().fadeIn("slow");
+}
