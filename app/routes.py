@@ -175,11 +175,11 @@ hash = generate_password_hash(p)
 
 models.Admin.query.delete()
 p = Admin(password_hash=hash)
-db.session.add(c)
+db.session.add(p)
 db.session.commit()
 
 # Used to index a puzzle for the day, should increment by +1 every day
-cheese_id_counter = 3
+cheese_id_counter = 1
 # Somehow increment this every day - APScheduler can help?
 
 @app.route('/')
@@ -199,11 +199,17 @@ def index():
         image = db.session.query(Cheese.image_filename).filter(Cheese.id == cheese_id_counter).scalar()
 
     # Get list of cheeses from the database to be used in the game's guess selector field
-    cheeses = db.session.query(Cheese.cheese_name).all()
-    print(cheeses)
-    # Render a html template in the browser
-    # The page renderer also passes the puzzle object through to the front end?
-    return render_template('index.html', cheeses=cheeses, image=image)
+    # SQLAlchemy returns this as a list of KeyedTuples for some reason, even though there is only one value stored..
+    result = db.session.query(Cheese.cheese_name).all()
+    
+    # Iterate through results and add all cheese name values to a list
+    cheeses = []
+    for row in result:
+        cheeses.append(row[0])
+
+    # Render the game html template in the browser
+    # Image filename and sorted list of cheeses are passed to the template renderer
+    return render_template('index.html', cheeses=sorted(cheeses), image=image)
 
 # This route below can receive GET and POST requests, required for receiving form data - Default without this set is just to receive GET requests
 @app.route('/auth', methods=['GET', 'POST'])
@@ -217,8 +223,6 @@ def auth():
     if form.validate_on_submit():
 
         password = request.form['password']
-        hash = db.session.query(Admin.password_hash).first()
-        print(hash)
 
         # Need to start a session for user login - old method did not work
         if check_password_hash(hash, password):
@@ -238,12 +242,28 @@ def puzzle_uploader():
     
     global authorised
 
-    # create new instance of PuzzleUploadForm()
+    # Create new instance of PuzzleUploadForm()
     form = PuzzleUploadForm()
-    # retreive lists of cheese attributes from the database and use them to set the choices for the form's SelectFields
-    form.set_types(db.get_attribute_list('cheese_type', 'cheese_type'))
-    form.set_countries(db.get_attribute_list('animal_name', 'animal'))
-    form.set_animals(db.get_attribute_list('country_name', 'country'))
+
+    # Retreive lists of cheese attributes from the database
+    result = db.session.query(Type.type).all()
+    types = []
+    for row in result:
+        types.append(row[0])
+
+    result = db.session.query(Animal.animal_name).all() 
+    animals = []
+    for row in result:
+        animals.append(row[0])
+
+    result = db.session.query(Country.type).all() 
+    countries = []
+    for row in result:
+        countries.append(row[0])
+
+    form.set_types(types)
+    form.set_countries(animals)
+    form.set_animals(countries)
 
     if form.validate_on_submit():
 
