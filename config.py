@@ -14,7 +14,7 @@ class Config(object):
     # Configuration items can be accessed with a dictionary syntax from app.config
     # ie. app.config['SECRET_KEY']
 
-    ADMIN_PASSWORD = 'password'
+    ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'password'
 
     # This config variable is used to define where new images should be uploaded from the puzzle upload form
 
