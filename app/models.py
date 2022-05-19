@@ -22,7 +22,7 @@ class Country(db.Model):
     cheeses = db.relationship('Cheese', backref='country', lazy='dynamic')
 
     def __repr__(self):
-        return '<User {}>'.format(self.country_name)
+        return '<Country {}>'.format(self.country_name)
 
 class Cheese(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,9 +31,10 @@ class Cheese(db.Model):
     animal_id = db.Column(db.String(64), db.ForeignKey('animal.id'), nullable=False)
     country_id = db.Column(db.String(64), db.ForeignKey('country.id'), nullable=False)
     mouldy = db.Column(db.Boolean)
+    image_filename = db.Column(db.String(128), nullable=False)
 
     def __repr__(self):
-        return '<User {}>'.format(self.name)
+        return '<Cheese: {}>'.format(self.cheese_name)
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
