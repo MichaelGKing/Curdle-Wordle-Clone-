@@ -13,7 +13,7 @@ let resultNum = 1;
 //Tracks the index of the cheeselist used in making the guess for generating
 //word in the results box from the cheeselist not the user input, as user input
 //may have incorrect capitalization.
-let cheeseIndex = 0; 
+let cheeseIndex = 0;
 
 //For sharing your puzzle results. DATABASE
 let puzzleNum = 1;
@@ -23,7 +23,7 @@ let puzzleNum = 1;
 var resultArray = new Array(5);
 // Loop to create 2D array using 1D array
 for (var i = 0; i < resultArray.length; i++) {
-  resultArray[i] = [-1,-1,-1,-1,-1,-1];
+  resultArray[i] = [-1, -1, -1, -1, -1, -1];
 }
 
 
@@ -146,9 +146,9 @@ function entryTest() {
       toggleCongrats();
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
     }
-    $("#result-"+resultNum).fadeOut(500);
+    $("#result-" + resultNum).fadeOut(500);
     setTimeout(resultGen, 500);
-    
+
   }
 }
 
@@ -202,23 +202,25 @@ function clipboard() {
     text = text.concat("\n");
   }
 
-  text = `Curdle #${puzzleNum} ${resultNum-1}/6\n${text}`;
+  text = `Curdle #${puzzleNum} ${resultNum - 1}/6\n${text}`;
   navigator.clipboard.writeText(text);
   alert("Copied the text: " + text);
 }
 
 
 // AJAX form.
+
 function sendCheese() {
+
   $.ajax({
     type: "POST",
     url: '/check-guess',
     contentType: "application/json",
     dataType: "json",
     data: JSON.stringify({
-        cheese_name: $("#cheese-choice").val(),
-    success: console.log("Success")
+      cheese_name: $("#cheese-choice").val(),
     }),
+    success: function (data, status, xhr) { console.log(data); }
   });
 }
 
