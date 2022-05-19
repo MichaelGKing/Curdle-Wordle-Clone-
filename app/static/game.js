@@ -137,7 +137,8 @@ function entryTest() {
   }
 
   if (validEntry == true) {
-    sendCheese();
+    let x = sendCheese();
+    console.log(x);
     removeText();
     attributeChecker();
     if (correctChoice[0] == true) {
@@ -211,17 +212,19 @@ function clipboard() {
 // AJAX form.
 
 function sendCheese() {
-
+  let response = ""
   $.ajax({
     type: "POST",
+    async: false,
     url: '/check-guess',
     contentType: "application/json",
     dataType: "json",
     data: JSON.stringify({
       cheese_name: $("#cheese-choice").val(),
     }),
-    success: function (data, status, xhr) { console.log(data); }
+    success: function (data, status, xhr) { response=JSON.stringify(data); }
   });
+  return response;
 }
 
 console.log("Hello World");
