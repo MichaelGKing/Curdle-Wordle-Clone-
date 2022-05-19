@@ -1,11 +1,8 @@
-//Stores information on the correct cheese. DATABASE
-let correctAttributes = ["Cheddar", "Europe", "Cow", "Type-5", "false"];
-
 //Stores a list of all the valid cheeses. DATABASE
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
 
-//Entries are name, continent, mold, animal, cheese type.
-let correctChoice = [false, false, false, false, false];
+//Entries are name, country, mold, animal, cheese type, continent. DATABASE
+let correctChoice = [false, false, false, false, false, false];
 
 //Tracks how many valid guesses have been made.
 let resultNum = 1;
@@ -13,7 +10,7 @@ let resultNum = 1;
 //Tracks the index of the cheeselist used in making the guess for generating
 //word in the results box from the cheeselist not the user input, as user input
 //may have incorrect capitalization.
-let cheeseIndex = 0; 
+let cheeseIndex = 0;
 
 //For sharing your puzzle results. DATABASE
 let puzzleNum = 1;
@@ -23,28 +20,14 @@ let puzzleNum = 1;
 var resultArray = new Array(5);
 // Loop to create 2D array using 1D array
 for (var i = 0; i < resultArray.length; i++) {
-  resultArray[i] = [-1,-1,-1,-1,-1,-1];
+  resultArray[i] = [-1, -1, -1, -1, -1, -1];
 }
 
 
 /**
- * Generates boolean array indicating if attribute of guessed cheese is same
- * as attribute of the correct cheese. Also inputs results to 2-D array resultArray
- * for use in sharing results with others.
+ * Innputs results to 2-D array resultArray for use in sharing results with others.
  */
 function attributeChecker() {
-  let guess = document.getElementById("cheese-choice").value.toLowerCase();
-
-  // Array brought back from server after pinged with guess value.
-  let guessAttributes = ["Cheddar", "Europe", "Cow", "Type-5", "false"];
-
-  // Mutates correctChoice array if guess attribute aligns with correct attribute.
-  for (let i = 0; i < guessAttributes.length; i++) {
-    if (guessAttributes[i] == correctAttributes[i]) {
-      correctChoice[i] = true;
-    }
-  }
-
   for (let i = 0; i < correctChoice.length; i++) {
     if (correctChoice[i] == true) {
       resultArray[resultNum - 1][i] = 1;
@@ -70,11 +53,14 @@ function resultGen() {
   }
   $("#word-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
-  //Generates section indicating if continent is correct.
+  //Generates section indicating if country is correct.
   document.getElementById("world-" + resultNum).classList.toggle("active");
   $("#world-" + resultNum).append("<i class='fa fa-globe'></i>");
   if (correctChoice[1] == true) {
     $("#world-" + resultNum + " i").css("color", "green");
+  }
+  if ((correctChoice[1] == false) && (correctChoice[5] == true)) {
+    $("#world-" + resultNum + " i").css("color", "orange");
   }
   $("#world-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
@@ -137,8 +123,9 @@ function entryTest() {
   }
 
   if (validEntry == true) {
-    sendCheese();
+    correctChoice = sendCheese();
     removeText();
+    // Makes an array that contains boolean for if the attributes of your guessec cheese are correct.
     attributeChecker();
     if (correctChoice[0] == true) {
       $("#guess-textbox").fadeOut("slow");
@@ -146,9 +133,10 @@ function entryTest() {
       toggleCongrats();
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
     }
-    $("#result-"+resultNum).fadeOut(500);
+    $("#result-" + resultNum).fadeOut(500);
+    // Mutates page based on results from guess.
     setTimeout(resultGen, 500);
-    
+
   }
 }
 
@@ -202,25 +190,56 @@ function clipboard() {
     text = text.concat("\n");
   }
 
-  text = `Curdle #${puzzleNum} ${resultNum-1}/6\n${text}`;
+  text = `Curdle #${puzzleNum} ${resultNum - 1}/6\n${text}`;
   navigator.clipboard.writeText(text);
   alert("Copied the text: " + text);
 }
 
 
 // AJAX form.
+
 function sendCheese() {
+  let response
   $.ajax({
     type: "POST",
+    async: false,
     url: '/check-guess',
     contentType: "application/json",
     dataType: "json",
     data: JSON.stringify({
-        cheese_name: $("#cheese-choice").val(),
-    success: console.log("Success")
+      cheese_name: $("#cheese-choice").val(),
     }),
+    success: function (data, status, xhr) { response=data; }
   });
+  //Turns JSON form into a js array
+  let result = Object.values(response);
+  let result_arranged = [];
+  let booleanisedResult = [];
+  
+  result_arranged.push(response.name)
+  result_arranged.push(response.country)
+  result_arranged.push(response.mold)
+  result_arranged.push(response.animal)
+  result_arranged.push(response.type)
+  result_arranged.push(response.continent)
+
+  for (let i = 0; i < result.length; i ++) {
+    if (result_arranged[i] == 'true') {
+      booleanisedResult.push(true);
+    } else {
+      booleanisedResult.push(false);
+    }
+  }
+
+  return booleanisedResult;
 }
 
-console.log("Hello World");
-
+/**
+ * Function toggles the help page to appear.
+ */
+function toggleHelp() {
+  document.getElementById("help-page").classList.toggle("active");
+  $("#grid-container-e1").css("display", "grid").hide().fadeIn("slow");
+  $("#grid-container-e2").css("display", "grid").hide().fadeIn("slow");
+  $("#grid-container-e3").css("display", "grid").hide().fadeIn("slow");
+}

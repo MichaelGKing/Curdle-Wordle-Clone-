@@ -1,0 +1,89 @@
+.help .overlay {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: beige;
+  z-index:1;
+  display: none;
+}
+
+.help .content {
+  position: fixed;
+  height: 100vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%) scale(0);
+  background: beige;
+  max-width: 500px;
+  width: 100%;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.help {
+  display: flex;
+}
+
+.help p {
+  font-size: 14px;
+  text-align: left;
+
+}
+
+.e p, i {
+  margin: 0;
+}
+
+.help.active .overlay {
+  display: block;
+}
+
+.help.active .content {
+  /* transition: all 300ms ease-in-out; */
+  transform: translate(-50%,-50%) scale(1);
+  overflow: auto;
+}
+
+#grid-container-e1, #grid-container-e2, #grid-container-e3 {
+  width: 100%;
+  height: 32.5px;
+  display: none;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1;
+  gap: 5px;
+}
+
+.e {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.word.e {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+}
+
+.world.e {
+  grid-column: 4 / span 1;
+  grid-row: 1;
+}
+
+.mold.e {
+  grid-column: 5 / span 1;
+  grid-row: 1;
+}
+
+.animal.e {
+  grid-column: 6 / span 1;
+  grid-row: 1;
+}
+
+.type.e {
+  grid-column: 7 / span 1;
+  grid-row: 1;
+}

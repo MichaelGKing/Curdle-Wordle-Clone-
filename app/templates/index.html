@@ -4,19 +4,21 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Curdle</title>
+  <title>CURDLE</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../static/style.css">
   <link rel="stylesheet" href="../static/popup.css">
+  <link rel="stylesheet" href="../static/help.css">
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&family=Rubik+Microbe&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&family=Rubik+Microbe&display=swap"
+    rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&display=swap" rel="stylesheet">
-  
+
   <script type="text/javascript" src="../static/game.js"></script>
   <script type="text/javascript" src="../static/inputFunctions.js"></script>
   <script defer src="../static/popup.js"></script>
@@ -28,7 +30,7 @@
     <p onclick="toggleHelp()">
       <ion-icon name="help-circle-outline"></ion-icon>
     </p>
-    <h1>Curdle</h1>
+    <h1>CURDLE</h1>
     <p onclick="toggleStats()">
       <ion-icon name="stats-chart-outline"></ion-icon>
     </p>
@@ -41,7 +43,7 @@
       <img src="{{ url_for('static', filename=image ) }}">
       {% endblock %}
     </section>
- 
+
 
     <section class="results">
       <div id="grid-container">
@@ -90,7 +92,7 @@
         <datalist id="cheese-names">
           {% for cheese in cheeses %}
           <option value="{{ cheese }}">
-          {% endfor %}
+            {% endfor %}
         </datalist>
       </div>
 
@@ -107,40 +109,75 @@
 
   <div class="popup" id="popup-1">
     <div class="overlay"></div>
-    <div class ="content">
+    <div class="content">
       <div class="close-btn" onclick="togglePopup()">&times;</div>
       <h2>Please enter a valid cheese!</h2>
       <p>See the drop down menu for a list.</p>
-      </div>
     </div>
   </div>
-  <div class="popup" id="popup-2">
+
+
+  <div class="help" id="help-page">
     <div class="overlay"></div>
-    <div class ="content">
+    <div class="content">
       <div class="close-btn" onclick="toggleHelp()">&times;</div>
-      <h2>Help</h2>
-      <p>Enter a guess...</p>
+      <h2>HOW TO PLAY</h2>
+      <p>Guess the CURDLE in 6 guesses.</p>
+      <p>Each guess must be a valid cheese. See the dropdown menu.</p>
+      <p>After each guess you will be told if your guess is consistent with the continent,
+        country, and animal of oirign of the answer. As well as it's mold content, and type.
+      </p>
+      <h3>EXAMPLES</h3>
+      <div id="grid-container-e1">
+        <div class="word e" id="word-e"><p>Cheddar</p></div>
+        <div class="world e" id="world-e"><i style="color: orange" class="fa fa-globe"></i></div>
+        <div class="mold e" id="mold-e"><i style="color: green" class="fa-solid fa-bacteria"></i></div>
+        <div class="animal e" id="animal-e"><i style="color: red" class="fa-solid fa-paw"></i></div>
+        <div class="type e" id="type-e"><i style="color: red" class="fas fa-cheese"></i></div>
       </div>
+      <p>The cheese is incorrect, continent of origin is consistent (country different), mold content is consistent, animal is different, and the cheese type is different.</p>
+      <div id="grid-container-e2">
+        <div class="word e" id="word-e"><p>Cheddar</p></div>
+        <div class="world e" id="world-e"><i style="color: green" class="fa fa-globe"></i></div>
+        <div class="mold e" id="mold-e"><i style="color: red" class="fa-solid fa-bacteria"></i></div>
+        <div class="animal e" id="animal-e"><i style="color: red" class="fa-solid fa-paw"></i></div>
+        <div class="type e" id="type-e"><i style="color: red" class="fas fa-cheese"></i></div>
+      </div>
+      <p>Only the continent and country of origin of the your guess is consistent with the correct answer.</p>
+      <div id="grid-container-e3">
+        <div class="word e" id="word-e" style="border: 3px solid green"><p>Cheddar</p></div>
+        <div class="world e" id="world-e"><i style="color: green" class="fa fa-globe"></i></div>
+        <div class="mold e" id="mold-e"><i style="color: green" class="fa-solid fa-bacteria"></i></div>
+        <div class="animal e" id="animal-e"><i style="color: green" class="fa-solid fa-paw"></i></div>
+        <div class="type e" id="type-e"><i style="color: green" class="fas fa-cheese"></i></div>
+      </div>
+      <p>You have guessed the correct cheese.</p>
+      <p style="font-weight:600; text-align: center; margin: 16px;">A new CURDLE will be available each day!</p>
     </div>
   </div>
+
+
   <div class="popup" id="popup-3">
     <div class="overlay"></div>
-    <div class ="content">
+    <div class="content">
       <div class="close-btn" onclick="toggleStats()">&times;</div>
       <h2>Statistics</h2>
       <p>You have scored...</p>
-      </div>
     </div>
   </div>
+
+
   <div class="popup" id="popup-4">
     <div class="overlay"></div>
-    <div class ="content">
+    <div class="content">
       <div class="close-btn" onclick="toggleCongrats()">&times;</div>
       <h2>Congratulations!</h2>
       <p>You have completed the puzzle.</p>
-      </div>
+      
     </div>
   </div>
+
+
 </body>
 
 </html>

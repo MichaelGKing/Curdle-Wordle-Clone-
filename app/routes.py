@@ -328,7 +328,6 @@ def get_guess():
         
         return results
 
-        
 
 
 
