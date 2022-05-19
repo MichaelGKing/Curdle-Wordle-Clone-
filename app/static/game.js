@@ -1,11 +1,11 @@
 //Stores information on the correct cheese. DATABASE
-let correctAttributes = ["Cheddar", "Europe", "Cow", "Type-5", "false"];
+let correctAttributes = ["Cheddar", "UK", "Cow", "Type-5", "false", "Europe"];
 
 //Stores a list of all the valid cheeses. DATABASE
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
 
-//Entries are name, continent, mold, animal, cheese type.
-let correctChoice = [false, false, false, false, false];
+//Entries are name, country, mold, animal, cheese type.
+let correctChoice = [false, false, false, false, false, false];
 
 //Tracks how many valid guesses have been made.
 let resultNum = 1;
@@ -36,7 +36,7 @@ function attributeChecker() {
   let guess = document.getElementById("cheese-choice").value.toLowerCase();
 
   // Array brought back from server after pinged with guess value.
-  let guessAttributes = ["Cheddar", "Europe", "Cow", "Type-5", "false"];
+  let guessAttributes = ["Cheddar", "UK", "Cow", "Type-5", "false", "Europe"];
 
   // Mutates correctChoice array if guess attribute aligns with correct attribute.
   for (let i = 0; i < guessAttributes.length; i++) {
@@ -70,11 +70,14 @@ function resultGen() {
   }
   $("#word-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
-  //Generates section indicating if continent is correct.
+  //Generates section indicating if country is correct.
   document.getElementById("world-" + resultNum).classList.toggle("active");
   $("#world-" + resultNum).append("<i class='fa fa-globe'></i>");
   if (correctChoice[1] == true) {
     $("#world-" + resultNum + " i").css("color", "green");
+  }
+  if ((correctChoice[1] == false) && (correctChoice[5] == true)) {
+    $("#world-" + resultNum + " i").css("color", "orange");
   }
   $("#world-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
@@ -138,7 +141,7 @@ function entryTest() {
 
   if (validEntry == true) {
     let x = sendCheese();
-    console.log(x);
+    console.log(x[0]);
     removeText();
     attributeChecker();
     if (correctChoice[0] == true) {
@@ -212,7 +215,7 @@ function clipboard() {
 // AJAX form.
 
 function sendCheese() {
-  let response = ""
+  let response
   $.ajax({
     type: "POST",
     async: false,
@@ -222,9 +225,10 @@ function sendCheese() {
     data: JSON.stringify({
       cheese_name: $("#cheese-choice").val(),
     }),
-    success: function (data, status, xhr) { response=JSON.stringify(data); }
+    success: function (data, status, xhr) { response=data; }
   });
-  return response;
+  let result = Object.values(response);
+  return result;
 }
 
 console.log("Hello World");
