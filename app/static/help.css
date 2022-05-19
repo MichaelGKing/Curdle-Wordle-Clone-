@@ -23,22 +23,6 @@
   box-sizing: border-box;
 }
 
-.help .close-btn {
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  width: 30px;
-  height: 30px;
-  background: #222;
-  color: beige;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 30px;
-  text-align: center;
-  border-radius: 50%;
-}
-
 .help.active .overlay {
   display: block;
 }
