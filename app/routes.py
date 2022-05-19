@@ -102,7 +102,7 @@ def get_guess():
 
     # Return string in json format to the client side
 
-        return {'name': "true", 'country': "true", 'mold': "true", 'animal': "true", 'type': "true", 'continent': "true"}
+        return {'name': "false", 'country': "true", 'mold': "true", 'animal': "true", 'type': "true", 'continent': "true"}
 
 
 

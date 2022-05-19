@@ -31,19 +31,20 @@ for (var i = 0; i < resultArray.length; i++) {
  * Generates boolean array indicating if attribute of guessed cheese is same
  * as attribute of the correct cheese. Also inputs results to 2-D array resultArray
  * for use in sharing results with others.
+ * REDUNDANT CODE AS THE SERVER WILL DO ATTRIBUTE CHECKING
  */
 function attributeChecker() {
-  let guess = document.getElementById("cheese-choice").value.toLowerCase();
+  // let guess = document.getElementById("cheese-choice").value.toLowerCase();
 
-  // Array brought back from server after pinged with guess value.
-  let guessAttributes = ["Cheddar", "UK", "Cow", "Type-5", "false", "Europe"];
+  // // Array brought back from server after pinged with guess value.
+  // let guessAttributes = ["Cheddar", "UK", "Cow", "Type-5", "false", "Europe"];
 
-  // Mutates correctChoice array if guess attribute aligns with correct attribute.
-  for (let i = 0; i < guessAttributes.length; i++) {
-    if (guessAttributes[i] == correctAttributes[i]) {
-      correctChoice[i] = true;
-    }
-  }
+  // // Mutates correctChoice array if guess attribute aligns with correct attribute.
+  // for (let i = 0; i < guessAttributes.length; i++) {
+  //   if (guessAttributes[i] == correctAttributes[i]) {
+  //     correctChoice[i] = true;
+  //   }
+  // }
 
   for (let i = 0; i < correctChoice.length; i++) {
     if (correctChoice[i] == true) {
@@ -140,9 +141,9 @@ function entryTest() {
   }
 
   if (validEntry == true) {
-    let x = sendCheese();
-    console.log(x[0]);
+    correctChoice = sendCheese();
     removeText();
+    // Makes an array that contains boolean for if the attributes of your guessec cheese are correct.
     attributeChecker();
     if (correctChoice[0] == true) {
       $("#guess-textbox").fadeOut("slow");
@@ -151,6 +152,7 @@ function entryTest() {
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
     }
     $("#result-" + resultNum).fadeOut(500);
+    // Mutates page based on results from guess.
     setTimeout(resultGen, 500);
 
   }
@@ -227,8 +229,27 @@ function sendCheese() {
     }),
     success: function (data, status, xhr) { response=data; }
   });
+  //Turns JSON form into a js array
   let result = Object.values(response);
-  return result;
+  let result_arranged = [];
+  let booleanisedResult = [];
+  
+  result_arranged.push(response.name)
+  result_arranged.push(response.country)
+  result_arranged.push(response.mold)
+  result_arranged.push(response.animal)
+  result_arranged.push(response.type)
+  result_arranged.push(response.continent)
+
+  for (let i = 0; i < result.length; i ++) {
+    if (result_arranged[i] == 'true') {
+      booleanisedResult.push(true);
+    } else {
+      booleanisedResult.push(false);
+    }
+  }
+
+  return booleanisedResult;
 }
 
 console.log("Hello World");
