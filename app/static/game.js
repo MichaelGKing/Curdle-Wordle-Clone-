@@ -1,7 +1,7 @@
 //Stores a list of all the valid cheeses. DATABASE
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
 
-//Entries are name, country, mold, animal, cheese type, continent.
+//Entries are name, country, mold, animal, cheese type, continent. DATABASE
 let correctChoice = [false, false, false, false, false, false];
 
 //Tracks how many valid guesses have been made.
