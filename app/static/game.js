@@ -1,10 +1,7 @@
-//Stores information on the correct cheese. DATABASE
-let correctAttributes = ["Cheddar", "UK", "Cow", "Type-5", "false", "Europe"];
-
 //Stores a list of all the valid cheeses. DATABASE
 let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
 
-//Entries are name, country, mold, animal, cheese type.
+//Entries are name, country, mold, animal, cheese type, continent.
 let correctChoice = [false, false, false, false, false, false];
 
 //Tracks how many valid guesses have been made.
@@ -28,24 +25,9 @@ for (var i = 0; i < resultArray.length; i++) {
 
 
 /**
- * Generates boolean array indicating if attribute of guessed cheese is same
- * as attribute of the correct cheese. Also inputs results to 2-D array resultArray
- * for use in sharing results with others.
- * REDUNDANT CODE AS THE SERVER WILL DO ATTRIBUTE CHECKING
+ * Innputs results to 2-D array resultArray for use in sharing results with others.
  */
 function attributeChecker() {
-  // let guess = document.getElementById("cheese-choice").value.toLowerCase();
-
-  // // Array brought back from server after pinged with guess value.
-  // let guessAttributes = ["Cheddar", "UK", "Cow", "Type-5", "false", "Europe"];
-
-  // // Mutates correctChoice array if guess attribute aligns with correct attribute.
-  // for (let i = 0; i < guessAttributes.length; i++) {
-  //   if (guessAttributes[i] == correctAttributes[i]) {
-  //     correctChoice[i] = true;
-  //   }
-  // }
-
   for (let i = 0; i < correctChoice.length; i++) {
     if (correctChoice[i] == true) {
       resultArray[resultNum - 1][i] = 1;
