@@ -9,7 +9,7 @@ from app.models import Cheese, Type, Country, Animal, Continent, Admin
 from . import import_data
 
 # Used to index a puzzle for the day, should increment by +1 every day
-cheese_id_counter = 1
+cheese_id_counter = 2
 # Somehow increment this every day - APScheduler can help?
 
 # Import all hardcoded data required for puzzles
@@ -128,7 +128,7 @@ def get_guess():
                 
                 return results
         
-        if (answer.name != guess.name):
+        if (answer.cheese_name != guess.cheese_name):
             results['name'] = False
 
         if (answer.country_id != guess.country_id):
@@ -138,7 +138,7 @@ def get_guess():
             results["mould"] = False
 
         if (answer.animal_id != guess.animal_id):
-            results["name"] = False
+            results["animal"] = False
 
         if (answer.type_id != guess.type_id):
             results["type"] = False
@@ -149,13 +149,19 @@ def get_guess():
 
         if (answer_country.continent_id != guess_country.continent_id):
             results["continent"] = False
-        
-        return results
 
+        return results
 
 @app.route('/get-cheeses', methods=['GET', 'POST'])
 def get_cheeses():
 
     if request.method == "POST":
         
-        valid_guesses = Cheese.cheese_name
+        result = db.session.query(Cheese.id, Cheese.cheese_name).all()
+    
+        # Iterate through results and add all cheese name values to a list
+        cheeses = {}
+        for row in result:
+            cheeses[row[0]] = row[1]
+        print(cheeses)
+        return cheeses
