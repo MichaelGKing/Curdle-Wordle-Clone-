@@ -32,13 +32,16 @@ for (var i = 0; i < resultArray.length; i++) {
  * Innputs results to 2-D array resultArray for use in sharing results with others.
  */
 function attributeChecker() {
-  for (let i = 0; i < correctChoice.length; i++) {
+  for (let i = 0; i < correctChoice.length -1; i++) {
     if (correctChoice[i] == true) {
       resultArray[resultNum - 1][i] = 1;
     }
     if (correctChoice[i] == false) {
       resultArray[resultNum - 1][i] = 0;
     }
+  }
+  if (correctChoice[5] == true && correctChoice[1] == false) {
+    resultArray[resultNum - 1][1] = 2;
   }
 }
 
@@ -179,6 +182,11 @@ function clipboard() {
   for (let i = 0; i < resultArray.length; i++) {
     for (let j = 0; j < resultArray[i].length; j++) {
       if (resultArray[i][j] == -1) {
+        continue;
+      }
+      if (resultArray[i][j] == 2) {
+        let x = "🟧";
+        text = text.concat(x);
         continue;
       }
       if (resultArray[i][j] == 0) {
