@@ -209,29 +209,20 @@ function sendCheese() {
     data: JSON.stringify({
       cheese_name: $("#cheese-choice").val(),
     }),
-    success: function (data, status, xhr) { response=data; }
+    success: function (data, status, xhr) { response=data;}
   });
   //Turns JSON form into a js array
-  let result = Object.values(response);
+
   let result_arranged = [];
-  let booleanisedResult = [];
-  
+
   result_arranged.push(response.name)
   result_arranged.push(response.country)
-  result_arranged.push(response.mold)
+  result_arranged.push(response.mould)
   result_arranged.push(response.animal)
   result_arranged.push(response.type)
   result_arranged.push(response.continent)
 
-  for (let i = 0; i < result.length; i ++) {
-    if (result_arranged[i] == 'true') {
-      booleanisedResult.push(true);
-    } else {
-      booleanisedResult.push(false);
-    }
-  }
-  console.log(booleanisedResult);
-  return booleanisedResult;
+  return result_arranged;
 }
 
 /**
