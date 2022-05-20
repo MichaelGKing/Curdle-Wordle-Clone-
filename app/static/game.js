@@ -230,7 +230,7 @@ function sendCheese() {
       booleanisedResult.push(false);
     }
   }
-
+  console.log(booleanisedResult);
   return booleanisedResult;
 }
 
