@@ -134,28 +134,8 @@ for value in countries:
     db.session.add(c)
     db.session.commit()
 
-# Deletes any existing values in the database for country
+# Deletes any existing values in the database for cheese
 Cheese.query.delete()
-
-# Define a function to add a puzzle to the database, will be used in one of the view functions below
-def add_puzzle(puzzle):
-
-    if puzzle[4] == 'True' or puzzle[4] == '1':
-        is_mouldy = True
-    else:
-        is_mouldy = False
-
-    c = Cheese(
-        cheese_name=puzzle[0], 
-        type_id = db.session.query(Type.id).filter(Type.type == puzzle[1]).scalar(), 
-        animal_id = db.session.query(Animal.id).filter(Animal.animal_name == puzzle[2]).scalar(), 
-        country_id = db.session.query(Country.id).filter(Country.country_name == puzzle[3]).scalar(), 
-        mouldy=is_mouldy, 
-        image_filename=puzzle[5]
-        )
-
-    db.session.add(c)
-    db.session.commit()
 
 for puzzle in cheeses:
 
