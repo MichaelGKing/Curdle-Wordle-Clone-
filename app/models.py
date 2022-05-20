@@ -40,6 +40,11 @@ class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     password_hash = db.Column(db.String(128))
 
+class PuzzleHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    client_puzzle_id = db.Column(db.Integer, nullable=False)
+    server_puzzle_id = db.Column(db.Integer, nullable=False)
+
 # Define a function to add a puzzle to the database
 # Used in routes for puzzle upload, and in dbinit to 
 def add_puzzle(puzzle):
