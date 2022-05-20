@@ -1,5 +1,9 @@
 //Stores a list of all the valid cheeses. DATABASE
-let cheeseList = ["Cheddar", "Camembert", "Parmesan", "Red Leicester", "Blue Cheese"];
+let cheeseList = [];
+  function storeCheeseList() {
+  cheeseList = getCheeseList();
+}
+
 
 //Entries are name, country, mold, animal, cheese type, continent. DATABASE
 let correctChoice = [false, false, false, false, false, false];
@@ -132,6 +136,7 @@ function entryTest() {
       $("#guess-button").fadeOut("slow");
       toggleCongrats();
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
+      localStorage.setItem("puzzleComplete", "True");
     }
     $("#result-" + resultNum).fadeOut(500);
     // Mutates page based on results from guess.
@@ -233,4 +238,29 @@ function toggleHelp() {
   $("#grid-container-e1").css("display", "grid").hide().fadeIn("slow");
   $("#grid-container-e2").css("display", "grid").hide().fadeIn("slow");
   $("#grid-container-e3").css("display", "grid").hide().fadeIn("slow");
+}
+
+/**
+ * Retrieves json dictionary of cheeselist from server.
+ * @returns CheeseList
+ */
+function getCheeseList() {
+  let response
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: '/get-cheeses',
+    dataType: "json",
+    success: function (data, status, xhr) { response=data;}
+  });
+  //Turns JSON form into a js array
+  //let result = Object.values();
+  // result_arranged.push(response.name)
+  // result_arranged.push(response.country)
+  // result_arranged.push(response.mould)
+  // result_arranged.push(response.animal)
+  // result_arranged.push(response.type)
+  // result_arranged.push(response.continent)
+  let cheeseList = Object.values(response);
+  return cheeseList;
 }
