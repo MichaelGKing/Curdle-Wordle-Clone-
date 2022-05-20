@@ -39,3 +39,4 @@ class Cheese(db.Model):
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     password_hash = db.Column(db.String(128))
+
