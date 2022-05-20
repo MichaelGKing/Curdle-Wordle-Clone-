@@ -33,3 +33,6 @@ class Config(object):
         
     # When true, SQLAlchemy sends a signal to the application everytime a change is about to be made to the database
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    LAUNCH_DATE  = [2022, 5, 21, 0, 0]
+
