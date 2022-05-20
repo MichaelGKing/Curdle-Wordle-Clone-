@@ -40,3 +40,23 @@ class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     password_hash = db.Column(db.String(128))
 
+# Define a function to add a puzzle to the database
+# Used in routes for puzzle upload, and in dbinit to 
+def add_puzzle(puzzle):
+
+    if puzzle[4] == 'True' or puzzle[4] == '1':
+        is_mouldy = True
+    else:
+        is_mouldy = False
+
+    c = Cheese(
+        cheese_name=puzzle[0], 
+        type_id = db.session.query(Type.id).filter(Type.type == puzzle[1]).scalar(), 
+        animal_id = db.session.query(Animal.id).filter(Animal.animal_name == puzzle[2]).scalar(), 
+        country_id = db.session.query(Country.id).filter(Country.country_name == puzzle[3]).scalar(), 
+        mouldy=is_mouldy, 
+        image_filename=puzzle[5]
+        )
+
+    db.session.add(c)
+    db.session.commit()

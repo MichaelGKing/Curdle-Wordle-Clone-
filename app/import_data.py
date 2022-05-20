@@ -1,7 +1,11 @@
 from app import db, app
 from werkzeug.security import generate_password_hash
-from app.models import Type, Animal, Country, Cheese, Continent, Admin
+from app.models import Type, Animal, Continent, Country, Cheese, Admin, add_puzzle
 import csv
+
+# When imported at the end of the application __init__ file, this module imports set values into the database
+# This includes hardcoded values for all cheese attributes and a list of puzzles imported from puzzles.csv
+# The default admin password is also set
 
 # Required cheese attributes
 types = ("fresh","soft","semi-hard","hard","blue","processed")
@@ -94,7 +98,7 @@ countries = [
 # This formatting will be controlled by the puzzle upload form inputs only allowing valid submissions
 
 # Open saved puzzles csv file, and add each line as a array within the cheeses array
-file = open('saved_puzzles.csv')
+file = open('puzzles.csv')
 csvreader = csv.reader(file)
 cheeses = []
 for row in csvreader:
@@ -139,23 +143,7 @@ Cheese.query.delete()
 
 for puzzle in cheeses:
 
-    # The csv reader returns all values as strings
-    # This checks the mouldy attribute to see if it is true or false and assigns the correct boolean value to a new variable
-    if puzzle[4] == 'True' or puzzle[4] == '1':
-        is_mouldy = True
-    else:
-        is_mouldy = False
-
-    c = Cheese(
-        cheese_name=puzzle[0], 
-        type_id = db.session.query(Type.id).filter(Type.type == puzzle[1]).scalar(), 
-        animal_id = db.session.query(Animal.id).filter(Animal.animal_name == puzzle[2]).scalar(), 
-        country_id = db.session.query(Country.id).filter(Country.country_name == puzzle[3]).scalar(), 
-        mouldy=is_mouldy, 
-        image_filename=puzzle[5]
-        )
-    db.session.add(c)
-    db.session.commit()
+    add_puzzle(puzzle)
 
 # Set the admin password from environment variable
 
