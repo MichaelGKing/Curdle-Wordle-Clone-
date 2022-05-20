@@ -97,61 +97,66 @@ countries = [
 #
 # This formatting will be controlled by the puzzle upload form inputs only allowing valid submissions
 
-# Open saved puzzles csv file, and add each line as a array within the cheeses array
-file = open('puzzles.csv')
-csvreader = csv.reader(file)
-cheeses = []
-for row in csvreader:
-    cheeses.append(row)
 
 # Add required cheese attributes to the database
+def import_types():
+    # Deletes any existing values in the database for type
+    Type.query.delete()
+    # Iterates through the list of types defined above and adds them to the database
+    for value in types:
+        t = Type(type=value)
+        db.session.add(t)
+        db.session.commit()
 
-# Deletes any existing values in the database for type
-Type.query.delete()
-# Iterates through the list of types defined above and adds them to the database
-for value in types:
-    t = Type(type=value)
-    db.session.add(t)
+def import_animals():
+    # Deletes any existing values in the database for animal
+    Animal.query.delete()
+    # Iterates through the list of animals defined above and adds them to the database
+    for value in animals:
+        a = Animal(animal_name=value)
+        db.session.add(a)
+        db.session.commit()
+
+def import_continents():
+    # Deletes any existing values in the database for continent
+    Continent.query.delete()
+    # Iterates through the list of continents defined above and adds them to the database
+    for value in continents:
+        c = Continent(continent_name=value)
+        db.session.add(c)
+        db.session.commit()
+
+def import_countries():
+    # Deletes any existing values in the database for country
+    Country.query.delete()
+    # Iterates through the array of countries defined above and adds them to the database
+    for value in countries:
+        c = Country(country_name=value[0], continent_id=value[1])
+        db.session.add(c)
+        db.session.commit()
+
+def import_puzzles():
+    # Deletes any existing values in the database for cheese
+    Cheese.query.delete()
+
+    # Open saved puzzles csv file, and add each line as a array within the cheeses array
+    file = open('puzzles.csv')
+    csvreader = csv.reader(file)
+    cheeses = []
+    for row in csvreader:
+        cheeses.append(row)
+
+    for puzzle in cheeses:
+        add_puzzle(puzzle)
+
+def set_admin_password():
+    # Set the admin password from environment variable
+
+    # Get admin password from environment variable, if doesnt exist, fallback on hardcoded value from config.py
+    p = app.config['ADMIN_PASSWORD']
+    hash = generate_password_hash(p)
+
+    Admin.query.delete()
+    p = Admin(password_hash=hash)
+    db.session.add(p)
     db.session.commit()
-
-# Deletes any existing values in the database for animal
-Animal.query.delete()
-# Iterates through the list of animals defined above and adds them to the database
-for value in animals:
-    a = Animal(animal_name=value)
-    db.session.add(a)
-    db.session.commit()
-
-# Deletes any existing values in the database for continent
-Continent.query.delete()
-# Iterates through the list of continents defined above and adds them to the database
-for value in continents:
-    c = Continent(continent_name=value)
-    db.session.add(c)
-    db.session.commit()
-
-# Deletes any existing values in the database for country
-Country.query.delete()
-# Iterates through the array of countries defined above and adds them to the database
-for value in countries:
-    c = Country(country_name=value[0], continent_id=value[1])
-    db.session.add(c)
-    db.session.commit()
-
-# Deletes any existing values in the database for cheese
-Cheese.query.delete()
-
-for puzzle in cheeses:
-
-    add_puzzle(puzzle)
-
-# Set the admin password from environment variable
-
-# Get admin password from environment variable, if doesnt exist, fallback on hardcoded value from config.py
-p = app.config['ADMIN_PASSWORD']
-hash = generate_password_hash(p)
-
-Admin.query.delete()
-p = Admin(password_hash=hash)
-db.session.add(p)
-db.session.commit()

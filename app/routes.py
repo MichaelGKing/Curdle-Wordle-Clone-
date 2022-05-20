@@ -1,4 +1,3 @@
-
 import os
 from app import app, db
 from app.forms import AdminLoginForm, PuzzleUploadForm
@@ -7,10 +6,18 @@ from wtforms import ValidationError
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 from app.models import Cheese, Type, Country, Animal, Continent, Admin
+from . import import_data
 
 # Used to index a puzzle for the day, should increment by +1 every day
 cheese_id_counter = 2
 # Somehow increment this every day - APScheduler can help?
+
+# Import all hardcoded data required for puzzles
+import_data.import_types()
+import_data.import_animals()
+import_data.import_continents()
+import_data.import_countries()
+import_data.import_puzzles()
 
 # Routes are written as shown below
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
