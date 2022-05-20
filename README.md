@@ -52,10 +52,18 @@ How to Install and Run Curdle (from local host)
    ```
 
 6. Create a file named '.flaskenv' and add any required environment variables. 
+
+   REQUIRED:
    
    To tell Flask which file needs to be run to start the application. This is necessary, and having it set in a .flaskenv file avoids the need to set it manually for every new session:
 
    ```FLASK_APP=curdle```
+
+   To tell Flask-SQLAlchemy and Flask-Migrate how to connect to the database:
+
+   ```DATABASE_URL='sqlite:///app.db'```
+
+   OPTIONAL:
 
    To run Flask in development mode. This enables some debugging tools and automatically reloads browser when changes are made to code
    
@@ -67,7 +75,7 @@ How to Install and Run Curdle (from local host)
 
    ```PYTHONUNBUFFERED='any_non_empty_string'```
 
-6. Build the application database. Return to your terminal within the curdle folder with your virtual env active
+7. Build the application database. Return to your terminal within the curdle folder with your virtual env active
 
    ```bash
    (venv) % flask db upgrade
