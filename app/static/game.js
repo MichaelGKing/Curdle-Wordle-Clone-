@@ -287,9 +287,7 @@ function setStats() {
   for (let i = 0; i < guessDist.length; i ++) {
     guessDistInt.push(parseInt(guessDist[i]));
   }
-  console.log(guessDistInt);
   let maxDist = Math.max.apply(Math, guessDistInt);
-  console.log(maxDist);
   let width;
   for (let i = 0; i < guessDistInt.length; i ++) {
     if (maxDist == 0) {
@@ -300,5 +298,17 @@ function setStats() {
     $("#bar" + (i + 1)).css("width", width + "%")
     $("#bar" + (i + 1) + " p").html(guessDistInt[i])
   }
-  console.log(guessDist);
+}
+
+function getPuzzleID() {
+  let response
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: '/get-cheeses',
+    dataType: "json",
+    success: function (data, status, xhr) { response=data;}
+  });
+  let cheeseList = Object.values(response);
+  return cheeseList;
 }
