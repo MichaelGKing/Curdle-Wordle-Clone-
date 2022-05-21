@@ -147,12 +147,15 @@ function entryTest(entry) {
     $("#result-" + resultNum).fadeOut(500);
     // Mutates page based on results from guess.
     setTimeout(resultGen(entry), 500);
-    if (resultNum == 6) {
-      $("#guess-textbox").fadeOut("slow");
-      $("#guess-button").fadeOut("slow");
-      $("#share-button").css("display", "flex").hide().fadeIn("slow");
-      userFailed();
-    }
+    
+    
+  }
+
+  if (resultNum == 7) {
+    $("#guess-textbox").fadeOut("slow");
+    $("#guess-button").fadeOut("slow");
+    $("#share-button").css("display", "flex").hide().fadeIn("slow");
+    userFailed();
   }
 }
 
