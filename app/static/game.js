@@ -44,6 +44,9 @@ function attributeChecker() {
   }
 }
 
+/**
+ * Triggers event when enter key hit.
+ */
 function search() {
   if(event.key === 'Enter') {
     entryTest(document.getElementById('cheese-choice').value);        
