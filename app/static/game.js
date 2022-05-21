@@ -1,6 +1,8 @@
 //Stores a list of all the valid cheeses. DATABASE
 let cheeseList = [];
-  function storeCheeseList() {
+
+//Function stores the servers cheese list.
+function storeCheeseList() {
   cheeseList = getCheeseList();
 }
 
@@ -23,7 +25,7 @@ let puzzleNum = 1;
 // Create one dimensional array
 var resultArray = new Array(5);
 // Loop to create 2D array using 1D array
-for (var i = 0; i < resultArray.length; i++) {
+for (var i = 0; i < 6; i++) {
   resultArray[i] = [-1, -1, -1, -1, -1, -1];
 }
 
@@ -111,11 +113,7 @@ function removeText() {
  */
 function entryTest() {
   //Removes the textbox and button when user has had 6 valid guesses.
-  if (resultNum == 6) {
-    $("#guess-textbox").fadeOut("slow");
-    $("#guess-button").fadeOut("slow");
-    $("#share-button").css("display", "flex").hide().fadeIn("slow");
-  }
+  
   let entry = document.getElementById("cheese-choice").value;
   let validEntry = false;
   for (let i = 0; i < cheeseList.length; i++) {
@@ -130,6 +128,7 @@ function entryTest() {
   }
 
   if (validEntry == true) {
+    userPlayed();
     correctChoice = sendCheese();
     removeText();
     // Makes an array that contains boolean for if the attributes of your guessec cheese are correct.
@@ -139,12 +138,17 @@ function entryTest() {
       $("#guess-button").fadeOut("slow");
       toggleCongrats();
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
-      localStorage.setItem("puzzleComplete", "True");
+      userSucceeded();
     }
     $("#result-" + resultNum).fadeOut(500);
     // Mutates page based on results from guess.
     setTimeout(resultGen, 500);
-
+    if (resultNum == 6) {
+      $("#guess-textbox").fadeOut("slow");
+      $("#guess-button").fadeOut("slow");
+      $("#share-button").css("display", "flex").hide().fadeIn("slow");
+      userFailed();
+    }
   }
 }
 

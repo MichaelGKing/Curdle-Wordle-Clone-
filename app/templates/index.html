@@ -21,12 +21,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&display=swap" rel="stylesheet">
 
   <script type="text/javascript" src="../static/game.js"></script>
+  <script type="text/javascript" src="../static/local_storage.js"></script>
   <script type="text/javascript" src="../static/inputFunctions.js"></script>
   <script defer src="../static/popup.js"></script>
   <script src="https://kit.fontawesome.com/143356e028.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="storeCheeseList()">
+<body onload="storeCheeseList(), userVisited()">
   <header>
     <p onclick="toggleHelp()">
       <ion-icon name="help-circle-outline"></ion-icon>
