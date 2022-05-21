@@ -136,7 +136,12 @@ header p:hover {
   display: none;
   justify-content: center;
   align-items: center;
+  background-color: black;
+  color: white;
+  height: 32.5px;
+  margin: 0 5px 0 5px;
 }
+
 
 #share-button {
   display: none;
@@ -164,10 +169,9 @@ header p:hover {
   background-color: green;
 }
 
-#button, #cheese-choice, #share {
+#button, #cheese-choice, #share, .correct-cheese {
   padding: 0px;
   height: 32.5px;
-  border-radius: 5px;
   font-size: 16px;
   font-family: "Poppins";
 }

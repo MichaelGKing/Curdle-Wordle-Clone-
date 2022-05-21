@@ -160,9 +160,13 @@ function entryTest(entry) {
   }
 
   if (resultNum == 7) {
+    //Uncomment when getanswer works. Will change html of reveal to correct cheese.
+    //getAnswer();
+    toggleFail();
     $("#guess-textbox").fadeOut("slow");
     $("#guess-button").fadeOut("slow");
     $("#share-button").css("display", "flex").hide().fadeIn("slow");
+    $("#correct-cheese").css("display", "flex").hide().fadeIn("slow");
     userFailed();
   }
 }
@@ -184,6 +188,13 @@ function toggleHelp() {
 
 function toggleStats() {
   document.getElementById("popup-3").classList.toggle("active");
+}
+
+/**
+ * Generates a bad luck pop up
+ */
+function toggleFail() {
+  document.getElementById("popup-5").classList.toggle("active");
 }
 
 /**
@@ -343,5 +354,7 @@ function getAnswer() {
     success: function (data, status, xhr) { response=data;}
   });
   let answer = Object.values(response);
+  
+  $("#correct-cheese p").html(answer);
   console.log(answer);
 }
