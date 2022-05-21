@@ -282,10 +282,10 @@ function getCheeseList() {
 }
 
 function setStats() {
-  $("#played").prepend("<p>" + localStorage.getItem("played") + "</p>");
-  $("#winrate").prepend("<p>" + localStorage.getItem("winrate") + "</p>");
-  $("#streak").prepend("<p>" + localStorage.getItem("streak") + "</p>");
-  $("#best-streak").prepend("<p>" + localStorage.getItem("best-streak") + "</p>");
+  $("#played_text").html(localStorage.getItem("played"));
+  $("#winrate_text").html(localStorage.getItem("winrate"));
+  $("#streak_text").html(localStorage.getItem("streak"));
+  $("#best_text").html(localStorage.getItem("best-streak"));
 
   let guessDist = localStorage.getItem("guess-distribution").split(',');
   let guessDistInt = [];
@@ -303,7 +303,7 @@ function setStats() {
       width = (guessDistInt[i] / maxDist) * 100;
     }
     $("#bar" + (i + 1)).css("width", width + "%")
-    $("#bar" + (i + 1)).append("<p>" + guessDistInt[i] + "</p>")
+    $("#bar" + (i + 1) + " p").html(guessDistInt[i])
   }
   console.log(guessDist);
 }
