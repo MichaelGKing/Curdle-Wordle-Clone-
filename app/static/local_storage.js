@@ -14,7 +14,13 @@ function getDate() {
 function loadUser() {
   if (localStorage.getItem("visits") == 1) {
     toggleHelp();
+    localStorage.setItem("played", 0);
+    localStorage.setItem("winrate", 0);
+    localStorage.setItem("streak", 0);
+    localStorage.setItem("best-streak", 0);
+    localStorage.setItem("guess-distribution", "0,1,3,0,5,0")
   } else {
+    
     if (localStorage.getItem("last_puzzle_attempted") == puzzleNum) {
       let guesses = localStorage.getItem("guesses_made");
       let guessesArray = guesses.split(',');
@@ -30,24 +36,8 @@ function loadUser() {
       localStorage.removeItem("userCompleted");
       localStorage.removeItem("guess_made");
     }
-    // if (localStorage.getItem("guess_made") == 'true') {
-    //   let guesses = localStorage.getItem("guesses_made").split(',');
-    //   console.log(guesses);
-    // }
   }
-
-
-  // let puzzleComplete = localStorage.getItem("puzzleComplete");
-  // if ((puzzleNum.toString()) != (localStorage.getItem("lastCompleted"))) {
-  //   localStorage.setItem("userCompleted", false);
-  //   localStorage.removeItem("guesses_made");
-  //   localStorage.removeItem("puzzleState");
-  // } else {
-  //   if (localStorage.getItem("gueeses_made") != null) {
-  //     let guesses = localStorage.getItem("gueeses_made").split(',');
-  //     console.log(guesses);
-  //   }
-  // }
+  setStats();
 }
 
 //Function loads when user gets correct guess
@@ -58,6 +48,11 @@ function userCompleted() {
 function userSucceeded() {
   localStorage.setItem("puzzleState", "win");
   localStorage.setItem("lastWin", puzzleNum);
+  if ((parseInt(localStorage.getItem("lastWin")) + 1) == puzzleNum) {
+
+  }
+  
+  
   userCompleted();
 }
 

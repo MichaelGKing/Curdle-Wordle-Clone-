@@ -19,7 +19,7 @@ let resultNum = 1;
 let cheeseIndex = 0;
 
 //For sharing your puzzle results. DATABASE
-let puzzleNum = 1;
+let puzzleNum = 2;
 
 //Matrix array storing results.
 // Create one dimensional array
@@ -279,4 +279,31 @@ function getCheeseList() {
   // result_arranged.push(response.continent)
   let cheeseList = Object.values(response);
   return cheeseList;
+}
+
+function setStats() {
+  $("#played").prepend("<p>" + localStorage.getItem("played") + "</p>");
+  $("#winrate").prepend("<p>" + localStorage.getItem("winrate") + "</p>");
+  $("#streak").prepend("<p>" + localStorage.getItem("streak") + "</p>");
+  $("#best-streak").prepend("<p>" + localStorage.getItem("best-streak") + "</p>");
+
+  let guessDist = localStorage.getItem("guess-distribution").split(',');
+  let guessDistInt = [];
+  for (let i = 0; i < guessDist.length; i ++) {
+    guessDistInt.push(parseInt(guessDist[i]));
+  }
+  console.log(guessDistInt);
+  let maxDist = Math.max.apply(Math, guessDistInt);
+  console.log(maxDist);
+  let width;
+  for (let i = 0; i < guessDistInt.length; i ++) {
+    if (maxDist == 0) {
+      width = 0
+    } else {
+      width = (guessDistInt[i] / maxDist) * 100;
+    }
+    $("#bar" + (i + 1)).css("width", width + "%")
+    $("#bar" + (i + 1)).append("<p>" + guessDistInt[i] + "</p>")
+  }
+  console.log(guessDist);
 }
