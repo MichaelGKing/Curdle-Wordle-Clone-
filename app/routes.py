@@ -13,11 +13,18 @@ from datetime import date
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
 # The view function contains this code
 
+todays_server_puzzle_id = 0
+todays_client_puzzle_id = 0
+
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 # A view function for the homepage which displays the game
 def index():
+
+    global todays_server_puzzle_id
+    global todays_client_puzzle_id
     # Get todays client-side puzzle ID - this increments by one every day
+    
     todays_client_puzzle_id = puzzlesetter.get_puzzle_id_for_client()
 
     # Check database to see if a puzzle has been generated for today
@@ -26,7 +33,7 @@ def index():
     # If no entry has been stored for todays puzzle, add an entry and set a server side puzzle id
     if result is None:
         todays_server_puzzle_id = puzzlesetter.set_puzzle_id_for_server()
-        p = PuzzleHistory(client_puzzle_id=todays_client_puzzle_id, server_puzzle_id=todays_server_puzzle_id, datetime=date.today())
+        p = PuzzleHistory(client_puzzle_id=todays_client_puzzle_id, server_puzzle_id=todays_server_puzzle_id, date=date.today())
         db.session.add(p)
         db.session.commit()
     # Else, use the value stored in the database
@@ -35,7 +42,7 @@ def index():
         print(todays_server_puzzle_id)
 
     print("Todays client puzzle ID is: " + str(todays_client_puzzle_id))
-    print("Todays client puzzle ID is: " + str(todays_server_puzzle_id))
+    print("Todays server puzzle ID is: " + str(todays_server_puzzle_id))
 
     image = db.session.query(Cheese.image_filename).filter(Cheese.id == todays_server_puzzle_id).scalar()
 
@@ -167,9 +174,24 @@ def get_cheeses():
         print(cheeses)
         return cheeses
 
+# Respond to client request todays puzzle id (the client facing one) and the puzzles date
 @app.route('/puzzle-id', methods=['GET', 'POST'])
 def puzzle_id():
 
     if request.method == "POST":
         
-        return cheeses
+        puzzle_data = puzzlesetter.get_daily_puzzle_info()
+
+        print(puzzle_data)
+        
+        return puzzle_data
+
+# Returns the correct answer - used by client to inform 
+@app.route('/get-answer', methods=['GET', 'POST'])
+def get_answer():
+
+    if request.method == "POST":
+
+        answer = Cheese.query.filter_by(id=todays_server_puzzle_id).first()
+
+        return
