@@ -20,7 +20,7 @@ function loadUser() {
     localStorage.setItem("winrate", 0);
     localStorage.setItem("streak", 0);
     localStorage.setItem("best-streak", 0);
-    localStorage.setItem("guess-distribution", "0,1,3,0,5,0")
+    localStorage.setItem("guess-distribution", "0,0,0,0,0,0")
   } else {
     if (localStorage.getItem("last_puzzle_attempted") == puzzleNum) {
       let guesses = localStorage.getItem("guesses_made");
@@ -57,12 +57,14 @@ function userSucceeded() {
     if (parseInt(localStorage.getItem("streak")) > parseInt(localStorage.getItem("best-streak"))) {
       localStorage.setItem("best-streak", localStorage.getItem("streak"));
     }
+    distCalc();
   }
   localStorage.setItem("puzzleState", "win");
   localStorage.setItem("lastWin", puzzleNum);
   userCompleted();
   let winrate = parseInt(localStorage.getItem("wins")) / parseInt(localStorage.getItem("played")) * 100;
   localStorage.setItem("winrate", winrate);
+  
   setStats();
 }
 
@@ -77,6 +79,7 @@ function userPlayed(guess) {
     localStorage.setItem("played", parseInt(localStorage.getItem("played")) + 1);
     let winrate = parseInt(localStorage.getItem("wins")) / parseInt(localStorage.getItem("played")) * 100;
     localStorage.setItem("winrate", winrate);
+    
   }
   localStorage.setItem("guess_made", true);
   localStorage.setItem("last_puzzle_attempted", puzzleNum);
@@ -106,5 +109,13 @@ function userVisited() {
 }
 
 function distCalc() {
-  
+  let dist = resultNum - 1;
+  let guessDist = localStorage.getItem("guess-distribution");
+  let guessDistArray = guessDist.split(',');
+  let guessDistArrayInt = [];
+  for (let i = 0; i < guessDistArray.length; i ++) {
+    guessDistArrayInt.push(parseInt(guessDistArray[i]));
+  }
+  guessDistArrayInt[dist] = guessDistArrayInt[dist] + 1;
+  localStorage.setItem("guess-distribution", guessDistArrayInt.join(","));
 }

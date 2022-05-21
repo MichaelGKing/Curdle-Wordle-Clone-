@@ -272,14 +272,6 @@ function getCheeseList() {
     dataType: "json",
     success: function (data, status, xhr) { response=data;}
   });
-  //Turns JSON form into a js array
-  //let result = Object.values();
-  // result_arranged.push(response.name)
-  // result_arranged.push(response.country)
-  // result_arranged.push(response.mould)
-  // result_arranged.push(response.animal)
-  // result_arranged.push(response.type)
-  // result_arranged.push(response.continent)
   let cheeseList = Object.values(response);
   return cheeseList;
 }
