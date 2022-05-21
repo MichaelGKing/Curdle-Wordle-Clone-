@@ -5,19 +5,8 @@ from flask import render_template, flash, redirect, request
 from wtforms import ValidationError
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
-from app.models import Cheese, Type, Country, Animal, Continent, Admin
-from . import import_data
-
-# Used to index a puzzle for the day, should increment by +1 every day
-cheese_id_counter = 2
-# Somehow increment this every day - APScheduler can help?
-
-# Import all hardcoded data required for puzzles
-import_data.import_types()
-import_data.import_animals()
-import_data.import_continents()
-import_data.import_countries()
-import_data.import_puzzles()
+from app.models import Cheese, PuzzleHistory, Type, Country, Animal, Continent, User
+from . import puzzlesetter
 
 # Routes are written as shown below
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
@@ -25,19 +14,29 @@ import_data.import_puzzles()
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
-# A view function for the homepage
+# A view function for the homepage which displays the game
 def index():
-    # get cheese puzzle by ID
-    # This could be randomised?
+    # Get todays client-side puzzle ID - this increments by one every day
+    todays_client_puzzle_id = puzzlesetter.get_puzzle_id_for_client()
 
-    global cheese_id_counter
+    # Check database to see if a puzzle has been generated for today
+    result = db.session.query(PuzzleHistory).filter(PuzzleHistory.client_puzzle_id == todays_client_puzzle_id).scalar()
 
-    image = db.session.query(Cheese.image_filename).filter(Cheese.id == cheese_id_counter).scalar()
-    # If the database query fails because the id does not exist it should return none...
-    if image == None:
-        # If this is the case, reset the cheese id counter to 1, starting the puzzles from the beginning again
-        cheese_id_counter = 1
-        image = db.session.query(Cheese.image_filename).filter(Cheese.id == cheese_id_counter).scalar()
+    # If no entry has been stored for todays puzzle, add an entry and set a server side puzzle id
+    if result is None:
+        todays_server_puzzle_id = puzzlesetter.set_puzzle_id_for_server()
+        p = PuzzleHistory(client_puzzle_id=todays_client_puzzle_id, server_puzzle_id=todays_server_puzzle_id)
+        db.session.add(p)
+        db.session.commit()
+    # Else, use the value stored in the database
+    else:
+        todays_server_puzzle_id = db.session.query(PuzzleHistory.server_puzzle_id).filter(PuzzleHistory.client_puzzle_id == todays_client_puzzle_id).scalar()
+        print(todays_server_puzzle_id)
+
+    print("Todays client puzzle ID is: " + str(todays_client_puzzle_id))
+    print("Todays client puzzle ID is: " + str(todays_server_puzzle_id))
+
+    image = db.session.query(Cheese.image_filename).filter(Cheese.id == todays_server_puzzle_id).scalar()
 
     # Get list of cheeses from the database to be used in the game's guess selector field
     # SQLAlchemy returns this as a list of KeyedTuples for some reason, even though there is only one value stored..
@@ -110,14 +109,14 @@ def puzzle_uploader():
     return render_template('puzzle-uploader.html', form=form)
     
 @app.route('/check-guess', methods=['GET', 'POST'])
-def get_guess():
+def check_guess():
     
     # Get cheese name from client side
     if request.method == "POST":
 
         cheese_name = request.get_json() # This returns a single entry dict containing the cheese name
 
-        answer = Cheese.query.filter_by(id=cheese_id_counter).first()
+        answer = Cheese.query.filter_by(id=puzzlesetter.get_puzzle_id_for_server()).first()
 
         guess = Cheese.query.filter_by(cheese_name=cheese_name['cheese_name']).first() #cheese_name
 
@@ -150,6 +149,7 @@ def get_guess():
         if (answer_country.continent_id != guess_country.continent_id):
             results["continent"] = False
 
+        print(results)
         return results
 
 @app.route('/get-cheeses', methods=['GET', 'POST'])
@@ -164,4 +164,11 @@ def get_cheeses():
         for row in result:
             cheeses[row[0]] = row[1]
         print(cheeses)
+        return cheeses
+
+@app.route('/puzzle-id', methods=['GET', 'POST'])
+def puzzle_id():
+
+    if request.method == "POST":
+        
         return cheeses
