@@ -235,10 +235,10 @@ function sendCheese(entry) {
     }),
     success: function (data, status, xhr) { response=data;}
   });
-  //Turns JSON form into a js array
-
+  
+  // Pushes the JSON array into a usable correctly ordered array for use in
+  // JS functions.
   let result_arranged = [];
-
   result_arranged.push(response.name)
   result_arranged.push(response.country)
   result_arranged.push(response.mould)
@@ -260,8 +260,8 @@ function toggleHelp() {
 }
 
 /**
- * Retrieves json dictionary of cheeselist from server.
- * @returns CheeseList
+ * Retrieves the list of possible cheeses from the server.
+ * @returns list of possible cheeses.
  */
 function getCheeseList() {
   let response
@@ -276,6 +276,10 @@ function getCheeseList() {
   return cheeseList;
 }
 
+/**
+ * Function sets the stats in the stats page from data retrieved in the local
+ * storage. Typically called when stats are changed.
+ */
 function setStats() {
   $("#played_text").html(localStorage.getItem("played"));
   $("#winrate_text").html(Math.round(parseInt(localStorage.getItem("winrate"))) + "%");
@@ -300,6 +304,9 @@ function setStats() {
   }
 }
 
+/**
+ * Function retrieves the day's puzzle id. Used in tracking stats.
+ */
 function getPuzzleID() {
   let response
   $.ajax({
@@ -313,4 +320,20 @@ function getPuzzleID() {
   puzzleID = puzzleData[1];
   console.log(puzzleID);
   puzzleNum = puzzleID;
+}
+
+/**
+ * Function retrieves the answer to the puzzle. Revealed to users if they fail to guess.
+ */
+function getAnswer() {
+  let response
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: '/get-answer',
+    dataType: "json",
+    success: function (data, status, xhr) { response=data;}
+  });
+  let answer = Object.values(response);
+  console.log(answer);
 }
