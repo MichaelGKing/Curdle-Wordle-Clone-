@@ -1,4 +1,19 @@
-<h1>Curdle Administration Portal</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+<body onload="storeCheeseList(), userVisited(), loadUser()">
+  <header>
+    <p onclick="toggleHelp()">
+      <ion-icon name="help-circle-outline"></ion-icon>
+    </p>
+    <h1>CURDLE</h1>
+    <p onclick="toggleStats()">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+    </p>
+  </header>
+
+<h2>Curdle Administration Portal</h2>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>
@@ -12,6 +27,13 @@
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
+      {{ form.username.label }}<br>
+      {{ form.username(size=32) }}<br>
+      {% for error in form.username.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+  </p>
+    <p>
         {{ form.password.label }}<br>
         {{ form.password(size=32) }}<br>
         {% for error in form.password.errors %}
@@ -20,3 +42,4 @@
     </p>
     <p>{{ form.submit() }}</p>
 </form>
+{% endblock %}
