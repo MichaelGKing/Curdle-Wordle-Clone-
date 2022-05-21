@@ -65,7 +65,7 @@
 
     <section class="guess-container">
       <div id="guess-textbox">
-        <input list="cheese-names" id="cheese-choice" name="cheese-choice" />
+        <input list="cheese-names" id="cheese-choice" name="cheese-choice" placeholder="Enter cheese here..." onkeydown="search()"/>
         <datalist id="cheese-names">
           {% for cheese in cheeses %}
           <option value="{{ cheese }}">

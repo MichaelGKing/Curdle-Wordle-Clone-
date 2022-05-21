@@ -45,6 +45,15 @@ function attributeChecker() {
 }
 
 /**
+ * Triggers event when enter key hit.
+ */
+function search() {
+  if(event.key === 'Enter') {
+    entryTest(document.getElementById('cheese-choice').value);        
+  }
+}
+
+/**
  * Function generates results box. Used both in user interaction and in creating the
  * page for the returning user.
  */
