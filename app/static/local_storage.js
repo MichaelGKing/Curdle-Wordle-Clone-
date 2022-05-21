@@ -14,15 +14,18 @@ function loadUser() {
 }
 
 //Function loads when user gets correct guess
+function userCompleted() {
+  localStorage.setItem("lastCompleted", puzzleNum);
+}
+
 function userSucceeded() {
   localStorage.setItem("puzzleState", "win");
-  localStorage.setItem("lastCompleted", getDate());
+  userCompleted();
 }
 
 function userFailed() {
-  localStorage.setItem("puzzleState", "fail")
-  let date = getDate();
-  localStorage.setItem("lastCompleted", date)
+  localStorage.setItem("puzzleState", "fail");
+  userCompleted();
 }
 
 function userPlayed() {
@@ -42,13 +45,4 @@ function userVisited() {
   else {console.log(visits + ' times visited')}
 
   localStorage.setItem('visits', visits);
-  var testObject = { 'one': 1, 'two': 2, 'three': 3 };
-
-  // Put the object into storage
-  localStorage.setItem('testObject', JSON.stringify(testObject));
-
-  // Retrieve the object from storage
-  var retrievedObject = localStorage.getItem('testObject');
-
-  console.log('retrievedObject: ', JSON.parse(retrievedObject));
 }
