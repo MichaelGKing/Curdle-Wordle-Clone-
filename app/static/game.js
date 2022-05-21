@@ -1,11 +1,8 @@
-//Stores a list of all the valid cheeses. DATABASE
+// Initializes cheeseList variable which is set to the list of cheeses retrieved from the server on page load.
 let cheeseList = [];
-
-//Function stores the servers cheese list.
 function storeCheeseList() {
   cheeseList = getCheeseList();
 }
-
 
 //Entries are name, country, mold, animal, cheese type, continent. DATABASE
 let correctChoice = [false, false, false, false, false, false];
@@ -18,13 +15,12 @@ let resultNum = 1;
 //may have incorrect capitalization.
 let cheeseIndex = 0;
 
-//For sharing your puzzle results. DATABASE
+//Initializes puzzleNum variable which is set to the day's puzzle ID from the server.
 let puzzleNum = -1;
 
-//Matrix array storing results.
-// Create one dimensional array
+// Initializes a 2-D array for storing the results of the users input. Used for creating
+// a string that can be copied by the user to share their results.
 var resultArray = new Array(5);
-// Loop to create 2D array using 1D array
 for (var i = 0; i < 6; i++) {
   resultArray[i] = [-1, -1, -1, -1, -1, -1];
 }
