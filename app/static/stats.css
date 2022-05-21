@@ -88,7 +88,8 @@
 }
 
 #played, #winrate, #streak, #best-streak {
-  width: 50px;
+  width: 70px;
+  min-width: 50px;
   height: 125px;
 }
 #played, #winrate, #streak, #best-streak {
