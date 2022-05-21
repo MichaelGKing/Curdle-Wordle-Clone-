@@ -47,7 +47,7 @@ class PuzzleHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     client_puzzle_id = db.Column(db.Integer, nullable=False)
     server_puzzle_id = db.Column(db.Integer, nullable=False)
-    datetime = db.Column(db.String(64), nullable=False)
+    puzzle_date = db.Column(db.String(64), nullable=False)
 
 # Define a function to add a puzzle to the database
 # Used in routes for puzzle upload, and in dbinit to 
