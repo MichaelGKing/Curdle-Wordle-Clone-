@@ -27,7 +27,8 @@ for (var i = 0; i < 6; i++) {
 
 
 /**
- * Innputs results to 2-D array resultArray for use in sharing results with others.
+ * Function stores the results of the user in a 2-D array for use in creating
+ * a string that can be copied by the user to share their results.
  */
 function attributeChecker() {
   for (let i = 0; i < correctChoice.length -1; i++) {
@@ -44,7 +45,8 @@ function attributeChecker() {
 }
 
 /**
- * Function generates results box.
+ * Function generates results box. Used both in user interaction and in creating the
+ * page for the returning user.
  */
 function resultGen(entry) {
   //resultnum starts at 1
@@ -93,6 +95,7 @@ function resultGen(entry) {
   }
   $("#type-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
+  //Increments the result num
   resultNum++;
 }
 
