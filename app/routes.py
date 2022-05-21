@@ -33,7 +33,7 @@ def index():
     # If no entry has been stored for todays puzzle, add an entry and set a server side puzzle id
     if result is None:
         todays_server_puzzle_id = puzzlesetter.set_puzzle_id_for_server()
-        p = PuzzleHistory(client_puzzle_id=todays_client_puzzle_id, server_puzzle_id=todays_server_puzzle_id, date=date.today())
+        p = PuzzleHistory(client_puzzle_id=todays_client_puzzle_id, server_puzzle_id=todays_server_puzzle_id, puzzle_date=date.today())
         db.session.add(p)
         db.session.commit()
     # Else, use the value stored in the database
