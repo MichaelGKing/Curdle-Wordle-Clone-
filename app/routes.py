@@ -7,6 +7,7 @@ from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 from app.models import Cheese, PuzzleHistory, Type, Country, Animal, Continent, User
 from . import puzzlesetter
+from datetime import date
 
 # Routes are written as shown below
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
@@ -25,7 +26,7 @@ def index():
     # If no entry has been stored for todays puzzle, add an entry and set a server side puzzle id
     if result is None:
         todays_server_puzzle_id = puzzlesetter.set_puzzle_id_for_server()
-        p = PuzzleHistory(client_puzzle_id=todays_client_puzzle_id, server_puzzle_id=todays_server_puzzle_id)
+        p = PuzzleHistory(client_puzzle_id=todays_client_puzzle_id, server_puzzle_id=todays_server_puzzle_id, datetime=date.today())
         db.session.add(p)
         db.session.commit()
     # Else, use the value stored in the database
