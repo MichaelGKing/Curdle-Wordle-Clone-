@@ -19,7 +19,7 @@ let resultNum = 1;
 let cheeseIndex = 0;
 
 //For sharing your puzzle results. DATABASE
-let puzzleNum = 5;
+let puzzleNum = -1;
 
 //Matrix array storing results.
 // Create one dimensional array
@@ -305,10 +305,12 @@ function getPuzzleID() {
   $.ajax({
     type: "POST",
     async: false,
-    url: '/get-cheeses',
+    url: '/puzzle-id',
     dataType: "json",
     success: function (data, status, xhr) { response=data;}
   });
-  let cheeseList = Object.values(response);
-  return cheeseList;
+  let puzzleData = Object.values(response);
+  puzzleID = puzzleData[1];
+  console.log(puzzleID);
+  puzzleNum = puzzleID;
 }
