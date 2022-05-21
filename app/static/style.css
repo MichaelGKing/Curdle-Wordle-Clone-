@@ -132,6 +132,12 @@ header p:hover {
   align-items: center;
 }
 
+#correct-cheese {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
 #share-button {
   display: none;
   justify-content: center;
