@@ -16,6 +16,7 @@
 
     <section class="image">
       {% block cheese_image %}
+      <!-- Ignore error here code works fine. -->
       <div id="cheese-image" style="background-image: url('{{ url_for('static', filename=image ) }}')"></div>
       {% endblock %}
     </section>
