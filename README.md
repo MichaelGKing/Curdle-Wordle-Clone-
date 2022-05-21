@@ -81,6 +81,12 @@ How to Install and Run Curdle (from local host)
    (venv) % flask db upgrade
    ```
 
+8. Load the database with hard-coded cheese attribute data, and any puzzles found in puzzles.csv
+
+   ```bash
+   (venv) % flask import_data
+   ```
+
 ### How to Start the Flask Application
 
 How to Play

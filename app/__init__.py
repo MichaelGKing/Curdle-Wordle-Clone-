@@ -7,12 +7,22 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+import click
+from flask.cli import with_appcontext
 
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager
+
+from commands.import_data import import_puzzle_data
+@click.command(name='import_data')
+@with_appcontext
+def import_data():
+    import_puzzle_data()
+
+app.cli.add_command(import_data)
 
 from app import models, routes
 
