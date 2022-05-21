@@ -38,6 +38,10 @@ function loadUser() {
       localStorage.setItem("guess_made", false);
     }
   }
+
+  if (parseInt(localStorage.getItem("lastWin")) < (puzzleNum - 1)) {
+    localStorage.setItem("streak", 0);
+  }
   setStats();
 }
 
@@ -49,6 +53,10 @@ function userCompleted() {
 function userSucceeded() {
   if (localStorage.getItem("puzzleState") == null) {
     localStorage.setItem("wins", parseInt(localStorage.getItem("wins")) + 1);
+    localStorage.setItem("streak", parseInt(localStorage.getItem("streak")) + 1);
+    if (parseInt(localStorage.getItem("streak")) > parseInt(localStorage.getItem("best-streak"))) {
+      localStorage.setItem("best-streak", localStorage.getItem("streak"));
+    }
   }
   localStorage.setItem("puzzleState", "win");
   localStorage.setItem("lastWin", puzzleNum);
@@ -63,6 +71,7 @@ function userFailed() {
   userCompleted();
 }
 
+//Function called when user makes a valid guess.
 function userPlayed(guess) {
   if (localStorage.getItem("guess_made") == 'false') {
     localStorage.setItem("played", parseInt(localStorage.getItem("played")) + 1);
@@ -94,4 +103,8 @@ function userVisited() {
   else {console.log(visits + ' times visited')}
 
   localStorage.setItem('visits', visits);
+}
+
+function distCalc() {
+  
 }

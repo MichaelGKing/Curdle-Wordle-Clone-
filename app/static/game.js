@@ -19,7 +19,7 @@ let resultNum = 1;
 let cheeseIndex = 0;
 
 //For sharing your puzzle results. DATABASE
-let puzzleNum = 2;
+let puzzleNum = 5;
 
 //Matrix array storing results.
 // Create one dimensional array
@@ -283,7 +283,7 @@ function getCheeseList() {
 
 function setStats() {
   $("#played_text").html(localStorage.getItem("played"));
-  $("#winrate_text").html(localStorage.getItem("winrate") + "%");
+  $("#winrate_text").html(Math.round(parseInt(localStorage.getItem("winrate"))) + "%");
   $("#streak_text").html(localStorage.getItem("streak"));
   $("#best_text").html(localStorage.getItem("best-streak"));
 
