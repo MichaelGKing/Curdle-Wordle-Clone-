@@ -283,7 +283,7 @@ function getCheeseList() {
 
 function setStats() {
   $("#played_text").html(localStorage.getItem("played"));
-  $("#winrate_text").html(localStorage.getItem("winrate"));
+  $("#winrate_text").html(localStorage.getItem("winrate") + "%");
   $("#streak_text").html(localStorage.getItem("streak"));
   $("#best_text").html(localStorage.getItem("best-streak"));
 

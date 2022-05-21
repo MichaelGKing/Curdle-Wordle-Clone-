@@ -15,6 +15,7 @@ function loadUser() {
   if (localStorage.getItem("visits") == 1) {
     toggleHelp();
     localStorage.setItem("guess_made", false);
+    localStorage.setItem("wins", 0);
     localStorage.setItem("played", 0);
     localStorage.setItem("winrate", 0);
     localStorage.setItem("streak", 0);
@@ -46,12 +47,15 @@ function userCompleted() {
 }
 
 function userSucceeded() {
+  if (localStorage.getItem("puzzleState") == null) {
+    localStorage.setItem("wins", parseInt(localStorage.getItem("wins")) + 1);
+  }
   localStorage.setItem("puzzleState", "win");
   localStorage.setItem("lastWin", puzzleNum);
-  if ((parseInt(localStorage.getItem("lastWin")) + 1) == puzzleNum) {
-
-  }
   userCompleted();
+  let winrate = parseInt(localStorage.getItem("wins")) / parseInt(localStorage.getItem("played")) * 100;
+  localStorage.setItem("winrate", winrate);
+  setStats();
 }
 
 function userFailed() {
@@ -62,6 +66,8 @@ function userFailed() {
 function userPlayed(guess) {
   if (localStorage.getItem("guess_made") == 'false') {
     localStorage.setItem("played", parseInt(localStorage.getItem("played")) + 1);
+    let winrate = parseInt(localStorage.getItem("wins")) / parseInt(localStorage.getItem("played")) * 100;
+    localStorage.setItem("winrate", winrate);
   }
   localStorage.setItem("guess_made", true);
   localStorage.setItem("last_puzzle_attempted", puzzleNum);
