@@ -25,7 +25,6 @@ function loadUser() {
     if (localStorage.getItem("last_puzzle_attempted") == puzzleNum) {
       let guesses = localStorage.getItem("guesses_made");
       let guessesArray = guesses.split(',');
-      console.log(guessesArray);
       for (let i = 0; i < guessesArray.length; i++) {
         entryTest(guessesArray[i]);
       }
