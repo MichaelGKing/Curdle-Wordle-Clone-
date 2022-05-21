@@ -50,11 +50,11 @@ function attributeChecker() {
 /**
  * Function generates results box.
  */
-function resultGen() {
+function resultGen(entry) {
   //resultnum starts at 1
   document.getElementById("word-" + resultNum).classList.toggle("active");
   let newEle = document.createElement("p");
-  let para = document.createTextNode(cheeseList[cheeseIndex]);
+  let para = document.createTextNode(entry);
   newEle.appendChild(para);
   document.getElementById("word-" + resultNum).appendChild(newEle);
   if (correctChoice[0] == true) {
@@ -108,28 +108,32 @@ function removeText() {
   document.getElementById("cheese-choice").value = "";
 }
 
+
+
 /**
  * Functions tests if entry is valid entry and performs followup functions.
  */
-function entryTest() {
+function entryTest(entry) {
   //Removes the textbox and button when user has had 6 valid guesses.
   
-  let entry = document.getElementById("cheese-choice").value;
   let validEntry = false;
+
   for (let i = 0; i < cheeseList.length; i++) {
     if (entry.toLowerCase() == cheeseList[i].toLowerCase()) {
       validEntry = true;
       cheeseIndex = i;
+      entry = cheeseList[i];
     }
   }
+  
 
   if (validEntry == false) {
     togglePopup();
   }
 
   if (validEntry == true) {
-    userPlayed();
-    correctChoice = sendCheese();
+    userPlayed(entry);
+    correctChoice = sendCheese(entry);
     removeText();
     // Makes an array that contains boolean for if the attributes of your guessec cheese are correct.
     attributeChecker();
@@ -142,7 +146,7 @@ function entryTest() {
     }
     $("#result-" + resultNum).fadeOut(500);
     // Mutates page based on results from guess.
-    setTimeout(resultGen, 500);
+    setTimeout(resultGen(entry), 500);
     if (resultNum == 6) {
       $("#guess-textbox").fadeOut("slow");
       $("#guess-button").fadeOut("slow");
@@ -215,7 +219,7 @@ function clipboard() {
 
 // AJAX form.
 
-function sendCheese() {
+function sendCheese(entry) {
   let response
   $.ajax({
     type: "POST",
@@ -224,7 +228,7 @@ function sendCheese() {
     contentType: "application/json",
     dataType: "json",
     data: JSON.stringify({
-      cheese_name: $("#cheese-choice").val(),
+      cheese_name: entry,
     }),
     success: function (data, status, xhr) { response=data;}
   });

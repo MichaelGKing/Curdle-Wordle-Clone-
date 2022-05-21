@@ -27,7 +27,7 @@
   <script src="https://kit.fontawesome.com/143356e028.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="storeCheeseList(), userVisited()">
+<body onload="storeCheeseList(), userVisited(), loadUser()">
   <header>
     <p onclick="toggleHelp()">
       <ion-icon name="help-circle-outline"></ion-icon>
@@ -99,7 +99,7 @@
       </div>
 
       <div id="guess-button">
-        <button id="button" type="submit" onclick="entryTest()">GUESS</button>
+        <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)">GUESS</button>
       </div>
 
       <div id="share-button">
