@@ -19,7 +19,7 @@ let resultNum = 1;
 let cheeseIndex = 0;
 
 //For sharing your puzzle results. DATABASE
-let puzzleNum = 1;
+let puzzleNum = 5;
 
 //Matrix array storing results.
 // Create one dimensional array
@@ -50,11 +50,11 @@ function attributeChecker() {
 /**
  * Function generates results box.
  */
-function resultGen() {
+function resultGen(entry) {
   //resultnum starts at 1
   document.getElementById("word-" + resultNum).classList.toggle("active");
   let newEle = document.createElement("p");
-  let para = document.createTextNode(cheeseList[cheeseIndex]);
+  let para = document.createTextNode(entry);
   newEle.appendChild(para);
   document.getElementById("word-" + resultNum).appendChild(newEle);
   if (correctChoice[0] == true) {
@@ -108,28 +108,32 @@ function removeText() {
   document.getElementById("cheese-choice").value = "";
 }
 
+
+
 /**
  * Functions tests if entry is valid entry and performs followup functions.
  */
-function entryTest() {
+function entryTest(entry) {
   //Removes the textbox and button when user has had 6 valid guesses.
   
-  let entry = document.getElementById("cheese-choice").value;
   let validEntry = false;
+
   for (let i = 0; i < cheeseList.length; i++) {
     if (entry.toLowerCase() == cheeseList[i].toLowerCase()) {
       validEntry = true;
       cheeseIndex = i;
+      entry = cheeseList[i];
     }
   }
+  
 
   if (validEntry == false) {
     togglePopup();
   }
 
   if (validEntry == true) {
-    userPlayed();
-    correctChoice = sendCheese();
+    userPlayed(entry);
+    correctChoice = sendCheese(entry);
     removeText();
     // Makes an array that contains boolean for if the attributes of your guessec cheese are correct.
     attributeChecker();
@@ -142,13 +146,16 @@ function entryTest() {
     }
     $("#result-" + resultNum).fadeOut(500);
     // Mutates page based on results from guess.
-    setTimeout(resultGen, 500);
-    if (resultNum == 6) {
-      $("#guess-textbox").fadeOut("slow");
-      $("#guess-button").fadeOut("slow");
-      $("#share-button").css("display", "flex").hide().fadeIn("slow");
-      userFailed();
-    }
+    setTimeout(resultGen(entry), 500);
+    
+    
+  }
+
+  if (resultNum == 7) {
+    $("#guess-textbox").fadeOut("slow");
+    $("#guess-button").fadeOut("slow");
+    $("#share-button").css("display", "flex").hide().fadeIn("slow");
+    userFailed();
   }
 }
 
@@ -215,7 +222,7 @@ function clipboard() {
 
 // AJAX form.
 
-function sendCheese() {
+function sendCheese(entry) {
   let response
   $.ajax({
     type: "POST",
@@ -224,7 +231,7 @@ function sendCheese() {
     contentType: "application/json",
     dataType: "json",
     data: JSON.stringify({
-      cheese_name: $("#cheese-choice").val(),
+      cheese_name: entry,
     }),
     success: function (data, status, xhr) { response=data;}
   });
@@ -265,14 +272,33 @@ function getCheeseList() {
     dataType: "json",
     success: function (data, status, xhr) { response=data;}
   });
-  //Turns JSON form into a js array
-  //let result = Object.values();
-  // result_arranged.push(response.name)
-  // result_arranged.push(response.country)
-  // result_arranged.push(response.mould)
-  // result_arranged.push(response.animal)
-  // result_arranged.push(response.type)
-  // result_arranged.push(response.continent)
   let cheeseList = Object.values(response);
   return cheeseList;
+}
+
+function setStats() {
+  $("#played_text").html(localStorage.getItem("played"));
+  $("#winrate_text").html(Math.round(parseInt(localStorage.getItem("winrate"))) + "%");
+  $("#streak_text").html(localStorage.getItem("streak"));
+  $("#best_text").html(localStorage.getItem("best-streak"));
+
+  let guessDist = localStorage.getItem("guess-distribution").split(',');
+  let guessDistInt = [];
+  for (let i = 0; i < guessDist.length; i ++) {
+    guessDistInt.push(parseInt(guessDist[i]));
+  }
+  console.log(guessDistInt);
+  let maxDist = Math.max.apply(Math, guessDistInt);
+  console.log(maxDist);
+  let width;
+  for (let i = 0; i < guessDistInt.length; i ++) {
+    if (maxDist == 0) {
+      width = 0
+    } else {
+      width = (guessDistInt[i] / maxDist) * 100;
+    }
+    $("#bar" + (i + 1)).css("width", width + "%")
+    $("#bar" + (i + 1) + " p").html(guessDistInt[i])
+  }
+  console.log(guessDist);
 }
