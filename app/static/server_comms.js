@@ -43,7 +43,7 @@ function sendCheese(entry) {
   result_arranged.push(response.animal)
   result_arranged.push(response.type)
   result_arranged.push(response.continent)
-
+  console.log(result_arranged)
   return result_arranged;
 }
 
@@ -82,6 +82,9 @@ function getAnswer() {
   result_arranged.push(response.continent)
   result_arranged.push(response.country)
 
+  if (response.mouldy == true) {
+
+  }
   result_arranged.push(response.mouldy)
 
   result_arranged.push(response.animal)
@@ -94,7 +97,12 @@ function getAnswer() {
   $("#answer-name").html(result_arranged[0]);
   $("#answer-region").html("The region of origin is: " + result_arranged[1]);
   $("#answer-country").html("The country of origin is: " + result_arranged[2]);
-  $("#answer-mould").html(result_arranged[3]);
+  if (result_arranged[3] == true) {
+    $("#answer-mould").html("The cheese contains veins.");
+  } else {
+    $("#answer-mould").html("The cheese does not contain veins.");
+  }
+  
   $("#answer-animal").html("The animal of origin is: " + result_arranged[4]);
   $("#answer-type").html("The type of cheese is: " + result_arranged[5]);
   $("#reference").attr("href", result_arranged[7]);
