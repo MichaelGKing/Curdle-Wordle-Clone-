@@ -136,7 +136,7 @@ function entryTest(entry) {
   
 
   if (validEntry == false) {
-    togglePopup();
+    toggleInvalid();
   }
 
   if (validEntry == true) {
@@ -175,8 +175,8 @@ function entryTest(entry) {
 /**
  * Generates a popup box when the user does not enter a valid cheese.
  */
-function togglePopup() {
-  document.getElementById("popup-1").classList.toggle("active");
+function toggleInvalid() {
+  document.getElementById("invalid-pop").classList.toggle("active");
 }
 
 /**

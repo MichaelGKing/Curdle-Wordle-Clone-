@@ -200,12 +200,12 @@
     </div>
   </div>
 
-  <div class="popup" id="popup-1">
-    <div class="overlay"></div>
+  <div class="popup" id="invalid-pop">
+    <div class="overlay" onclick="toggleInvalid()"></div>
     <div class="content">
-      <div class="close-btn" onclick="togglePopup()">&times;</div>
-      <h2>Please enter a valid cheese!</h2>
-      <p>See the drop down menu for a list.</p>
+      <div class="close-btn" onclick="toggleInvalid()">&times;</div>
+      <ion-icon name="alert-circle-outline" style="color: red"></ion-icon>
+        <p style="font-size: 16px">Not a valid cheese!</p>
     </div>
   </div>
 
