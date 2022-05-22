@@ -149,6 +149,7 @@ function entryTest(entry) {
       $("#guess-textbox").fadeOut("slow");
       $("#guess-button").fadeOut("slow");
       toggleCongrats();
+      $("#correct-cheese-container").css("display", "flex").hide().fadeIn("slow");
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
       userSucceeded();
     }
