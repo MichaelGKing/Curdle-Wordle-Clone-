@@ -8,6 +8,7 @@ body {
   margin: 0px;
 }
 
+/* Styling for header elements */
 header {
   display: flex;
   width: 100%;
@@ -32,6 +33,10 @@ header p {
 header p:hover {
   color: rgb(221, 178, 61);
   cursor: pointer;
+}
+
+header ion-icon {
+  margin-top: 6px;
 }
 
 /* Body */
