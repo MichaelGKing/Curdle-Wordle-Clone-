@@ -194,14 +194,14 @@ function toggleStats() {
  * Generates a bad luck pop up
  */
 function toggleFail() {
-  document.getElementById("popup-5").classList.toggle("active");
+  document.getElementById("fail-pop").classList.toggle("active");
 }
 
 /**
  * Generates popup box for when the user completes the puzzle.
  */
 function toggleCongrats() {
-  document.getElementById("popup-4").classList.toggle("active");
+  document.getElementById("congrats-pop").classList.toggle("active");
 }
 
 /**

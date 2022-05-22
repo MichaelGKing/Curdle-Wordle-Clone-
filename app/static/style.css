@@ -161,11 +161,12 @@ header ion-icon {
   background-color: black;
   color: white;
   height: 32.5px;
-  margin: 0 5px 0 5px;
+  margin: 0 5px 5px 5px;
   width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 3px;
 }
 
 
@@ -241,7 +242,6 @@ header ion-icon {
   height: 30px;
   color: rgb(0, 0, 0);
   font-size: 25px;
-  font-weight: 600;
   line-height: 30px;
   text-align: center;
   border-radius: 50%;
