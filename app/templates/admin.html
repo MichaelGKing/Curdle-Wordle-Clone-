@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<body>
+<body class="admin_body">
   <header>
     <p>
       <a href="/index"><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
@@ -16,11 +16,11 @@
 <h2>Welcome Curdle Admin!</h2>
 <p>Please upload your new puzzle using the form below</p>
 
-{% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
     {% endfor %}
     </ul>
   {% endif %}
@@ -68,16 +68,16 @@
       {% endfor %}
     </p>
     <p>
-      {{ form.image_attribution.label }}<br>
-      {{ form.image_attribution(maxlength=128) }}<br>
-      {% for error in form.image_attribution.errors %}
+      {{ form.attribution.label }}<br>
+      {{ form.attribution(maxlength=128) }}<br>
+      {% for error in form.attribution.errors %}
       <span style="color: red;">[{{ error }}]</span>
       {% endfor %}
     </p>
     <p>
-      {{ form.info_link.label }}<br>
-      {{ form.info_link(maxlength=256) }}<br>
-      {% for error in form.info_link.errors %}
+      {{ form.link.label }}<br>
+      {{ form.link(maxlength=256) }}<br>
+      {% for error in form.link.errors %}
       <span style="color: red;">[{{ error }}]</span>
       {% endfor %}
     </p>
