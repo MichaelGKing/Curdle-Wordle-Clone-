@@ -13,7 +13,6 @@ header {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  border-bottom: 1px solid black;
 }
 
 h1 {
@@ -25,7 +24,9 @@ h1 {
 
 
 header p {
-  margin: auto;
+  margin: 8px;
+  margin-bottom: 0;
+  margin-top: 5px;
   font-size: 24px;
   color: black;
 }
@@ -36,7 +37,16 @@ header p:hover {
 }
 
 header ion-icon {
-  margin-top: 6px;
+  margin-top: 3px;
+}
+
+#header-elements {
+  display: flex;
+  width: 500px;
+  border-bottom: 1px solid #f4a942;
+  justify-content: space-between;
+  margin: 0 5px 0 5px;
+  align-items: center;
 }
 
 /* Body */
