@@ -1,3 +1,4 @@
+/* Global Styles START */
 html, body {
   overflow: hidden;
   font-family: "Poppins";
@@ -7,8 +8,9 @@ body {
   background-color: beige;
   margin: 0px;
 }
+/* Global Styles END */
 
-/* Styling for header elements */
+/* Header Styles START */
 header {
   display: flex;
   width: 100%;
@@ -49,7 +51,9 @@ header ion-icon {
   align-items: center;
 }
 
-/* Body */
+/* Header Styles END */
+
+/* General Body Styles START */
 #pageload {
   position: absolute;
   top: 0%;
@@ -79,6 +83,7 @@ header ion-icon {
   border-radius: 3px;
 }
 
+/* Results Section Styles START */
 .results {
   display: flex;
   justify-content: center;
@@ -139,7 +144,9 @@ header ion-icon {
   grid-column: 1 / span 7;
   grid-row: 6;
 }
+/* Results Section Styles END */
 
+/* Guess textfield and button styles START */
 .guess {
   display: flex;
   justify-content: center;
@@ -159,6 +166,8 @@ header ion-icon {
   justify-content: center;
   align-items: center;
 }
+
+/* Guess textfield and button styles END */
 
 #correct-cheese-container {
   display: none;
