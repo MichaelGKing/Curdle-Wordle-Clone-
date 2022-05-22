@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, SelectField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SelectField, SubmitField, BooleanField, StringField, TextAreaField
 from wtforms.validators import DataRequired
 
 
@@ -15,6 +15,7 @@ class AdminLoginForm(FlaskForm):
     
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
     
@@ -27,6 +28,8 @@ class PuzzleUploadForm(FlaskForm):
     mould = BooleanField('Is mouldy?')
     image = FileField(validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Only images of .png, .jpg, .jpeg or .gif allowed.')])
     submit = SubmitField('Upload Puzzle to Curdle Database')
+    attribution = TextAreaField("Image desciption", validators=[DataRequired()])
+    link =  StringField("Cheese Info Hyperlink", validators=[DataRequired()])
 
     # Setter functions are required so that the type, country and animal form fields can have their options set
     # with data from the corresponding database tables. 
@@ -41,6 +44,7 @@ class PuzzleUploadForm(FlaskForm):
     def set_animals(list):
         global animal
         animal = SelectField('Animal of Origin', choices=list, validators=[DataRequired()])
+
 
 
 
