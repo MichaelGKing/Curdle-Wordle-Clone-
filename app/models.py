@@ -1,7 +1,8 @@
-from app import db, login
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+import csv
 
+from sqlalchemy import ForeignKey
+from app import db, app
+from werkzeug.security import generate_password_hash
 
 class Type(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -34,7 +35,7 @@ class Cheese(db.Model):
     country_id = db.Column(db.String(64), db.ForeignKey('country.id'), nullable=False)
     mouldy = db.Column(db.Boolean)
     image_filename = db.Column(db.String(128), nullable=False)
-    image_attribution = db.Column(db.String(256))
+    image_attribution = db.Column(db.String(128))
     info_link = db.Column(db.String(256))
 
     cheese_type = db.relationship("Type", foreign_keys=[type_id])
@@ -44,17 +45,10 @@ class Cheese(db.Model):
     def __repr__(self):
         return '<Cheese: {}>'.format(self.cheese_name)   
 
-class User(UserMixin, db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
 
 class PuzzleHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -81,9 +75,4 @@ def add_puzzle(puzzle):
         )
 
     db.session.add(c)
-    db.session.commit
-    
-# Configure a user loader function - Loads a user, given an ID, from the database, and registers it with Flask-Login
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+    db.session.commit()
