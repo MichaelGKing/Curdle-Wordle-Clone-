@@ -5,12 +5,11 @@ from werkzeug.security import generate_password_hash
 class Type(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(64), unique=True, index=True, nullable=False)
-    cheeses = db.relationship('Cheese', backref='type', lazy='dynamic')
 
 class Animal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     animal_name = db.Column(db.String(64), unique=True, index=True, nullable=False)
-    cheeses = db.relationship('Cheese', backref='animal', lazy='dynamic')
+
 
 class Continent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,7 +20,6 @@ class Country(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     country_name = db.Column(db.String(64), index=True, nullable=False)
     continent_id = db.Column(db.String(64), db.ForeignKey('continent.id'))
-    cheeses = db.relationship('Cheese', backref='country', lazy='dynamic')
 
     def __repr__(self):
         return '<Country {}>'.format(self.country_name)
@@ -35,8 +33,12 @@ class Cheese(db.Model):
     mouldy = db.Column(db.Boolean)
     image_filename = db.Column(db.String(128), nullable=False)
 
+    cheese_type = db.relationship("Type", foreign_keys=[type_id])
+    cheese_animal = db.relationship("Animal", foreign_keys=[animal_id])
+    cheese_country = db.relationship("Country", foreign_keys=[country_id])
+
     def __repr__(self):
-        return '<Cheese: {}>'.format(self.cheese_name)
+        return '<Cheese: {}>'.format(self.cheese_name)   
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
