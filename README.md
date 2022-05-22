@@ -111,9 +111,13 @@ Credits
 
 ### 3rd party extentions and libraries
 Title-font: https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&family=Rubik+Microbe&display=swap
+
 Body-font: https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&display=swap
+
 Header-icons: https://ionic.io/ionicons
+
 AJAX: https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
+
 Attribute-icons: https://fontawesome.com/
 
 To avoid the need for 
