@@ -50,6 +50,15 @@ header ion-icon {
 }
 
 /* Body */
+#pageload {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  z-index: 20;
+  background-color: beige;
+  height: 100%;
+}
+
 .game-container {
   display: block;
 }
