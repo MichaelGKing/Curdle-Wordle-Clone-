@@ -67,7 +67,7 @@
 
     <section class="guess-container">
       <div id="guess-textbox">
-        <input list="cheese-names" id="cheese-choice" name="cheese-choice" placeholder="Enter cheese here..." onkeydown="search()"/>
+        <input list="cheese-names" id="cheese-choice" name="cheese-choice" placeholder="Type cheese guess here..." onkeydown="search()"/>
         <datalist id="cheese-names">
           {% for cheese in cheeses %}
           <option value="{{ cheese }}">
@@ -76,7 +76,7 @@
       </div>
 
       <div id="guess-button">
-        <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)"><i style="color: rgb(211, 202, 84)" class="fas fa-cheese"></i> GUESS</button>
+        <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)"><i style="color: rgb(211, 202, 84)" class="fas fa-cheese"></i> SUBMIT</button>
       </div>
 
       <div id="correct-cheese-container">
@@ -100,11 +100,16 @@
     <div class="content">
       <div class="close-btn" onclick="toggleHelp()">&times;</div>
       <h2>HOW TO PLAY</h2>
-      <p>Guess the CURDLE in 6 guesses.</p>
-      <p>Each guess must be a valid cheese. See the dropdown menu.</p>
-      <p>After each guess you will be told if your guess is consistent with the continent,
-        country, and animal of oirign of the answer. As well as it's mold content, and type.
-      </p>
+      <p>Guess the CURDLE in 6 guesses from the image shown.</p>
+      <p>Type your guess in the box. Each guess must be a valid cheese, see the dropdown menu.</p>
+      <p>After you submit your guess, your submission will appear surrounded by a border (green if correct, red if incorrect).</p>
+        
+      <p>Icons will also appear indicating if your guess shares the same region (<i style="color: orange" class="fa fa-globe"></i>),
+        country (<i style="color: green" class="fa fa-globe"></i>), and animal of oirign (<i style="color: green" class="fa-solid fa-paw"></i>) with the answer. 
+        As well as it's mold content (<i style="color: green" class="fa-solid fa-bacteria"></i>), and type (<i style="color: green" class="fas fa-cheese"></i>). These attributes are explained below.</p>
+        
+      <p>Icons will appear red (<i style="color: red" class="fas fa-cheese"></i>) if your guess and the answer do not share the attribute. For example if your guess uses cow products, and the answer uses goat products
+      the icon will appear red (<i style="color: red" class="fa-solid fa-paw"></i>).</p>
       <h3>EXAMPLES</h3>
       <div id="grid-container-e1">
         <div class="word e" id="word-e"><p>Cheddar</p></div>
@@ -113,7 +118,8 @@
         <div class="animal e" id="animal-e"><i style="color: red" class="fa-solid fa-paw"></i></div>
         <div class="type e" id="type-e"><i style="color: red" class="fas fa-cheese"></i></div>
       </div>
-      <p>The cheese is incorrect, continent of origin is consistent (country different), mold content is consistent, animal is different, and the cheese type is different.</p>
+      <p>The cheese is incorrect (red border), region of origin is consistent (<i style="color: orange" class="fa fa-globe"></i>), 
+        mold content is consistent (<i style="color: green" class="fa-solid fa-bacteria"></i>), animal is different (<i style="color: red" class="fa-solid fa-paw"></i>), and the cheese type is different (<i style="color: red" class="fas fa-cheese"></i>).</p>
       <div id="grid-container-e2">
         <div class="word e" id="word-e"><p>Cheddar</p></div>
         <div class="world e" id="world-e"><i style="color: green" class="fa fa-globe"></i></div>
@@ -121,7 +127,7 @@
         <div class="animal e" id="animal-e"><i style="color: red" class="fa-solid fa-paw"></i></div>
         <div class="type e" id="type-e"><i style="color: red" class="fas fa-cheese"></i></div>
       </div>
-      <p>Only the continent and country of origin of the your guess is consistent with the correct answer.</p>
+      <p>Only the region and country of origin of your guess is consistent with the correct answer.</p>
       <div id="grid-container-e3">
         <div class="word e" id="word-e" style="border: 2px solid green"><p>Cheddar</p></div>
         <div class="world e" id="world-e"><i style="color: green" class="fa fa-globe"></i></div>
@@ -130,6 +136,12 @@
         <div class="type e" id="type-e"><i style="color: green" class="fas fa-cheese"></i></div>
       </div>
       <p>You have guessed the correct cheese.</p>
+      <h3>ATTRIBUTES EXPLAINED</h3>
+      <p><span style="font-weight: bold">Region</span> of origin: The region in which the cheese originated (Africa, Asia, Europe, Middle East, North and Central America, Oceania or South America).</p>
+      <p><span style="font-weight: bold">Country</span> of origin: The country in which the cheese originated (UN recognized).</p>
+      <p><span style="font-weight: bold">Mold</span> content: Do your guess and the answer both contain mold. For example Blue cheese contains mold.</p>
+      <p><span style="font-weight: bold">Animal</span> of origin: Does your guess share the same animal of origin with the answer. Can be either cow, sheep, goat or moose.</p>
+      <p><span style="font-weight: bold">Type</span> of cheese: Does your guess fall into one of these types along with the answer: fresh, soft, semi-hard, hard, blue or processed.</p>
       <p style="font-weight:600; text-align: center; margin: 16px;">A new CURDLE will be available each day!</p>
     </div>
   </div>
