@@ -80,7 +80,7 @@
         <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)"><i style="color: rgb(153 153 0);" class="fas fa-cheese"></i> SUBMIT</button>
       </div>
 
-      <div id="correct-cheese-container">
+      <div id="correct-cheese-container" onclick="toggleCheese()">
         <div id="correct-cheese"><p id="correct-cheese-text">Cheddar</p></div>
       </div>
 
@@ -228,7 +228,19 @@
     </div>
   </div>
 
-  
+  <div class="popup" id="cheese-pop">
+    <div class="overlay" onclick="toggleCheese()"></div>
+    <div class="content">
+      <div class="close-btn" onclick="toggleCheese()">&times;</div>
+      <h3>Cheddar</h3>
+      <p>Region: Europe</p>
+      <p>Country: UK</p>
+      <p>Mold: No</p>
+      <p>Animal: Cow</p>
+      <p>Type: Semi-hard</p>
+      <p>Find the image and extra info HERE</p>
+    </div>
+  </div>
 
   </body>
 

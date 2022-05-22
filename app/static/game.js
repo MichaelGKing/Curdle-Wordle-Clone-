@@ -191,6 +191,10 @@ function toggleStats() {
   document.getElementById("popup-3").classList.toggle("active");
 }
 
+function toggleCheese() {
+  document.getElementById("cheese-pop").classList.toggle("active");
+}
+
 /**
  * Generates a bad luck pop up
  */
