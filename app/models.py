@@ -32,6 +32,8 @@ class Cheese(db.Model):
     country_id = db.Column(db.String(64), db.ForeignKey('country.id'), nullable=False)
     mouldy = db.Column(db.Boolean)
     image_filename = db.Column(db.String(128), nullable=False)
+    image_attribution = db.Column(db.String(128))
+    info_link = db.Column(db.String(256))
 
     cheese_type = db.relationship("Type", foreign_keys=[type_id])
     cheese_animal = db.relationship("Animal", foreign_keys=[animal_id])
