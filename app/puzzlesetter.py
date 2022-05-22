@@ -1,5 +1,5 @@
 import random
-from datetime import datetime
+from datetime import datetime, date
 from app import app, db
 from app.models import Cheese, PuzzleHistory
 
@@ -24,9 +24,13 @@ def get_daily_puzzle_info():
 
     launch_date = datetime(ld[0], ld[1], ld[2], ld[3], ld[4])
 
-    todays_date = datetime.now()
+    todays_datetime = datetime.now()
 
-    puzzle_info = {'puzzle-id': (todays_date - launch_date).days, 'puzzle-date': todays_date}
+    todays_date_object = date.today()
+
+    todays_date_formatted = todays_date_object.strftime("%d-%m-%Y")
+
+    puzzle_info = {'puzzle-id': (todays_datetime - launch_date).days, 'puzzle-date': todays_date_formatted}
 
     return puzzle_info
 
