@@ -160,7 +160,7 @@ function entryTest(entry) {
     
   }
 
-  if (resultNum == 7) {
+  if (localStorage.getItem("puzzleState") == 'fail') {
     //Uncomment when getanswer works. Will change html of reveal to correct cheese.
     //getAnswer();
     toggleFail();
@@ -233,8 +233,11 @@ function clipboard() {
     }
     text = text.concat("\n");
   }
-
-  text = `Curdle #${puzzleNum} ${resultNum - 1}/6\n${text}`;
+  let totalGuesses = resultNum - 1;
+  if (localStorage.getItem("puzzleState") == 'fail') {
+    totalGuesses = 'X';
+  }
+  text = `Curdle #${puzzleNum} ${totalGuesses}/6\n${text}`;
   navigator.clipboard.writeText(text);
   alert("Copied the text: " + text);
 }
