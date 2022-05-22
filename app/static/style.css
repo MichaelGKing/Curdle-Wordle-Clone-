@@ -88,6 +88,9 @@ header ion-icon {
 
 #grid-container p {
   margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #result-1, #result-2, #result-3, #result-4, #result-5, #result-6 {
@@ -251,6 +254,8 @@ header ion-icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 .word {
