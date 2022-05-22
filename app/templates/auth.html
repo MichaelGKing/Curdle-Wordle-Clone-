@@ -4,12 +4,12 @@
 
 <body>
   <header>
-    <p onclick="toggleHelp()">
-      <ion-icon name="help-circle-outline"></ion-icon>
+    <p>
+      <a href="/index"><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
     </p>
     <h1>CURDLE</h1>
-    <p onclick="toggleStats()">
-      <ion-icon name="stats-chart-outline"></ion-icon>
+    <p>
+      <a href="https://github.com/warrun/curdle"></a><ion-icon name="logo-github"></ion-icon></a>
     </p>
   </header>
 
@@ -25,21 +25,21 @@
 {% endwith %}
 {% block body %}{% endblock %}
 <form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <p>
-      {{ form.username.label }}<br>
-      {{ form.username(size=32) }}<br>
-      {% for error in form.username.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
+  {{ form.hidden_tag() }}
+  <p>
+    {{ form.username.label }}<br>
+    {{ form.username(size=32) }}<br>
+    {% for error in form.username.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
   </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}<br>
-        {% for error in form.password.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
+  <p>
+    {{ form.password.label }}<br>
+    {{ form.password(size=32) }}<br>
+    {% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </p>
+  <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}
