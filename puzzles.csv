@@ -1,7 +1,8 @@
-Cheddar,firm,cow,United Kingdom,FALSE,/images/cheese1.jpg,https://en.wikipedia.org/wiki/File:Somerset-Cheddar.jpg,https://en.wikipedia.org/wiki/Cheddar_cheese
-Parmesan,hard,cow,Italy,FALSE,/images/cheese2.jpg,https://en.wikipedia.org/wiki/Parmesan#/media/File:Parmesan_Cheese_Parmigiano-Reggiano.jpg,https://en.wikipedia.org/wiki/Parmesan
-Roquefort,blue,sheep,France,TRUE,/images/cheese3.jpg,https://en.wikipedia.org/wiki/Roquefort#/media/File:Wikicheese_-_Roquefort_-_20150417_-_003.jpg,https://en.wikipedia.org/wiki/Roquefort
+Cheddar,semi-hard,cow,United Kingdom,FALSE,/images/cheese1.jpg,https://en.wikipedia.org/wiki/File:Somerset-Cheddar.jpg,https://en.wikipedia.org/wiki/Cheddar_cheese
+Parmesan,granular,cow,Italy,FALSE,/images/cheese2.jpg,https://en.wikipedia.org/wiki/Parmesan#/media/File:Parmesan_Cheese_Parmigiano-Reggiano.jpg,https://en.wikipedia.org/wiki/Parmesan
+Roquefort,veined,sheep,France,TRUE,/images/cheese3.jpg,https://en.wikipedia.org/wiki/Roquefort#/media/File:Wikicheese_-_Roquefort_-_20150417_-_003.jpg,https://en.wikipedia.org/wiki/Roquefort
 Coulommiers,soft-ripened,cow,France,FALSE,/images/cheese4.jpg,https://en.wikipedia.org/wiki/File:Coulommiers_lait_cru.jpg,https://en.wikipedia.org/wiki/Coulommiers_cheese
-Valencay,semi-soft,goat,France,TRUE,/images/cheese5.jpg,https://en.wikipedia.org/wiki/File:Valen%C3%A7ay_04.jpg,https://en.wikipedia.org/wiki/Valen%C3%A7ay_cheese
-Brie,soft,cow,France,FALSE,/images/cheese6.jpg,https://en.wikipedia.org/wiki/File:Brie_01.jpg,https://en.wikipedia.org/wiki/Brie
+Valencay,creamy,goat,France,TRUE,/images/cheese5.jpg,https://en.wikipedia.org/wiki/File:Valen%C3%A7ay_04.jpg,https://en.wikipedia.org/wiki/Valen%C3%A7ay_cheese
+Brie,soft-ripened,cow,France,FALSE,/images/cheese6.jpg,https://en.wikipedia.org/wiki/File:Brie_01.jpg,https://en.wikipedia.org/wiki/Brie
 Havarti,semi-soft,cow,Denmark,FALSE,/images/cheese7.jpg,https://en.wikipedia.org/wiki/File:Tilsiter.jpg,https://en.wikipedia.org/wiki/Havarti
+Herve,washed-rind,cow,Belgium,FALSE,/images/cheese8.jpg,https://en.wikipedia.org/wiki/Limburger#/media/File:Remoudou_(cheese).jpg,https://en.wikipedia.org/wiki/Limburger
