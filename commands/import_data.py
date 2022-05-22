@@ -15,7 +15,7 @@ def import_admin_user():
 
 # Set cheese types
 def import_types():
-    types = ("fresh","soft","semi-hard","hard","blue","processed")
+    types = ("soft","semi-soft","medium","semi-hard","hard")
     Type.query.delete()
     for value in types:
         t = Type(type=value)
