@@ -1,4 +1,6 @@
 import csv
+
+from sqlalchemy import ForeignKey
 from app import db, app
 from werkzeug.security import generate_password_hash
 
@@ -14,12 +16,13 @@ class Animal(db.Model):
 class Continent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     continent_name = db.Column(db.String(64), index=True, nullable=False)
-    countries = db.relationship('Country', backref='continent', lazy='dynamic')
 
 class Country(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     country_name = db.Column(db.String(64), index=True, nullable=False)
     continent_id = db.Column(db.String(64), db.ForeignKey('continent.id'))
+
+    country_continent = db.relationship("Continent", foreign_keys=[continent_id])
 
     def __repr__(self):
         return '<Country {}>'.format(self.country_name)
