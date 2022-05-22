@@ -50,6 +50,15 @@ header ion-icon {
 }
 
 /* Body */
+#pageload {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  z-index: 20;
+  background-color: beige;
+  height: 100%;
+}
+
 .game-container {
   display: block;
 }
@@ -226,11 +235,11 @@ header ion-icon {
 
 #button:hover {
   cursor: pointer;
-  background-color: rgb(241, 241, 241);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #button:active {
-  background-color: rgb(223, 223, 223);
+  background-color: rgb(221, 178, 61);
 }
 
 .close-btn {

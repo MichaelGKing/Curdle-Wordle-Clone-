@@ -12,6 +12,7 @@ function getDate() {
 //Resets the localstorage if the user returns on a different puzzle. Otherwise
 //sets up page for returning user.
 function loadUser() {
+  $("#pageload").fadeOut("slow");
   if (localStorage.getItem("visits") == 1) {
     toggleHelp();
     localStorage.setItem("guess_made", false);
@@ -22,6 +23,7 @@ function loadUser() {
     localStorage.setItem("best-streak", 0);
     localStorage.setItem("guess-distribution", "0,0,0,0,0,0")
   } else {
+    
     if (localStorage.getItem("last_puzzle_attempted") == puzzleNum) {
       let guesses = localStorage.getItem("guesses_made");
       let guessesArray = guesses.split(',');
