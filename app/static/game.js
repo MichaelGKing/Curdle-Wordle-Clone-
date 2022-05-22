@@ -136,7 +136,7 @@ function entryTest(entry) {
   
 
   if (validEntry == false) {
-    togglePopup();
+    toggleInvalid();
   }
 
   if (validEntry == true) {
@@ -175,8 +175,8 @@ function entryTest(entry) {
 /**
  * Generates a popup box when the user does not enter a valid cheese.
  */
-function togglePopup() {
-  document.getElementById("popup-1").classList.toggle("active");
+function toggleInvalid() {
+  document.getElementById("invalid-pop").classList.toggle("active");
 }
 
 /**
@@ -194,14 +194,14 @@ function toggleStats() {
  * Generates a bad luck pop up
  */
 function toggleFail() {
-  document.getElementById("popup-5").classList.toggle("active");
+  document.getElementById("fail-pop").classList.toggle("active");
 }
 
 /**
  * Generates popup box for when the user completes the puzzle.
  */
 function toggleCongrats() {
-  document.getElementById("popup-4").classList.toggle("active");
+  document.getElementById("congrats-pop").classList.toggle("active");
 }
 
 /**

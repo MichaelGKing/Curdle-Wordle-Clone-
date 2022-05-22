@@ -110,6 +110,8 @@
         
       <p>Icons will appear red (<i style="color: red" class="fas fa-cheese"></i>) if your guess and the answer do not share the attribute. For example if your guess uses cow products, and the answer uses goat products
       the icon will appear red (<i style="color: red" class="fa-solid fa-paw"></i>).</p>
+
+      <p>If you succeed or fail to get the cheese it will be revealed in a black box below your guesses. Click the box for information on the cheese! 😀</p>
       <h3>EXAMPLES</h3>
       <div id="grid-container-e1">
         <div class="word e" id="word-e"><p>Cheddar</p></div>
@@ -148,7 +150,6 @@
 
 
   <div class="stats" id="popup-3">
-    <div class="overlay"></div>
     <div class="content">
       <div class="close-btn" onclick="toggleStats()">&times;</div>
       <h2>Statistics</h2>
@@ -197,33 +198,32 @@
           <div class="bar" id="bar6"><p></p></div>
         </div>
       </div>
+      <p style="font-weight: bold; font-size:14px">Now that's an impressive record!</p>
     </div>
   </div>
 
-  <div class="popup" id="popup-1">
-    <div class="overlay"></div>
+  <div class="popup" id="invalid-pop">
+    <div class="overlay" onclick="toggleInvalid()"></div>
     <div class="content">
-      <div class="close-btn" onclick="togglePopup()">&times;</div>
-      <h2>Please enter a valid cheese!</h2>
-      <p>See the drop down menu for a list.</p>
+      <div class="close-btn" onclick="toggleInvalid()">&times;</div>
+      <ion-icon name="alert-circle-outline" style="color: red"></ion-icon>
+        <p style="font-size: 16px">Not a valid cheese!</p>
     </div>
   </div>
 
-  <div class="popup" id="popup-4">
-    <div class="overlay"></div>
+  <div class="popup" id="congrats-pop">
+    <div class="overlay" onclick="toggleCongrats()"></div>
     <div class="content">
       <div class="close-btn" onclick="toggleCongrats()">&times;</div>
-      <h2>Congratulations!</h2>
-      <p>You have completed the puzzle.</p>
+      <p>🥂 Congratulations! 🥂</p>
     </div>
   </div>
 
-  <div class="popup" id="popup-5">
-    <div class="overlay"></div>
+  <div class="popup" id="fail-pop">
+    <div class="overlay" onclick="toggleFail()"></div>
     <div class="content">
       <div class="close-btn" onclick="toggleFail()">&times;</div>
-      <h2>Bad Luck!</h2>
-      <p>Try again tomorrow =)</p>
+      <p>Try again tomorrow! 😀</p>
     </div>
   </div>
 
