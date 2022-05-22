@@ -67,7 +67,7 @@
 
     <section class="guess-container">
       <div id="guess-textbox">
-        <input list="cheese-names" id="cheese-choice" name="cheese-choice" placeholder="Enter cheese here..." onkeydown="search()"/>
+        <input list="cheese-names" id="cheese-choice" name="cheese-choice" placeholder="Type cheese guess here..." onkeydown="search()"/>
         <datalist id="cheese-names">
           {% for cheese in cheeses %}
           <option value="{{ cheese }}">
@@ -76,7 +76,7 @@
       </div>
 
       <div id="guess-button">
-        <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)"><i style="color: rgb(211, 202, 84)" class="fas fa-cheese"></i> GUESS</button>
+        <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)"><i style="color: rgb(211, 202, 84)" class="fas fa-cheese"></i> SUBMIT</button>
       </div>
 
       <div id="correct-cheese-container">
