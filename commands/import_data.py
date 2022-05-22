@@ -1,12 +1,14 @@
+import csv
 from app import db, app
-from app.models import *
+from app.models import User, Type, Animal, Continent, Country, Cheese, add_puzzle
 
 
 # Set account admin password from environment varible if exists, fallback to config varible
 def import_admin_user():
     User.query.delete()
-    admin = User(username="curdleadmin", password_hash=generate_password_hash(app.config['ADMIN_PASSWORD']))
-    db.session.add(admin)
+    u = User(username='curdleadmin', email="admin@curdle.com")
+    u.set_password(app.config['ADMIN_PASSWORD'])
+    db.session.add(u)
     db.session.commit()
 
 # Set puzzle attibutes
@@ -137,6 +139,7 @@ def import_puzzles():
         add_puzzle(puzzle)
 
 def import_puzzle_data():
+    import_admin_user()
     import_types()
     import_animals()
     import_countries()

@@ -1,18 +1,20 @@
 import os
 from app import app, db
 from app.forms import AdminLoginForm, PuzzleUploadForm
-from flask import render_template, flash, redirect, request
+from flask import render_template, flash, redirect, request, url_for
 from wtforms import ValidationError
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 from app.models import Cheese, PuzzleHistory, Type, Country, Animal, Continent, User
 from . import puzzlesetter
 from datetime import date
+from flask_login import current_user, login_user, login_required, logout_user
 
 # Routes are written as shown below
 # The decorators at the beginning (starting with @app) define what URL's the code below them is run on
 # The view function contains this code
 
+# Set global variables for client and server side puzzle IDs
 todays_server_puzzle_id = 0
 todays_client_puzzle_id = 0
 
@@ -60,33 +62,39 @@ def index():
     return render_template('index.html', cheeses=sorted(cheeses), image=image)
 
 # This route below can receive GET and POST requests, required for receiving form data - Default without this set is just to receive GET requests
-@app.route('/auth', methods=['GET', 'POST'])
-def auth():
-
-    # initialize new object of AdminLoginForm() class
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # Check if user authernicated already, if so redirect to the admin page
+    if current_user.is_authenticated:
+        return redirect(url_for('admin'))
+     # Create new form object
     form = AdminLoginForm()
 
-    # Use WTForms' FlaskForms functions to validate user input
-    # The validations set in admin_login.py are checked, and if data is valid, browser is redirected to /index
     if form.validate_on_submit():
 
-        password = request.form['password']
+        # Create user object from results returned by searching username
+        user = User.query.filter_by(username=form.username.data).first()
+        # If user doesnt exist, flash message to user explaining
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        # Create new Flask-Login login session for the user
+        login_user(user, remember=form.remember_me.data)
+        # Redirect to the admin page
+        return redirect(url_for('admin'))
 
-        # Need to start a session for user login - old method did not work
-        if check_password_hash(hash, password):
-            flash('Administration Portal Authentication Successful')
-            return redirect('/puzzle-uploader')
-        else:   
-            raise ValidationError('The password you entered in incorrect')
+    return render_template('login.html', title='Curdle Administrator Portal', form=form)
 
-    # Else, browser stays at /authorise view
-    return render_template('auth.html', form=form)
-    
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You can successfully logged out of the Curdle Administrator Console')
+    return redirect('/login')
 
-@app.route('/puzzle-uploader', methods=['GET', 'POST']) 
-def puzzle_uploader():
-    
-    #global authorised
+@app.route('/admin', methods=['GET', 'POST'])
+@login_required
+def admin():
 
     # Create new instance of PuzzleUploadForm()
     form = PuzzleUploadForm()
@@ -103,7 +111,6 @@ def puzzle_uploader():
 
             req = request.form
 
-
             f = form.image.data
             filename = secure_filename(f.filename)
             f.save(os.path.join(app.instance_path, 'images', filename))
@@ -111,10 +118,8 @@ def puzzle_uploader():
             print(req)
 
             flash('Puzzle Upload Successful')
-
-            # return redirect(request.url)
     
-    return render_template('puzzle-uploader.html', form=form)
+    return render_template('admin.html', title="Curdle Administrator Console", form=form)
     
 @app.route('/check-guess', methods=['GET', 'POST'])
 def check_guess():
