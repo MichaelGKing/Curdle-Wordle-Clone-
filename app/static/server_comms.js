@@ -35,8 +35,7 @@ function sendCheese(entry) {
     success: function (data, status, xhr) { response=data;}
   });
   
-  // Pushes the JSON array into a usable correctly ordered array for use in
-  // JS functions.
+  // Arranges the JSON as some browsers alphabetically order it :/
   let result_arranged = [];
   result_arranged.push(response.name)
   result_arranged.push(response.country)
@@ -77,8 +76,29 @@ function getAnswer() {
     dataType: "json",
     success: function (data, status, xhr) { response=data;}
   });
-  let answer = Object.values(response);
-  
-  $("#correct-cheese p").html(answer);
-  console.log(answer);
+  let result_arranged = [];
+  // Arranges the JSON as some browsers alphabetically order it :/
+  result_arranged.push(response.name)
+  result_arranged.push(response.continent)
+  result_arranged.push(response.country)
+
+  result_arranged.push(response.mouldy)
+
+  result_arranged.push(response.animal)
+  result_arranged.push(response.type)
+  result_arranged.push(response.image_attribution)
+  result_arranged.push(response.info_link)
+
+  let cheese = result_arranged[0];
+  $("#correct-cheese p").html(result_arranged[0]);
+  $("#answer-name").html(result_arranged[0]);
+  $("#answer-region").html("The region of origin is: " + result_arranged[1]);
+  $("#answer-country").html("The country of origin is: " + result_arranged[2]);
+  $("#answer-mould").html(result_arranged[3]);
+  $("#answer-animal").html("The animal of origin is: " + result_arranged[4]);
+  $("#answer-type").html("The type of cheese is: " + result_arranged[5]);
+  $("#reference").attr("href", result_arranged[7]);
+
+  console.log(result_arranged[5]);
+  return result_arranged;
 }

@@ -123,14 +123,14 @@ function entryTest(entry) {
       $("#correct-cheese-container").css("display", "flex").hide().fadeIn("slow");
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
       userSucceeded();
+      getAnswer();
     }
     $("#result-" + resultNum).fadeOut(500);
     // Mutates page based on results from guess.
     setTimeout(resultGen(entry), 500);
   }
-  if (localStorage.getItem("puzzleState") == 'fail') {
-    //Uncomment when getanswer works. Will change html of reveal to correct cheese.
-    //getAnswer();
+  if ((resultNum == 7) && localStorage.getItem("puzzleState") != 'win') {
+    getAnswer();
     toggleFail();
     $("#guess-textbox").fadeOut("slow");
     $("#guess-button").fadeOut("slow");
