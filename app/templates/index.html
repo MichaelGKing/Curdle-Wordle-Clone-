@@ -4,6 +4,7 @@
 
   <body onload="storeCheeseList(), getPuzzleID(), userVisited(), loadUser()">
     <header>
+      <div id="header-elements">
       <p onclick="toggleHelp()">
         <ion-icon name="help-circle-outline"></ion-icon>
       </p>
@@ -12,6 +13,7 @@
         <ion-icon name="stats-chart-outline"></ion-icon>
       </p>
     </header>
+    </div>
   <section class="game-container">
 
     <section class="image">
@@ -74,7 +76,7 @@
       </div>
 
       <div id="guess-button">
-        <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)">GUESS</button>
+        <button id="button" type="submit" onclick="entryTest(document.getElementById('cheese-choice').value)"><i style="color: rgb(211, 202, 84)" class="fas fa-cheese"></i> GUESS</button>
       </div>
 
       <div id="correct-cheese-container">
@@ -121,7 +123,7 @@
       </div>
       <p>Only the continent and country of origin of the your guess is consistent with the correct answer.</p>
       <div id="grid-container-e3">
-        <div class="word e" id="word-e" style="border: 3px solid green"><p>Cheddar</p></div>
+        <div class="word e" id="word-e" style="border: 2px solid green"><p>Cheddar</p></div>
         <div class="world e" id="world-e"><i style="color: green" class="fa fa-globe"></i></div>
         <div class="mold e" id="mold-e"><i style="color: green" class="fa-solid fa-bacteria"></i></div>
         <div class="animal e" id="animal-e"><i style="color: green" class="fa-solid fa-paw"></i></div>

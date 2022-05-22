@@ -8,11 +8,11 @@ body {
   margin: 0px;
 }
 
+/* Styling for header elements */
 header {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  border-bottom: 1px solid black;
 }
 
 h1 {
@@ -24,7 +24,9 @@ h1 {
 
 
 header p {
-  margin: auto;
+  margin: 8px;
+  margin-bottom: 0;
+  margin-top: 5px;
   font-size: 24px;
   color: black;
 }
@@ -32,6 +34,19 @@ header p {
 header p:hover {
   color: rgb(221, 178, 61);
   cursor: pointer;
+}
+
+header ion-icon {
+  margin-top: 3px;
+}
+
+#header-elements {
+  display: flex;
+  width: 500px;
+  border-bottom: 1px solid #f4a942;
+  justify-content: space-between;
+  margin: 0 5px 0 5px;
+  align-items: center;
 }
 
 /* Body */
@@ -46,12 +61,13 @@ header p:hover {
 }
 
 #cheese-image {
-  width: 494px;
+  width: 500px;
   height: 250px;
-  border: 3px solid black;
   background-position: center;
   background-size: cover;
   margin: 5px;
+  margin-bottom: 0px;
+  border-radius: 3px;
 }
 
 .results {
@@ -157,14 +173,15 @@ header p:hover {
 }
 
 #share {
-  margin: 5px 5px 0 5px;
+  margin: 0 5px 0 5px;
   width: 500px;
   background-color: green;
-  border: 3px solid rgba(221, 178, 61, 0.5);
+  border: 2px solid rgba(221, 178, 61, 0.5);
   box-sizing: border-box;
   color: white;
   font-size: 16px;
   font-weight: 600;
+  border-radius: 3px;
 }
 
 #share:hover {
@@ -189,13 +206,18 @@ header p:hover {
   font-size: 16px;
   padding-left: 5px;
   text-align: left;
+  background-color: beige;
+  border: 2px solid rgb(221, 178, 61);
+  border-radius: 3px;
+  height: 28.5px;
 }
 
 #button {
   margin: 5px 5px 0 5px;
   width: 500px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: beige;
+  border: 2px solid rgb(221, 178, 61);
+  border-radius: 3px;
 }
 
 #button:hover {
@@ -232,7 +254,7 @@ header p:hover {
 }
 
 .word {
-  border: 3px solid red;
+  border: 2px solid red;
 }
 
 .word, .mold, .animal, .type, .world {
