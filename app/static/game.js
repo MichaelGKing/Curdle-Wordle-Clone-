@@ -4,16 +4,12 @@ function storeCheeseList() {
   cheeseList = getCheeseList();
 }
 
-//Entries are name, country, mold, animal, cheese type, continent. DATABASE
+// Array indicating if guesses attributes are the same as the answers attributes.
+// Initialized to all false, will be updated from server upon user input.
 let correctChoice = [false, false, false, false, false, false];
 
-//Tracks how many valid guesses have been made.
+//Tracks how many valid guesses have been made. For use in various mutator functions.
 let resultNum = 1;
-
-//Tracks the index of the cheeselist used in making the guess for generating
-//word in the results box from the cheeselist not the user input, as user input
-//may have incorrect capitalization.
-let cheeseIndex = 0;
 
 //Initializes puzzleNum variable which is set to the day's puzzle ID from the server.
 let puzzleNum = -1;
@@ -41,15 +37,6 @@ function attributeChecker() {
   }
   if (correctChoice[5] == true && correctChoice[1] == false) {
     resultArray[resultNum - 1][1] = 2;
-  }
-}
-
-/**
- * Triggers event when enter key hit.
- */
-function search() {
-  if(event.key === 'Enter') {
-    entryTest(document.getElementById('cheese-choice').value);        
   }
 }
 
@@ -108,37 +95,21 @@ function resultGen(entry) {
   resultNum++;
 }
 
-
-/**
- * Function removes text from the text input box.
- */
-function removeText() {
-  document.getElementById("cheese-choice").value = "";
-}
-
-
-
 /**
  * Functions tests if entry is valid entry and performs followup functions.
  */
 function entryTest(entry) {
-  //Removes the textbox and button when user has had 6 valid guesses.
-  
-  let validEntry = false;
 
+  let validEntry = false;
   for (let i = 0; i < cheeseList.length; i++) {
     if (entry.toLowerCase() == cheeseList[i].toLowerCase()) {
       validEntry = true;
-      cheeseIndex = i;
       entry = cheeseList[i];
     }
   }
-  
-
   if (validEntry == false) {
     toggleInvalid();
   }
-
   if (validEntry == true) {
     userPlayed(entry);
     correctChoice = sendCheese(entry);
@@ -156,10 +127,7 @@ function entryTest(entry) {
     $("#result-" + resultNum).fadeOut(500);
     // Mutates page based on results from guess.
     setTimeout(resultGen(entry), 500);
-    
-    
   }
-
   if (localStorage.getItem("puzzleState") == 'fail') {
     //Uncomment when getanswer works. Will change html of reveal to correct cheese.
     //getAnswer();
@@ -170,143 +138,6 @@ function entryTest(entry) {
     $("#correct-cheese-container").css("display", "flex").hide().fadeIn("slow");
     userFailed();
   }
-}
-
-
-/**
- * Generates a popup box when the user does not enter a valid cheese.
- */
-function toggleInvalid() {
-  document.getElementById("invalid-pop").classList.toggle("active");
-}
-
-/**
- * Opens the help page.
- */
-function toggleHelp() {
-  document.getElementById("help-page").classList.toggle("active");
-}
-
-/**
- * Opens the stats page.
- */
-function toggleStats() {
-  document.getElementById("stats-page").classList.toggle("active");
-}
-
-/**
- * Generates pop containing information on the correct cheese.
- */
-function toggleCheese() {
-  document.getElementById("cheese-pop").classList.toggle("active");
-}
-
-/**
- * Generates a bad luck pop up if user fails to guess in six attempts.
- */
-function toggleFail() {
-  document.getElementById("fail-pop").classList.toggle("active");
-}
-
-/**
- * Generates popup box for when the user successfully completes the puzzle.
- */
-function toggleCongrats() {
-  document.getElementById("congrats-pop").classList.toggle("active");
-}
-
-/**
- * Copies result to clipboard when share button is pressed.
- */
-function clipboard() {
-  let text = "";
-  for (let i = 0; i < resultArray.length; i++) {
-    for (let j = 0; j < resultArray[i].length; j++) {
-      if (resultArray[i][j] == -1) {
-        continue;
-      }
-      if (resultArray[i][j] == 2) {
-        let x = "🟧";
-        text = text.concat(x);
-        continue;
-      }
-      if (resultArray[i][j] == 0) {
-        let x = "🟥";
-        text = text.concat(x);
-        continue;
-      }
-      if (resultArray[i][j] == 1) {
-        let x = "🟩";
-        text = text.concat(x);
-        continue;
-      }
-    }
-    text = text.concat("\n");
-  }
-  let totalGuesses = resultNum - 1;
-  if (localStorage.getItem("puzzleState") == 'fail') {
-    totalGuesses = 'X';
-  }
-  text = `Curdle #${puzzleNum} ${totalGuesses}/6\n${text}`;
-  navigator.clipboard.writeText(text);
-  alert("Copied the text: " + text);
-}
-
-
-// AJAX form.
-
-function sendCheese(entry) {
-  let response
-  $.ajax({
-    type: "POST",
-    async: false,
-    url: '/check-guess',
-    contentType: "application/json",
-    dataType: "json",
-    data: JSON.stringify({
-      cheese_name: entry,
-    }),
-    success: function (data, status, xhr) { response=data;}
-  });
-  
-  // Pushes the JSON array into a usable correctly ordered array for use in
-  // JS functions.
-  let result_arranged = [];
-  result_arranged.push(response.name)
-  result_arranged.push(response.country)
-  result_arranged.push(response.mould)
-  result_arranged.push(response.animal)
-  result_arranged.push(response.type)
-  result_arranged.push(response.continent)
-
-  return result_arranged;
-}
-
-/**
- * Function toggles the help page to appear.
- */
-function toggleHelp() {
-  document.getElementById("help-page").classList.toggle("active");
-  $("#grid-container-e1").css("display", "grid").hide().fadeIn("slow");
-  $("#grid-container-e2").css("display", "grid").hide().fadeIn("slow");
-  $("#grid-container-e3").css("display", "grid").hide().fadeIn("slow");
-}
-
-/**
- * Retrieves the list of possible cheeses from the server.
- * @returns list of possible cheeses.
- */
-function getCheeseList() {
-  let response
-  $.ajax({
-    type: "POST",
-    async: false,
-    url: '/get-cheeses',
-    dataType: "json",
-    success: function (data, status, xhr) { response=data;}
-  });
-  let cheeseList = Object.values(response);
-  return cheeseList;
 }
 
 /**
@@ -335,40 +166,4 @@ function setStats() {
     $("#bar" + (i + 1)).css("width", width + "%")
     $("#bar" + (i + 1) + " p").html(guessDistInt[i])
   }
-}
-
-/**
- * Function retrieves the day's puzzle id. Used in tracking stats.
- */
-function getPuzzleID() {
-  let response
-  $.ajax({
-    type: "POST",
-    async: false,
-    url: '/puzzle-id',
-    dataType: "json",
-    success: function (data, status, xhr) { response=data;}
-  });
-  let puzzleData = Object.values(response);
-  puzzleID = puzzleData[1];
-  console.log(puzzleID);
-  puzzleNum = puzzleID;
-}
-
-/**
- * Function retrieves the answer to the puzzle. Revealed to users if they fail to guess.
- */
-function getAnswer() {
-  let response
-  $.ajax({
-    type: "POST",
-    async: false,
-    url: '/get-answer',
-    dataType: "json",
-    success: function (data, status, xhr) { response=data;}
-  });
-  let answer = Object.values(response);
-  
-  $("#correct-cheese p").html(answer);
-  console.log(answer);
 }
