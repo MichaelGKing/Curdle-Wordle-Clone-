@@ -192,12 +192,22 @@ def get_answer():
 
     if request.method == "POST":
 
-        answer = db.session.query(Cheese.cheese_name, Type.type, Animal.animal_name, Country.country_name, Cheese.mouldy)\
+        answer = db.session.query(Cheese.cheese_name, Type.type, Animal.animal_name, Country.country_name, Cheese.mouldy, Continent.continent_name, Cheese.image_attribution, Cheese.info_link)\
             .join(Cheese.cheese_type)\
             .join(Cheese.cheese_animal)\
             .join(Cheese.cheese_country)\
+            .join(Country.country_continent)\
             .filter(Cheese.id == todays_server_puzzle_id).first()
 
-    json_answer = {'name' : answer[0], 'type' : answer[1], 'animal' : answer[2], 'country' : answer[3], 'mouldy' : answer[4]}
-    
-    return(json_answer)
+        json_answer = {
+            'name' : answer[0],
+            'type' : answer[1],
+            'animal' : answer[2],
+            'country' : answer[3],
+            'mouldy' : answer[4],
+            'continent' : answer[5],
+            'image_attribution' : answer[6],
+            'info_link' : answer[7]
+            }
+        
+        return(json_answer)
