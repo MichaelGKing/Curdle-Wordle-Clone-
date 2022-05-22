@@ -166,7 +166,7 @@ function entryTest(entry) {
     $("#guess-textbox").fadeOut("slow");
     $("#guess-button").fadeOut("slow");
     $("#share-button").css("display", "flex").hide().fadeIn("slow");
-    $("#correct-cheese").css("display", "flex").hide().fadeIn("slow");
+    $("#correct-cheese-container").css("display", "flex").hide().fadeIn("slow");
     userFailed();
   }
 }
