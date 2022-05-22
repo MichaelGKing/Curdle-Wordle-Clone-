@@ -1,8 +1,9 @@
 import csv
+from flask_login import UserMixin
 
 from sqlalchemy import ForeignKey
-from app import db, app
-from werkzeug.security import generate_password_hash
+from app import db, app, login
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Type(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +28,7 @@ class Country(db.Model):
     def __repr__(self):
         return '<Country {}>'.format(self.country_name)
 
-class Cheese(db.Model):
+class Cheese(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     cheese_name = db.Column(db.String(64), unique=True, index=True, nullable=False)
     type_id = db.Column(db.String(64), db.ForeignKey('type.id'), nullable=False)
@@ -41,6 +42,12 @@ class Cheese(db.Model):
     cheese_type = db.relationship("Type", foreign_keys=[type_id])
     cheese_animal = db.relationship("Animal", foreign_keys=[animal_id])
     cheese_country = db.relationship("Country", foreign_keys=[country_id])
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return '<Cheese: {}>'.format(self.cheese_name)   
@@ -78,3 +85,7 @@ def add_puzzle(puzzle):
 
     db.session.add(c)
     db.session.commit()
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
