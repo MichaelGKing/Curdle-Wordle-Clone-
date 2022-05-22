@@ -66,22 +66,22 @@
       {% for error in form.image.errors %}
       <span style="color: red;">[{{ error }}]</span>
       {% endfor %}
-  </p>
-  <p>
-    {{ form.image_attribution.label }}<br>
-    {{ form.image_attribution(maxlength=128) }}<br>
-    {% for error in form.image_attribution.errors %}
-    <span style="color: red;">[{{ error }}]</span>
-    {% endfor %}
-  </p>
-  <p>
-    {{ form.info_link.label }}<br>
-    {{ form.info_link(maxlength=256) }}<br>
-    {% for error in form.info_link.errors %}
-    <span style="color: red;">[{{ error }}]</span>
-    {% endfor %}
-  </p>
-    <p>{{ form.submit() }}</p>
+    </p>
+    <p>
+      {{ form.image_attribution.label }}<br>
+      {{ form.image_attribution(maxlength=128) }}<br>
+      {% for error in form.image_attribution.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.info_link.label }}<br>
+      {{ form.info_link(maxlength=256) }}<br>
+      {% for error in form.info_link.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+      <p>{{ form.submit() }}</p>
 </form>
 
 {% endblock %}
