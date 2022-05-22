@@ -91,6 +91,17 @@ How to Install and Run Curdle (from local host)
 
 How to Play
 -----------
+Guess the CURDLE in 6 guesses from the image shown.
+
+Type your guess in the box. Each guess must be a valid cheese, see the dropdown menu.
+
+After you submit your guess, your submission will appear surrounded by a border (green if correct, red if incorrect).
+
+Icons will also appear indicating if your guess shares the same region, country, and animal of oirign with the answer. As well as it's mold content, and type. These attributes are explained below.
+
+Icons will appear red if your guess and the answer do not share the attribute. For example if your guess uses cow products, and the answer uses goat products the icon will appear red.
+
+If you succeed or fail to get the cheese it will be revealed in a black box below your guesses. Click the box for information on the cheese! 😀
 
 How to Add New Puzzles to the Game
 ----------------------------------
