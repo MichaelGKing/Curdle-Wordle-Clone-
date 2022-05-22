@@ -71,7 +71,9 @@ def add_puzzle(puzzle):
         animal_id = db.session.query(Animal.id).filter(Animal.animal_name == puzzle[2]).scalar(), 
         country_id = db.session.query(Country.id).filter(Country.country_name == puzzle[3]).scalar(), 
         mouldy=is_mouldy, 
-        image_filename=puzzle[5]
+        image_filename=puzzle[5],
+        image_attribution=puzzle[6],
+        info_link=puzzle[7]
         )
 
     db.session.add(c)

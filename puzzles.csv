@@ -1,4 +1,4 @@
-Cheddar,semi-hard,cow,United Kingdom,False,/images/cheese1.jpg
-Parmigiano Reggiano,hard,cow,Italy,False,/images/cheese2.jpg
-Processed Cheese Slices,processed,cow,United States,False,/images/cheese3.jpg
-Roquefort,blue,sheep,France,True,/images/cheese4.jpg
+Cheddar,semi-hard,cow,United Kingdom,False,/images/cheese1.jpg,Test,Test
+Parmigiano Reggiano,hard,cow,Italy,False,/images/cheese2.jpg,Test,Test
+Processed Cheese Slices,processed,cow,United States,False,/images/cheese3.jpg,Test,Test
+Roquefort,blue,sheep,France,True,/images/cheese4.jpg,Test,Test
