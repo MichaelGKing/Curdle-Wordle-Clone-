@@ -13,8 +13,8 @@ from flask.cli import with_appcontext
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
-migrate = Migrate(app, db, render_as_batch=True)
-login = LoginManager
+migrate = Migrate(app, db)
+login = LoginManager(app)
 
 from commands.import_data import import_puzzle_data
 @click.command(name='import_data')

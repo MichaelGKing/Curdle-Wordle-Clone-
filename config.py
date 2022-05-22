@@ -36,3 +36,5 @@ class Config(object):
 
     LAUNCH_DATE  = [2022, 5, 19, 0, 0]
 
+    DEBUG = True
+
