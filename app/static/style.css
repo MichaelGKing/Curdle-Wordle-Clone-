@@ -57,6 +57,7 @@ header ion-icon {
   background-position: center;
   background-size: cover;
   margin: 5px;
+  margin-bottom: 0px;
 }
 
 .results {
@@ -237,7 +238,7 @@ header ion-icon {
 }
 
 .word {
-  border: 3px solid red;
+  border: 2px solid red;
 }
 
 .word, .mold, .animal, .type, .world {

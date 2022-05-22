@@ -65,7 +65,7 @@ function resultGen(entry) {
   newEle.appendChild(para);
   document.getElementById("word-" + resultNum).appendChild(newEle);
   if (correctChoice[0] == true) {
-    $("#word-" + resultNum).css("border", "3px solid green");
+    $("#word-" + resultNum).css("border", "2px solid green");
   }
   $("#word-" + resultNum).css("display", "flex").hide().fadeIn("slow");
 
