@@ -276,6 +276,8 @@ def reset_puzzle_history():
         PuzzleHistory.query.delete()
 
         flash('* Server puzzle history cleared *', 'success')
+
+        return redirect(url_for('admin'))
         
 # Increment the client-side puzzle id counter for testing/demonstration
 @app.route('/increment-puzzle-id', methods=['GET', 'POST'])
@@ -289,4 +291,6 @@ def increment_puzzle_id():
         todays_client_puzzle_id += 1
 
         flash('* It is a new day! *', 'success')
+
+        return redirect(url_for('admin'))
 

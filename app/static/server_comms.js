@@ -108,14 +108,25 @@ function getAnswer() {
 }
 
 /**
- * Function for forcing a new puzzle.
+ * Functions for forcing a new puzzle.
  */
-function changePuzzle() {
+ function resetServerPuzzleHistory() {
   let response;
   $.ajax({
     type: "POST",
     async: false,
     url: '/reset-puzzle-history',
+    dataType: "json",
+    success: function (data, status, xhr) { response=data;}
+  });
+}
+
+function incrementPuzzleID() {
+  let response;
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: '/increment-puzzle-id',
     dataType: "json",
     success: function (data, status, xhr) { response=data;}
   });
