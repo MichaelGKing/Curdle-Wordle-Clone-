@@ -25,7 +25,7 @@ class Country(db.Model):
     def __repr__(self):
         return '<Country {}>'.format(self.country_name)
 
-class Cheese(UserMixin, db.Model):
+class Cheese(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cheese_name = db.Column(db.String(64), unique=True, index=True, nullable=False)
     type_id = db.Column(db.String(64), db.ForeignKey('type.id'), nullable=False)
@@ -43,7 +43,7 @@ class Cheese(UserMixin, db.Model):
     def __repr__(self):
         return '<Cheese: {}>'.format(self.cheese_name)   
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
