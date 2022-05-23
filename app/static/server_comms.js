@@ -117,7 +117,7 @@ function getAnswer() {
     async: false,
     url: '/reset-puzzle-history',
     dataType: "json",
-    success: function (data, status, xhr) { response=data;}
+    success: function (data, status, xhr) { response=data; console.log(data);}
   });
 }
 
@@ -128,6 +128,6 @@ function incrementPuzzleID() {
     async: false,
     url: '/increment-puzzle-id',
     dataType: "json",
-    success: function (data, status, xhr) { response=data;}
+    success: function (data, status, xhr) { response=data; console.log(data);}
   });
 }

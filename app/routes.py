@@ -25,13 +25,13 @@ def index():
     global todays_server_puzzle_id
     global todays_client_puzzle_id
     
+    # Not in use...
     # If TESTING set to True, use a static client-side puzzle ID that can be incremented from the admin page
-    if app.config['TESTING']:
-        todays_client_puzzle_id = 1
-
+    # if app.config['TESTING']:
+    #    todays_client_puzzle_id = 1
     # if TESTING False, use proper game logic and increment the client side id each day, starting at LAUNCH_DATE
-    else:
-        todays_client_puzzle_id = puzzlesetter.get_puzzle_id_for_client()
+    # else:
+    todays_client_puzzle_id = puzzlesetter.get_puzzle_id_for_client()
 
     # Check database to see if a puzzle has been generated for today
     result = db.session.query(PuzzleHistory).filter(PuzzleHistory.client_puzzle_id == todays_client_puzzle_id).scalar()
@@ -266,6 +266,7 @@ def get_answer():
         return(json_answer)
 
 # Clear puzzle history table in the database for testing/demonstration
+# This one appears to work but when inspecting, makes absolutely no database changes and throws no errors...
 @app.route('/reset-puzzle-history', methods=['GET', 'POST'])
 def reset_puzzle_history():
 
@@ -275,11 +276,12 @@ def reset_puzzle_history():
 
         PuzzleHistory.query.delete()
 
-        flash('* Server puzzle history cleared *', 'success')
+        print('* Server puzzle history cleared *')
 
-        return redirect(url_for('admin'))
+        return{ 'message' : 'success' }
         
 # Increment the client-side puzzle id counter for testing/demonstration
+# This works but the id resets again on page load... 
 @app.route('/increment-puzzle-id', methods=['GET', 'POST'])
 def increment_puzzle_id():
     
@@ -288,9 +290,11 @@ def increment_puzzle_id():
         print(request.get_json)
         
         global todays_client_puzzle_id
+        print(todays_client_puzzle_id)
         todays_client_puzzle_id += 1
+        print(todays_client_puzzle_id)
 
-        flash('* It is a new day! *', 'success')
+        print('* It is a new day! *')
 
-        return redirect(url_for('admin'))
+        return{ 'message' : 'success' }
 
