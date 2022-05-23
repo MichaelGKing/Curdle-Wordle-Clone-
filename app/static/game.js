@@ -111,12 +111,17 @@ function entryTest(entry) {
   if (validEntry == false) {
     toggleInvalid();
   }
+  
   if (validEntry == true) {
+    // Stores guess in local storage.
     userPlayed(entry);
+    // Makes an array that contains boolean for if the attributes of your guesses attributes match the answer.
     correctChoice = sendCheese(entry);
+    // Removes text from the input box.
     removeText();
-    // Makes an array that contains boolean for if the attributes of your guessec cheese are correct.
+    // Stores results for use in clipboard share button.
     attributeChecker();
+    // Tests if user correctly guessed cheese and removes inputs.
     if (correctChoice[0] == true) {
       $("#guess-textbox").fadeOut("slow");
       $("#guess-button").fadeOut("slow");
@@ -124,13 +129,18 @@ function entryTest(entry) {
       $("#correct-cheese-container").css("display", "flex").hide().fadeIn("slow");
       $("#share-button").css("display", "flex").hide().fadeIn("slow");
       userSucceeded();
+      // Retrieves answer and references materials used in a pop up box.
       getAnswer();
     }
+    // Removes the results placeholder.
     $("#result-" + resultNum).fadeOut(500);
-    // Mutates page based on results from guess.
+    // Adds results.
     setTimeout(resultGen(entry), 500);
   }
+
+  // Triggers loss event and removes user input if user runs out of guesses and hasn't won.
   if ((resultNum == 7) && localStorage.getItem("puzzleState") != 'win') {
+    // Retrieves answer and references materials used in a pop up box.
     getAnswer();
     toggleFail();
     $("#guess-textbox").fadeOut("slow");
