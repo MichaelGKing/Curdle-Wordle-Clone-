@@ -5,7 +5,9 @@
 function loadUser() {
   $("#pageload").fadeOut("slow");
   if (localStorage.getItem("visits") == 1) {
+    // Opens help page on first user visit.
     toggleHelp();
+    // Initializes local storage variables or they will be set to null (less coding).
     localStorage.setItem("guess_made", false);
     localStorage.setItem("wins", 0);
     localStorage.setItem("played", 0);
@@ -14,7 +16,7 @@ function loadUser() {
     localStorage.setItem("best-streak", 0);
     localStorage.setItem("guess-distribution", "0,0,0,0,0,0")
   } else {
-    
+    // Test for if user is returning to a puzzle they have attempted, and regenerate the page for them.
     if (localStorage.getItem("last_puzzle_attempted") == puzzleNum) {
       let guesses = localStorage.getItem("guesses_made");
       let guessesArray = guesses.split(',');
@@ -23,6 +25,7 @@ function loadUser() {
       }
       localStorage.setItem("guesses_made", guesses);
     }
+    // Tests if user is returning to the page upon a new puzzle and resets it for them.
     if (localStorage.getItem("last_puzzle_attempted") != puzzleNum) {
       localStorage.removeItem("guesses_made");
       localStorage.removeItem("puzzleState");
@@ -31,9 +34,12 @@ function loadUser() {
     }
   }
 
+  // Tests if user has broken there streak.
   if (parseInt(localStorage.getItem("lastWin")) < (puzzleNum - 1)) {
     localStorage.setItem("streak", 0);
   }
+
+  // Restores stats variables.
   setStats();
 }
 
@@ -49,20 +55,24 @@ function userCompleted() {
  * Function generates localstorage for if the user successfully completes the puzzle.
  */
 function userSucceeded() {
+  // Tests if puzzle isn't complete then ticks wins counter and streak. Streak is reset to 0 in previous function
+  // if user breaks it.
   if (localStorage.getItem("puzzleState") == null) {
     localStorage.setItem("wins", parseInt(localStorage.getItem("wins")) + 1);
     localStorage.setItem("streak", parseInt(localStorage.getItem("streak")) + 1);
+    // Increases max streak if users current streak is better.
     if (parseInt(localStorage.getItem("streak")) > parseInt(localStorage.getItem("best-streak"))) {
       localStorage.setItem("best-streak", localStorage.getItem("streak"));
     }
+    // Adds win to appropriate distribution.
     distCalc();
   }
+
   localStorage.setItem("puzzleState", "win");
   localStorage.setItem("lastWin", puzzleNum);
   userCompleted();
   let winrate = parseInt(localStorage.getItem("wins")) / parseInt(localStorage.getItem("played")) * 100;
   localStorage.setItem("winrate", winrate);
-  
   setStats();
 }
 
@@ -82,13 +92,15 @@ function userFailed() {
  */
 function userPlayed(guess) {
   if (localStorage.getItem("guess_made") == 'false') {
+    // Only ticks the played variabled if user has not interacted with puzzle yet.
     localStorage.setItem("played", parseInt(localStorage.getItem("played")) + 1);
+    // Adjusts winrate as soon as user attempts puzzle.
     let winrate = parseInt(localStorage.getItem("wins")) / parseInt(localStorage.getItem("played")) * 100;
     localStorage.setItem("winrate", winrate);
-    
   }
   localStorage.setItem("guess_made", true);
   localStorage.setItem("last_puzzle_attempted", puzzleNum);
+  // Stores the guess string in localstorage.
   let guesses_made = localStorage.getItem("guesses_made");
   if (guesses_made == null) {
     localStorage.setItem("guesses_made", guess);
@@ -96,6 +108,7 @@ function userPlayed(guess) {
     guesses_made = guesses_made + "," + guess;
     localStorage.setItem("guesses_made", guesses_made);
   }
+  // Remakes the stats.
   setStats();
 }
 
@@ -117,7 +130,7 @@ function userVisited() {
 }
 
 /**
- * Function calculates the distribution of guesses made by the user for the stats page.
+ * Function generates the distribution array for generating the distribution graph in stats.
  */
 function distCalc() {
   let dist = resultNum - 1;
