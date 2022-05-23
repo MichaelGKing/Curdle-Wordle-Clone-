@@ -98,7 +98,9 @@ function getAnswer() {
   }
   $("#answer-animal").html("The animal of origin is: " + result_arranged[4]);
   $("#answer-type").html("The type of cheese is: " + result_arranged[5]);
-  $("#reference").attr("href", result_arranged[7]);
+  $("#info-ref").attr("href", result_arranged[7]);
+  $("#image-ref").attr("href", result_arranged[6]);
+  $("#references").css("display", "flex").hide().fadeIn("slow");
   return result_arranged;
 }
 
