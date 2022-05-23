@@ -449,9 +449,8 @@ header ion-icon {
 
 /* Styling for game END */
 
-/**
-Move this to main when possible
-**/
+/* Styling for admin page START */
+
 .admin_body {
   max-width: 500px; 
   margin: auto; 
@@ -492,3 +491,5 @@ Move this to main when possible
 .flashes li {
   padding-top: 10px;
 }
+
+/* Styling for admin page END */
