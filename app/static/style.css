@@ -268,7 +268,6 @@ header ion-icon {
 }
 
 /* Styling for hidden results bars */
-
 .word.active, .world.active, .mold.active, .animal.active, .type.active {
   display: flex;
   justify-content: center;
@@ -446,11 +445,9 @@ header ion-icon {
   grid-column: 7 / span 1;
   grid-row: 6;
 }
-
 /* Styling for game END */
 
 /* Styling for admin page START */
-
 .admin_body {
   max-width: 500px; 
   margin: auto; 
@@ -491,5 +488,4 @@ header ion-icon {
 .flashes li {
   padding-top: 10px;
 }
-
 /* Styling for admin page END */
