@@ -16,20 +16,20 @@ class AdminLoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Log In')
 
     
 class PuzzleUploadForm(FlaskForm):
 
     name = StringField('Cheese Name', validators=[DataRequired()])
     type = SelectField('Cheese Type', choices=[], validators=[DataRequired()])
-    country = SelectField('Country of Origin', choices=[], validators=[DataRequired()])
     animal = SelectField('Animal of Origin', choices=[], validators=[DataRequired()])
+    country = SelectField('Country of Origin', choices=[], validators=[DataRequired()])
     mould = BooleanField('Is mouldy?')
-    image = FileField(validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Only images of .png, .jpg, .jpeg or .gif allowed.')])
-    submit = SubmitField('Upload Puzzle to Curdle Database')
+    image = FileField("Image (.jpg .jpeg .png and .gif only)", validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Only images of .png, .jpg, .jpeg or .gif allowed.')])
     attribution = TextAreaField("Image desciption", validators=[DataRequired()])
     link =  StringField("Cheese Info Hyperlink", validators=[DataRequired()])
+    submit = SubmitField('Upload Puzzle to Curdle Database')
 
     # Setter functions are required so that the type, country and animal form fields can have their options set
     # with data from the corresponding database tables. 

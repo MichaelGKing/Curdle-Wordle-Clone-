@@ -1,11 +1,9 @@
-import os
+import os, csv
 from app import app, db
 from app.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect, request, url_for
 from wtforms import ValidationError
-from werkzeug.security import check_password_hash
-from werkzeug.utils import secure_filename
-from app.models import Cheese, PuzzleHistory, Type, Country, Animal, Continent, User
+from app.models import Cheese, PuzzleHistory, Type, Country, Animal, Continent, User, add_puzzle
 from . import puzzlesetter
 from datetime import date
 from flask_login import current_user, login_user, login_required, logout_user
@@ -76,7 +74,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         # If user doesnt exist, flash message to user explaining
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', 'error')
             return redirect(url_for('login'))
         # Create new Flask-Login login session for the user
         login_user(user, remember=form.remember_me.data)
@@ -89,7 +87,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You can successfully logged out of the Curdle Administrator Console')
+    flash('Logout: Successful', 'success')
     return redirect('/login')
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -109,15 +107,59 @@ def admin():
         # Here goes the code that recieves the data and handles adding it to the database
         if request.method == "POST":
 
-            req = request.form
+            # Determine the next puzzle database id number
 
-            f = form.image.data
-            filename = secure_filename(f.filename)
-            f.save(os.path.join(app.instance_path, 'images', filename))
+            # Count existing puzzles in database
+            puzzle_count = db.session.query(Cheese).count()
+            print(puzzle_count)
+            # Add one to count - this will be the new id
+            new_puzzle_id = puzzle_count + 1
+            print(new_puzzle_id)
+
+            # Assign new cheese name data to local variables for checking formats of data and debugging
+            name = form.name.data.capitalize()
+            # Check if cheese already in the database, if not None, flash message to user and reload page
+            result = db.session.query(Cheese.cheese_name).filter(Cheese.cheese_name == name).first()
+            if result != None:
+                flash('! Upload failed !', 'error')
+                flash('There was already a cheese of that name in the database.', 'error')
+                return render_template('admin.html', title="Curdle Administrator Console", form=form)
+
+            # Assing rest of puzzle data to local variables...
+            type = eval(form.type.data) # This data is returned in a string, but in tuple format.. eval fixes this.
+            animal = eval(form.animal.data) # Unfortunately this now means the client could pass malicious code to the server..
+            country = eval(form.country.data) # And it will be run, no questions asked?
+            mould = form.mould.data
+            image = form.image.data
+            attribution = form.attribution.data
+            link = form.link.data
+
+            # Generate new generic image file name in format: cheese<id>.<file extension>
+            ext_list = list(app.config['ALLOWED_EXTENSIONS'])
+            filename = 'cheese'
+            for ext in ext_list:
+                print(ext)
+                print(image.filename.endswith(ext))
+                if image.filename.endswith(ext):
+                    filename = filename+str(new_puzzle_id)+'.'+ext
+                    break
             
-            print(req)
+            # Set filepath for new image to be uploaded to then save image
+            filepath = os.path.join(os.path.dirname(app.instance_path), 'app', 'static', 'images',  filename)
+            image.save(filepath)
 
-            flash('Puzzle Upload Successful')
+            # Set a list of puzzle attributes in format that add_puzzle() can understand
+            puzzle = [ name, type[1], animal[1], country[1], mould, "/images/"+filename, attribution, link ]
+            
+            # Write the list to the puzzles.csv file for backup incase the database needs to be rebuilt
+            with open('puzzles.csv', 'a', newline='') as f:
+                writer_object = csv.writer(f)
+                writer_object.writerow(puzzle)
+                f.close()
+
+            # Add puzzle to the database
+            add_puzzle(puzzle)
+            flash('* Puzzle Upload Successful *', 'success')
     
     return render_template('admin.html', title="Curdle Administrator Console", form=form)
     
@@ -216,3 +258,11 @@ def get_answer():
             }
         
         return(json_answer)
+
+@app.route('/reset-puzzle-id', methods=['GET', 'POST'])
+def reset_puzzle_id():
+    return
+
+@app.route('/increment-puzzle-id', methods=['GET', 'POST'])
+def increment_puzzle_id():
+    return

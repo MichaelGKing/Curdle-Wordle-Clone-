@@ -444,3 +444,47 @@ header ion-icon {
   grid-column: 7 / span 1;
   grid-row: 6;
 }
+
+/**
+Move this to main when possible
+**/
+.admin_body {
+  max-width: 500px; 
+  margin: auto; 
+  padding: 30px 30px 30px 30px;
+  text-align: center;
+}
+
+.admin_body input[type=text] {
+  width: 70%;
+}
+
+.admin_body input[type=password] {
+  width: 70%;
+}
+
+.admin_body select {
+  width: 70%;
+}
+
+.flashes {
+  list-style-type: none;
+  text-decoration: none;
+  padding: .1em 1em;
+  margin: 0;
+  padding-bottom: 0;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.flashes .success {
+  color: green;
+}
+
+.flashes .error {
+  color: red;
+}
+
+.flashes li {
+  padding-top: 10px;
+}
