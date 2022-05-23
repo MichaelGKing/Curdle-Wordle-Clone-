@@ -13,75 +13,78 @@
     </p>
   </header>
 
-<h2>Welcome Curdle Admin!</h2>
-<p>Please upload your new puzzle using the form below</p>
+  <h2>Welcome Curdle Admin!</h2>
+  <p>Please upload your new puzzle using the form below</p>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-{% block body %}{% endblock %}
-
-<form action="" method="post" novalidate enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.name.label }}<br>
-        {{ form.name(maxlength=64) }}<br>
-        {% for error in form.name.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.type.label }}<br>
-        {{ form.type() }}<br>
-        {% for error in form.type.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.country.label }}<br>
-        {{ form.country() }}<br>
-        {% for error in form.country.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.animal.label }}<br>
-        {{ form.animal() }}<br>
-        {% for error in form.animal.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.mould() }} {{ form.mould.label }}<br>
-    </p>
-    <p>
-      {{ form.image.label }}<br>
-      {{ form.image() }}<br>
-      {% for error in form.image.errors %}
-      <span style="color: red;">[{{ error }}]</span>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
       {% endfor %}
-    </p>
-    <p>
-      {{ form.attribution.label }}<br>
-      {{ form.attribution(maxlength=128) }}<br>
-      {% for error in form.attribution.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
-    <p>
-      {{ form.link.label }}<br>
-      {{ form.link(maxlength=256) }}<br>
-      {% for error in form.link.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
-      <p>{{ form.submit() }}</p>
-</form>
+      </ul>
+    {% endif %}
+  {% endwith %}
+  {% block body %}{% endblock %}
+  <form action="" method="post" novalidate enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <p>
+          {{ form.name.label }}<br>
+          {{ form.name(maxlength=64) }}<br>
+          {% for error in form.name.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p>
+      <p>
+          {{ form.type.label }}<br>
+          {{ form.type() }}<br>
+          {% for error in form.type.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p>
+      <p>
+          {{ form.country.label }}<br>
+          {{ form.country() }}<br>
+          {% for error in form.country.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p>
+      <p>
+          {{ form.animal.label }}<br>
+          {{ form.animal() }}<br>
+          {% for error in form.animal.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p>
+      <p>
+          {{ form.mould() }} {{ form.mould.label }}<br>
+      </p>
+      <p>
+        {{ form.image.label }}<br>
+        {{ form.image() }}<br>
+        {% for error in form.image.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>
+        {{ form.attribution.label }}<br>
+        {{ form.attribution(maxlength=128) }}<br>
+        {% for error in form.attribution.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+      <p>
+        {{ form.link.label }}<br>
+        {{ form.link(maxlength=256) }}<br>
+        {% for error in form.link.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+        <p>{{ form.submit() }}</p>
+  </form>
+  <p>Extra functions for testing and demonstration</p>
+  <button type="button" onclick="changePuzzle()">Reset puzzle history</button>
+  <button type="button" onclick="incrementPuzzle()">Reset puzzle history</button>
+</body>
 
 {% endblock %}
