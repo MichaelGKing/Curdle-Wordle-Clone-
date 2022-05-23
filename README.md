@@ -8,11 +8,14 @@ Curdle is an image identification game that presents players with an image of a 
 
 Curdle is a full-stack web application built using Flask, AJAX, and jQuery. The game was created by the authors as for the Web Project assignment while taking CITS3403 in semester one 2022 at The University of Western Australia.
 
-Table of Contents
------------------
-
-Design and Development
+Design and Development 
 ----------------------
+
+The design and development of the application started with the name. We were both aware that the biggest challenge for the project would be making a game that was actually fun or at least interesting to play. 
+
+Work was split up into backend and frontend development, after a twist of fate put two people together who were much more confident sticking one side of the client/server model. 
+
+A kanban board guided the development process with tasks being split up into small acheivable pieces and being completed when they felt right, or when an idea needed to be tested.
 
 How to Install and Run Curdle (from local host)
 -----------------------------------------------
@@ -89,8 +92,15 @@ How to Install and Run Curdle (from local host)
 
 ### How to Start the Flask Application
 
+After follwoing the install/setup instructions, start the application by running to following command: 
+```bash
+   (venv) % flask run
+   ```
+Navigate to (http://127.0.0.1:5000) in your browser to open the web app.
+
 How to Play
 -----------
+
 Guess the CURDLE in 6 guesses from the image shown.
 
 Type your guess in the box. Each guess must be a valid cheese, see the dropdown menu.
@@ -125,22 +135,29 @@ Attribute-icons: https://fontawesome.com/
 
 Favicon: https://favicon.io/emoji-favicons/cheese-wedge/
 
-To avoid the need for 
+Flask-Login: https://flask-login.readthedocs.io/en/latest/
+
+Flask-Migrate: https://flask-migrate.readthedocs.io/en/latest/
+
+Flask-SQLAlchemy: https://flask-sqlalchemy.palletsprojects.com/en/2.x/
+
+Flask-WTF: https://flask-wtf.readthedocs.io/en/1.0.x/
+
 
 References
 -------------------
 
 ### DBDiagram
 
-The SQLite database for the project was designed using DBDiagram, a relational database diagram tool found at https://dbdiagram.io/
+The original SQLite database for the project was designed using DBDiagram, a relational database diagram tool found at https://dbdiagram.io/
 
-The database diagram can be viewed below:
+The database diagram can be viewed at:
 
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/627fc6307f945876b61ae11e'> </iframe>
+https://dbdiagram.io/embed/627fc6307f945876b61ae11e
 
 ### Flask development references
 
-A large proportion of the basic Flask application set up was designed following the offical documentation found at https://flask.palletsprojects.com/
+A good amount of the basic Flask application set up was guided the offical documentation found at https://flask.palletsprojects.com/
 
-Miguel Grinberg's The Flask Mega-Tutorial also provided a valuable guide for many aspects of the development process not covered in the official flask docuemtation. Miguel's tutorial can be found here: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+Miguel Grinberg's The Flask Mega-Tutorial also provided a valuable help for many aspects of the development process not covered in the official flask docuemtation. Miguel's tutorial can be found here: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
