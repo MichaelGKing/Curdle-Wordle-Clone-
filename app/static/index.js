@@ -1,5 +1,5 @@
 /**
- * Triggers event when enter key hit.
+ * Function allows cheese guess to be made when enter key is hit.
  */
 function search() {
   if (event.key === 'Enter') {

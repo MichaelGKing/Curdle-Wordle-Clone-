@@ -1,5 +1,7 @@
-//Resets the localstorage if the user returns on a different puzzle. Otherwise
-//sets up page for returning user.
+/**
+ * Function sets up the page for the user depending if they are new, returning to an attempted (or unattempted) puzzle,
+ * or returning to a new puzzle.
+ */
 function loadUser() {
   $("#pageload").fadeOut("slow");
   if (localStorage.getItem("visits") == 1) {
@@ -64,12 +66,20 @@ function userSucceeded() {
   setStats();
 }
 
+/**
+ * Function generates localstorage for if the user runs out of guesses.
+ */
 function userFailed() {
   localStorage.setItem("puzzleState", "fail");
   userCompleted();
 }
 
-//Function called when user makes a valid guess.
+/**
+ * Function generates localstorage for the guesses made by the user on the day's puzzle,
+ * and generates localstorage for if the puzzle has been attempted for that day.
+ * For use in generating the site to a returning user.
+ * @param guess 
+ */
 function userPlayed(guess) {
   if (localStorage.getItem("guess_made") == 'false') {
     localStorage.setItem("played", parseInt(localStorage.getItem("played")) + 1);
@@ -89,7 +99,9 @@ function userPlayed(guess) {
   setStats();
 }
 
-//Function stores how many user visits there have been.
+/**
+ * Function generates localstorage for counting the number of visits a user has made.
+ */
 function userVisited() {
   let visits = localStorage.getItem("visits");
   if (visits == null) {
@@ -104,6 +116,9 @@ function userVisited() {
   localStorage.setItem('visits', visits);
 }
 
+/**
+ * Function calculates the distribution of guesses made by the user for the stats page.
+ */
 function distCalc() {
   let dist = resultNum - 1;
   let guessDist = localStorage.getItem("guess-distribution");
