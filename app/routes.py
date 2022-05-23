@@ -13,8 +13,8 @@ from flask_login import current_user, login_user, login_required, logout_user
 # The view function contains this code
 
 # Set global variables for client and server side puzzle IDs
-todays_server_puzzle_id = 1
-todays_client_puzzle_id = 1
+todays_server_puzzle_id = 0
+todays_client_puzzle_id = 0
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
@@ -258,3 +258,11 @@ def get_answer():
             }
         
         return(json_answer)
+
+@app.route('/reset-puzzle-id', methods=['GET', 'POST'])
+def reset_puzzle_id():
+    return
+
+@app.route('/increment-puzzle-id', methods=['GET', 'POST'])
+def increment_puzzle_id():
+    return
