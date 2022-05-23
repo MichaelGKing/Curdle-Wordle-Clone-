@@ -120,6 +120,8 @@ AJAX: https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
 
 Attribute-icons: https://fontawesome.com/
 
+Favicon: https://favicon.io/emoji-favicons/cheese-wedge/
+
 To avoid the need for 
 
 References
