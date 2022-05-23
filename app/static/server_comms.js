@@ -65,6 +65,7 @@ function getPuzzleID() {
 /**
  * Function retrieves the answer to the puzzle and links to resources used. 
  * Revealed to users if they fail to guess.
+ * @return an array containing the answer, its attributes, and references.
  */
 function getAnswer() {
   let response;
@@ -98,9 +99,11 @@ function getAnswer() {
   }
   $("#answer-animal").html("The animal of origin is: " + result_arranged[4]);
   $("#answer-type").html("The type of cheese is: " + result_arranged[5]);
+  //Attaches href to references that appear at bottom of page.
   $("#info-ref").attr("href", result_arranged[7]);
   $("#image-ref").attr("href", result_arranged[6]);
   $("#references").css("display", "flex").hide().fadeIn("slow");
+
   return result_arranged;
 }
 

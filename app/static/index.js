@@ -43,6 +43,7 @@ function clipboard() {
     text = text.concat("\n");
   }
   let totalGuesses = resultNum - 1;
+  // If user failed the puzzle changes the result to X to indicate user was not successful.
   if (localStorage.getItem("puzzleState") == 'fail') {
     totalGuesses = 'X';
   }

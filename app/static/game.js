@@ -35,6 +35,7 @@ function attributeChecker() {
       resultArray[resultNum - 1][i] = 0;
     }
   }
+  // This is for if user guesses correct region but not country, so it can make the icon orange.
   if (correctChoice[5] == true && correctChoice[1] == false) {
     resultArray[resultNum - 1][1] = 2;
   }
@@ -156,16 +157,19 @@ function entryTest(entry) {
  * storage. Typically called when stats are changed.
  */
 function setStats() {
+  // Changes the numbers in the top of the stats to those stored in localstorage.
   $("#played_text").html(localStorage.getItem("played"));
   $("#winrate_text").html(Math.round(parseInt(localStorage.getItem("winrate"))) + "%");
   $("#streak_text").html(localStorage.getItem("streak"));
   $("#best_text").html(localStorage.getItem("best-streak"));
 
+  // Adjusts the distribution values and bar widths.
   let guessDist = localStorage.getItem("guess-distribution").split(',');
   let guessDistInt = [];
   for (let i = 0; i < guessDist.length; i ++) {
     guessDistInt.push(parseInt(guessDist[i]));
   }
+  // maxDist used as the 100% bar width value. So all other dists are sized according to it.
   let maxDist = Math.max.apply(Math, guessDistInt);
   let width;
   for (let i = 0; i < guessDistInt.length; i ++) {
