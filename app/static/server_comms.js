@@ -101,3 +101,17 @@ function getAnswer() {
   $("#reference").attr("href", result_arranged[7]);
   return result_arranged;
 }
+
+/**
+ * Function for forcing a new puzzle.
+ */
+function changePuzzle() {
+  let response;
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: '/reset-puzzle-history',
+    dataType: "json",
+    success: function (data, status, xhr) { response=data;}
+  });
+}
