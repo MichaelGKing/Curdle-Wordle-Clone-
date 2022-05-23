@@ -3,8 +3,6 @@ from app import app, db
 from app.forms import AdminLoginForm, PuzzleUploadForm
 from flask import render_template, flash, redirect, request, url_for
 from wtforms import ValidationError
-from werkzeug.security import check_password_hash
-from werkzeug.utils import secure_filename
 from app.models import Cheese, PuzzleHistory, Type, Country, Animal, Continent, User, add_puzzle
 from . import puzzlesetter
 from datetime import date
@@ -15,8 +13,8 @@ from flask_login import current_user, login_user, login_required, logout_user
 # The view function contains this code
 
 # Set global variables for client and server side puzzle IDs
-todays_server_puzzle_id = 0
-todays_client_puzzle_id = 0
+todays_server_puzzle_id = 1
+todays_client_puzzle_id = 1
 
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
