@@ -16,6 +16,7 @@ from flask_login import current_user, login_user, login_required, logout_user
 todays_server_puzzle_id = 0
 todays_client_puzzle_id = 0
 
+
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 # A view function for the homepage which displays the game
@@ -23,9 +24,14 @@ def index():
 
     global todays_server_puzzle_id
     global todays_client_puzzle_id
-    # Get todays client-side puzzle ID - this increments by one every day
     
-    todays_client_puzzle_id = puzzlesetter.get_puzzle_id_for_client()
+    # If TESTING set to True, use a static client-side puzzle ID that can be incremented from the admin page
+    if app.config['TESTING']:
+        todays_client_puzzle_id = 1
+
+    # if TESTING False, use proper game logic and increment the client side id each day, starting at LAUNCH_DATE
+    else:
+        todays_client_puzzle_id = puzzlesetter.get_puzzle_id_for_client()
 
     # Check database to see if a puzzle has been generated for today
     result = db.session.query(PuzzleHistory).filter(PuzzleHistory.client_puzzle_id == todays_client_puzzle_id).scalar()
@@ -259,10 +265,19 @@ def get_answer():
         
         return(json_answer)
 
-@app.route('/reset-puzzle-id', methods=['GET', 'POST'])
-def reset_puzzle_id():
-    return
+# Clear puzzle history table in the database for testing/demonstration
+@app.route('/reset-puzzle-history', methods=['GET', 'POST'])
+def reset_puzzle_history():
 
+    if request.method == "POST":
+
+        PuzzleHistory.query.delete()
+        
+# Increment the client-side puzzle id counter for testing/demonstration
 @app.route('/increment-puzzle-id', methods=['GET', 'POST'])
 def increment_puzzle_id():
-    return
+    
+    if request.method == "POST":
+        
+        global todays_client_puzzle_id
+        todays_client_puzzle_id += 1
