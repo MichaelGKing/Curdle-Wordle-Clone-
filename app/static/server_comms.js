@@ -43,7 +43,6 @@ function sendCheese(entry) {
   result_arranged.push(response.animal)
   result_arranged.push(response.type)
   result_arranged.push(response.continent)
-  console.log(result_arranged)
   return result_arranged;
 }
 
@@ -81,18 +80,13 @@ function getAnswer() {
   result_arranged.push(response.name)
   result_arranged.push(response.continent)
   result_arranged.push(response.country)
-
-  if (response.mouldy == true) {
-
-  }
   result_arranged.push(response.mouldy)
-
   result_arranged.push(response.animal)
   result_arranged.push(response.type)
   result_arranged.push(response.image_attribution)
   result_arranged.push(response.info_link)
 
-  let cheese = result_arranged[0];
+  //Generates text in the answer info pop up.
   $("#correct-cheese p").html(result_arranged[0]);
   $("#answer-name").html(result_arranged[0]);
   $("#answer-region").html("The region of origin is: " + result_arranged[1]);
@@ -102,11 +96,8 @@ function getAnswer() {
   } else {
     $("#answer-mould").html("The cheese does not contain veins.");
   }
-  
   $("#answer-animal").html("The animal of origin is: " + result_arranged[4]);
   $("#answer-type").html("The type of cheese is: " + result_arranged[5]);
   $("#reference").attr("href", result_arranged[7]);
-
-  console.log(result_arranged[5]);
   return result_arranged;
 }
