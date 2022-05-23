@@ -96,10 +96,10 @@ function resultGen(entry) {
 }
 
 /**
- * Functions tests if entry is valid entry and performs followup functions.
+ * Functions performs data validation by checking entry again database provided list of cheeses.
  */
 function entryTest(entry) {
-
+  // Data validation portion.
   let validEntry = false;
   for (let i = 0; i < cheeseList.length; i++) {
     if (entry.toLowerCase() == cheeseList[i].toLowerCase()) {
@@ -107,6 +107,7 @@ function entryTest(entry) {
       entry = cheeseList[i];
     }
   }
+  // Displays pop up if invalid data.
   if (validEntry == false) {
     toggleInvalid();
   }
