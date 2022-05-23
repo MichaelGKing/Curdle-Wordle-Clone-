@@ -271,13 +271,22 @@ def reset_puzzle_history():
 
     if request.method == "POST":
 
+        print(request.get_json)
+
         PuzzleHistory.query.delete()
+
+        flash('* Server puzzle history cleared *', 'success')
         
 # Increment the client-side puzzle id counter for testing/demonstration
 @app.route('/increment-puzzle-id', methods=['GET', 'POST'])
 def increment_puzzle_id():
     
     if request.method == "POST":
+
+        print(request.get_json)
         
         global todays_client_puzzle_id
         todays_client_puzzle_id += 1
+
+        flash('* It is a new day! *', 'success')
+
