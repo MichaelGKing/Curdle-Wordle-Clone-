@@ -13,19 +13,20 @@
       <p onclick="toggleStats()">
         <ion-icon name="stats-chart-outline"></ion-icon>
       </p>
+      </div>
     </header>
-    </div>
-  <section class="game-container">
 
-    <section class="image">
+  <div class="game-container">
+
+    <div class="image">
       {% block cheese_image %}
       <!-- Ignore error here code works fine. -->
       <div id="cheese-image" style="background-image: url('{{ url_for('static', filename=image ) }}')"></div>
       {% endblock %}
-    </section>
+    </div>
 
 
-    <section class="results">
+    <div class="results">
       <div id="grid-container">
         <div id="result-1"></div>
         <div class="word one" id="word-1"></div>
@@ -64,9 +65,9 @@
         <div class="animal six" id="animal-6"></div>
         <div class="type six" id="type-6"></div>
       </div>
-    </section>
+    </div>
 
-    <section class="guess-container">
+    <div class="guess-container">
       <div id="guess-textbox">
         <input list="cheese-names" id="cheese-choice" name="cheese-choice" placeholder="Type cheese guess here..." onkeydown="search()"/>
         <datalist id="cheese-names">
@@ -94,8 +95,8 @@
         <p>👀 <a id="image-ref" href="" target="_blank">IMAGE</a>    🧠<a id="info-ref" href="" target="_blank">INFO</a></p>
       </div>
 
-    </section>
-  </section>
+    </div>
+  
 
 
   <div class="help" id="help-page">
