@@ -16,13 +16,6 @@ function toggleInvalid() {
 }
 
 /**
- * Opens the help page.
- */
-function toggleHelp() {
-  document.getElementById("help-page").classList.toggle("active");
-}
-
-/**
  * Opens the stats page.
  */
 function toggleStats() {
