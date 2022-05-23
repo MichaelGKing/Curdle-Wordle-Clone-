@@ -27,8 +27,8 @@ class PuzzleUploadForm(FlaskForm):
     country = SelectField('Country of Origin', choices=[], validators=[DataRequired()])
     mould = BooleanField('Is mouldy?')
     image = FileField("Image (.jpg .jpeg .png and .gif only)", validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Only images of .png, .jpg, .jpeg or .gif allowed.')])
-    attribution = TextAreaField("Image desciption", validators=[DataRequired()])
-    link =  StringField("Cheese Info Hyperlink", validators=[DataRequired()])
+    attribution = TextAreaField("Image source URL", validators=[DataRequired()])
+    link =  StringField("Cheese info URL", validators=[DataRequired()])
     submit = SubmitField('Upload Puzzle to Curdle Database')
 
     # Setter functions are required so that the type, country and animal form fields can have their options set

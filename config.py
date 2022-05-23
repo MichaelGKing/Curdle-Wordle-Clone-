@@ -34,5 +34,6 @@ class Config(object):
     # When true, SQLAlchemy sends a signal to the application everytime a change is about to be made to the database
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    LAUNCH_DATE  = [2022, 5, 19, 0, 0]
+    LAUNCH_DATE  = [2022, 5, 23, 0, 0]
 
+    TESTING = os.environ.get('TESTING') or False
