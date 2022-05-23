@@ -105,6 +105,9 @@ If you succeed or fail to get the cheese it will be revealed in a black box belo
 
 How to Add New Puzzles to the Game
 ----------------------------------
+Login on the login page at "address/login" (only accessible through entering the url in your browser). Then login with an admin account, and you will be presented with a form to upload your new puzzle.
+
+Fill out the form, hit submit and the new cheese will be saved into the database.
 
 Credits
 -------
