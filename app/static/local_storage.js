@@ -35,11 +35,17 @@ function loadUser() {
   setStats();
 }
 
-//Function loads when user gets correct guess
+/**
+ * Function generates localstorage to indicate if user has completed the puzzle.
+ * Either won or run out of gueeses.
+ */
 function userCompleted() {
   localStorage.setItem("userCompleted", true);
 }
 
+/**
+ * Function generates localstorage for if the user successfully completes the puzzle.
+ */
 function userSucceeded() {
   if (localStorage.getItem("puzzleState") == null) {
     localStorage.setItem("wins", parseInt(localStorage.getItem("wins")) + 1);
