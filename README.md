@@ -113,13 +113,13 @@ Credits
 -------
 
 ### 3rd party extentions and libraries
-Title-font: https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&family=Rubik+Microbe&display=swap
+Title-font: https://fonts.google.com/specimen/Rubik+Microbe?query=micr
 
-Body-font: https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&display=swap
+Body-font: https://fonts.google.com/specimen/Poppins?query=pop
 
 Header-icons: https://ionic.io/ionicons
 
-AJAX: https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
+JQuery Library: https://jquery.com/
 
 Attribute-icons: https://fontawesome.com/
 
