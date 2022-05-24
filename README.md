@@ -77,14 +77,26 @@ How to Install and Run Curdle (from local host)
    To allow the Flask application to print debugging messages to console, disable stdout buffering
 
    ```PYTHONUNBUFFERED='any_non_empty_string'```
+   
+7. Set up the application cofiguration file. This is found in the project root folder and is called 'config.py'. It stores all configuration variables for the Flask application. 
+	
+	To change the administrator account password, change the text between the quotes for 'password', or alternatively set the ADMIN_PASSWORD environment variable to your desired password within your virtual environment (This is preferable but frustrating for development).
 
-7. Build the application database. Return to your terminal within the curdle folder with your virtual env active
+		```ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'password'```
 
-   ```bash
-   (venv) % flask db upgrade
-   ```
+	Before creating the application database and importing the required cheese attribute and puzzle data, set the LAUNCH_DATA config variable to todays date. The format is [YYYY, M, DD, m, s]. This allows the application to keep track of time and set a new puzzle every day at the set time. 
 
-8. Load the database with hard-coded cheese attribute data, and any puzzles found in puzzles.csv
+		```LAUNCH_DATE  = [2022, 5, 24, 0, 0]```
+
+	When testing out the application, you can move the game forward to a new day at anytime by moving this data back a day, and restarting the Flask application (see below for more info).
+
+8. Build the application database. Return to your terminal within the project root directory and with your virtual env active
+	
+	```bash
+	(venv) % flask db upgrade
+	```
+
+9. Run the import_data.py script using the below Flask command. This script clears all database information, except for puzzlehistory, and reloads all the puzzle attributes. These attributes can be edited within the python script if desired. The script also runs a function from the curdle module, puzzlesetter, on every line puzzles.csv to add puzzles to the database.
 
    ```bash
    (venv) % flask import_data
@@ -115,9 +127,11 @@ If you succeed or fail to get the cheese it will be revealed in a black box belo
 
 How to Add New Puzzles to the Game
 ----------------------------------
-Login on the login page at "address/login" (only accessible through entering the url in your browser). Then login with an admin account, and you will be presented with a form to upload your new puzzle.
+The login page is accessable by adding the "/login" path to the end of the application URL. There are no links to this found anywhere on the game page by design. The username is hardcoded as 'curdleadmin' and the password is set either through the config.py module or as a Flask environment variable. Login with an admin account, and you will be presented with a form to upload new puzzles.
 
-Fill out the form, hit submit and the new cheese will be saved into the database.
+Fill out the form, hit submit and the new cheese puzzle will be saved into the database. A message will be flashed at the top of the admin page to confirm this. As well as adding a new entry to the database, the flask application will also add a new line to puzzles.csv containing the puzzle information. This is usefull if you need to rebuild the database as any newly added cheeses will not be lost. 
+
+Images are automatically renamed based on the puzzle ID they are associated with, so there is no need to worry about cheese information in the file name providing clues to the player. They are uploaded to /static/images.
 
 Credits
 -------
